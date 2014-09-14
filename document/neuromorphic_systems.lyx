@@ -66,11 +66,6 @@ Neuron networks; Neuromorphic systems; Neural networks on robotics; AI;
  
 \end_layout
 
-\begin_layout Standard
-Ashley Kleinhans, Andrew Mundy, Terry Stewart, Jörg Conradt, Brandon Kelly,
- Stephen Deiss, Daniel Neil, Diogo Pata, Sergio Davies, Wang Wei Lee
-\end_layout
-
 \begin_layout Section
 Abstract
 \end_layout
@@ -94,11 +89,12 @@ Cognitive results of Telluride workshop
 \end_layout
 
 \begin_layout Standard
-Summary of what happened and pushing it a bit more - ref to the board
+Summary of what happened and pushing it a bit more - animal behaviour experiment
+ as per http://jn.physiology.org/content/98/6/3548
 \end_layout
 
 \begin_layout Standard
-Interesting infrastructure 
+Interesting infrastructure (addition of SpiNNaker)
 \end_layout
 
 \begin_layout Standard
