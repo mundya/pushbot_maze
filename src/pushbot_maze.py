@@ -26,6 +26,8 @@ if __name__ == '__main__':
    
     '''see another laser at certain distance'''
     
+    '''record sensory data at point of inflection'''
+    
 
     while True:
         # find the x and y position of the laser point in the field of view
@@ -33,7 +35,8 @@ if __name__ == '__main__':
         x = bot.p_x
         y = bot.p_y
         print x,y
-        # 
+        # if the bot is to close to the wall turn left 
+        # TODO: need to make this a random routine that will update with learning 
         if y < 47:
             bot.motor(0, 0.3, 0)
         else:

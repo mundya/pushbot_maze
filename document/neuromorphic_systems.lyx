@@ -79,22 +79,56 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-trying to achieve intro to robots etc.
- What robots we are using (NST and EV3) and some on the algorithms we use.
- <<What is demonstrated and what is novel?? >> 
+We look to Neuromorphic systems to help us understand the way in which the
+ brain works 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "krichmar_neuromorphic_2011"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
-Cognitive results of Telluride workshop
+The system we are using is that of the pushbot developed by NST labs at
+ the Technische Universität München and Nengo the neural simulator implementing
+ the Neural Engineering Framework (NEF).
 \end_layout
 
 \begin_layout Standard
-Summary of what happened and pushing it a bit more - animal behaviour experiment
- as per http://jn.physiology.org/content/98/6/3548
+Demonstrating and implementing higher-level cognitive functions with the
+ use of semantic pointers.
+ 
 \end_layout
 
 \begin_layout Standard
-Interesting infrastructure (addition of SpiNNaker)
+Programming intelligence into robotics and creating intelligent machines
+ based on what we know from intelligent animal behaviour.
+ 
+\end_layout
+
+\begin_layout Standard
+Comparisons between published animal testing 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kim_encoding_2007"
+
+\end_inset
+
+ and results of our current work.
+ 
+\end_layout
+
+\begin_layout Standard
+Cognitive results of Telluride workshop.
+ Time related implementation - what people were able to do in that time
+ 
+\end_layout
+
+\begin_layout Standard
+Interesting infrastructure (addition of SpiNNaker??)
 \end_layout
 
 \begin_layout Standard
@@ -110,20 +144,12 @@ have infrastructure, easy to get people to build models and do things and
  computation 
 \end_layout
 
-\begin_layout Standard
-Time related implementation - what people were able to do in that time 
-\end_layout
-
 \begin_layout Section
 Background
 \end_layout
 
 \begin_layout Standard
-what where why 
-\end_layout
-
-\begin_layout Standard
-lit review other robot systems 
+what where why lit review other robot systems 
 \end_layout
 
 \begin_layout Section
@@ -132,6 +158,14 @@ Architecture
 
 \begin_layout Standard
 useful components that we are doing and why 
+\end_layout
+
+\begin_layout Standard
+Kernel: Learning algorithm 
+\end_layout
+
+\begin_layout Standard
+Envelope: Sensorimotor space that the body explores 
 \end_layout
 
 \begin_layout Section
@@ -675,7 +709,7 @@ ical behaviors”[1] -”one salient feature of these behaviors is that the
 on of a spiking neural model (Wilson and Cowan, 1972) in a simulated countermand
 ing task.
  We observed that an additional monitoring-related signal can directly account
- for the observed changes in the neural response variability and the behavioral
+ for the observed changes in the neural response variability and the behavioural
  performance.” [4] --Learning Models?
 \end_layout
 
@@ -692,16 +726,6 @@ ing task.
 
 \begin_layout Standard
 -Code snippets -Nengo block diagrams
-\end_layout
-
-\begin_layout Standard
-\begin_inset External
-	template Dia
-	filename figure.dia
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsubsection
@@ -784,8 +808,8 @@ drive robot up to object turn left and right use data from driving robot
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "NST Nengo"
-options "plain"
+bibfiles "IEEEabrv,refs"
+options "ieeetr"
 
 \end_inset
 
