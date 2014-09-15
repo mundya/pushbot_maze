@@ -28,7 +28,17 @@ if __name__ == '__main__':
     
 
     while True:
-        bot.motor(0.1, 0.1, 0)
-        #print bot.tracker_0(0)
+        # find the x and y position of the laser point in the field of view
+        # TODO: need to return labelled positions for each different frequency 
+        x = bot.p_x
+        y = bot.p_y
+        print x,y
+        # 
+        if y < 47:
+            bot.motor(0, 0.3, 0)
+        else:
+            bot.motor(0.2, 0.2, 0)
+
+            
         time.sleep(0.1)
 
