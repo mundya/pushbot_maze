@@ -27,6 +27,7 @@ class PushBot3(object):
 
     running_bots = {}
 
+# class to talk to the pushbot through telnet
     @classmethod
     def get_bot(cls, address, port=56000, message_delay=0.01, packet_size=5):
         key = (address, port)
@@ -129,10 +130,6 @@ class PushBot3(object):
             scatter = None
 
         while True:
-            #fig.clear()
-            #print self.track_periods
-            #pylab.plot(self.delta)
-            #pylab.hist(self.delta, 50, range=(0000, 15000))
             img.set_data(self.image)
             if scatter is not None:
                 scatter.set_offsets(np.array([self.p_y, self.p_x]).T)
@@ -149,6 +146,7 @@ class PushBot3(object):
 
     def get_compass(self):
         return self.sensor['compass']
+        
     def get_accel(self):
         return self.sensor['accel']
 
@@ -188,7 +186,6 @@ class PushBot3(object):
             # throw out invalid data
             return
 
-
         if window_index == 0:
             min0 = data[0]
             min1 = data[1]
@@ -199,30 +196,17 @@ class PushBot3(object):
             averages = [0, 0, 0]
             self.sensor['compass'] = averages
 
-#        if data[0] < min0 - abs(0.1*min0):
-#            data[0] = min0 - abs(0.1*min0)
-#        if data[0] > max0 + abs(0.1*max0):
-#            data[0] = max0 + abs(0.1*max0)
         min0 = min(min0, data[0])
         max0 = max(max0, data[0])
 
-#        if data[1] < min1 - abs(0.1*min1):
-#            data[1] = min1 - abs(0.1*min1)
-#        if data[1] > max1 + abs(0.1*max1):
-#            data[1] = max1 + abs(0.1*max1)
         min1 = min(min1, data[1])
         max1 = max(max1, data[1])
 
-#        if data[2] < min2 - abs(0.1*min2):
-#            data[2] = min2 - abs(0.1*min2)
-#        if data[2] > max2 + abs(0.1*max2):
-#            data[2] = max2 + abs(0.1*max2)
         min2 = min(min2, data[2])
         max2 = max(max2, data[2])
 
 
         #decay minimum and maximum
-
         window0[window_index % rolling_average_time_window] = data[0]
         window1[window_index % rolling_average_time_window] = data[1]
         window2[window_index % rolling_average_time_window] = data[2]
@@ -424,11 +408,6 @@ class PushBot3(object):
                 t_diff = delta.astype(np.float) - t_exp
 
                 w_t = np.exp(-(t_diff**2)/(2*sigma_t**2))
-                #w = np.sum(w_t)
-                #eta *= w
-                #print w
-                #print t_diff[:5]
-                #print w_t[:5]
                 px = self.p_x[i]
                 py = self.p_y[i]
 
@@ -553,12 +532,15 @@ class PushBot3(object):
             self.socket.send('E-\n')
             self.socket.send('!S-\n')
 
+	def left_turn(self, angle, force=False)
+		if 
+    
+
 
 if __name__ == '__main__':
     #bot1 = PushBot3('10.162.177.135')
     #bot1.laser(200)
     #bot1.led(100)
-
 
     IP = raw_input("Please enter the robot IP: ")
     print "IP address entered is: ", IP
@@ -575,6 +557,6 @@ if __name__ == '__main__':
     #import time
 
     while True:
-        #bot.omni_motor(0, 1, 0)
+        bot.motor(0.3, 0.3, 0)
         time.sleep(0.1)
 
