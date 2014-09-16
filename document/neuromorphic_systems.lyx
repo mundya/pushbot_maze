@@ -225,10 +225,6 @@ task (behaviour related); hardware; software; architecture; results and
 \end_layout
 
 \begin_layout Standard
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset CommandInset include
 LatexCommand input
 filename "sections/telluride.lyx"
