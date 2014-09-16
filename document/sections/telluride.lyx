@@ -1,0 +1,789 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Subsection
+
+\lang british
+PushBots Racing Competition: Visually Guided Reactive Navigation
+\end_layout
+
+\begin_layout Subsection
+
+\lang british
+Robotic "sheep" effect: One pushbot follows the other
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Navigation SLAM and Planning? 
+\end_layout
+
+\begin_layout Subsection
+
+\lang british
+Make sure we do not run into things
+\end_layout
+
+\begin_layout Subsection
+
+\lang british
+Seek and destroy 
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Hawk Dove Model 
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Trex
+\end_layout
+
+\begin_layout Subsection
+
+\lang british
+interface for controlling the EMB14 tank and EMB
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang british
+Introduction EMB
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+While recent studies have made strides in biologically grounded technical
+ models of individual mind and body components [CN], there has been relatively
+ less progress made on a system level.
+ What progress has been made tends to focus on either high-level biological
+ descriptions or on low-level technical implementation.
+ For the merger of these disparate goals, robotics is generally accepted
+ as a suitable medium.
+ Robotics implementations, however, tend toward architectures that are goal
+ oriented rather than trying to mimic how tasks are accomplished in biological
+ systems.
+ Success is measured by the competence of the robot.
+ Since the science of the neurobiology of behavior lags our technologies,
+ it is easy to take shortcuts to achieve criterion goals.
+ Building robots that mimic biological models such as the Distributed Adaptive
+ Control (DAC) architecture using tools that are optimized for neural simulation
+ such as the Nengo programming system from the Neuroengineering Framework
+ (NEF) informs the DAC theory and allows iterative improvement in both theory
+ and robot competence.
+ In particular we would like to test a model that combines, low level geneticall
+y determined behavioral response biases with adaptive classical and operational
+ conditioning that are based upon known facts about cerebellar and hippocampal
+ architecture and function.
+ Furthermore, we wish to model neurally inspired prefrontal short term and
+ long term memory acquisition and the generation of plans from memory that
+ can augment or override conditioned responses.
+ In effect we wish to simulate all the key neuro-cognitive elements of a
+ complete adaptive organism with neural models.
+ An airplane emulates and surpasses aspects of a bird’s flight, but leaves
+ out some of the most fundamental adaptive capabilities of a bird.
+ We seek to integrate high fidelity modeling even if it is at the expense
+ of some sacrifice in criterion performance in the initial instantiations.
+ An adjunct goal is of course to train and inform a new generation of neuromorph
+ic researchers in the DAC model and in the use of the tools available from
+ NEF.
+ This will eventually allow these researchers to combine brain and behavioral
+ models in a modular way, and will thereby lead to an acceleration in the
+ development and deployment of advanced models and robots much as scientific
+ computing and statistical libraries have contributed to many fields of
+ study.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+-------------------------------------
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+-”To take our understanding of individual body/brain components and further
+ our understanding on a systems level” [emb website]
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+-”This workshop will address the challenge of understanding and building
+ embodied neuromorphic real-world architectures of perception, cognition
+ and action through both presentations, discussion and concrete experimentation.”
+ [Emb web] Specifically we intend to program an autonomous robot with a
+ DAC (Distributed Adaptive Control) architecture using a combination of
+ IQR, Python and Nengo (NeuroEngineering framework) tools, and have that
+ robot learn to navigate and forage in an artificial environment searching
+ for faux reinforcement while avoiding faux aversive stimuli or predators.
+ [srd]
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang british
+Methods EMB
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+The goal of this study is to create a biologically-grounded foraging robot.
+ The distributed adaptive control (DAC) [1] model will be used as the systems
+ level structure.
+ This structure will be divided among different functions defined in neurons
+ through Nengo and the corresponding Neural Engineering Framework (NEF)
+ model [5,24].
+ By using Nengo to rapidly prototype and implement modules of neural algorithms
+ while structuring these modules within the DAC hierarchy, we hope to achieve
+ a high degree of biological accuracy.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+The Neural Engineering Framework The Neural Engineering Farmework (NEF)
+ is a means of implementing cognitive processes within a biological substrate.
+ The NEF enables the modeling of large scale networks of individual neuron
+ models.
+ These large scale models have been used to build models ranging from single
+ cell activity [23] to age-related cognitive decline [22].
+ These models that accurately explain and predict real-world neural behavior.
+ It is important to stress that this ability was not an explicit constraint
+ upon the original work.
+ Instead it is a consequence of the inherent biological constraint of the
+ model.
+ These large-scale models are, generally speaking, created with three guiding
+ definitions.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+The first of these definitions defines an ensemble of neurons which are
+ used to encode information as a population.
+ A time-varying numeric vector represents this ensemble of neurons.
+ This ensemble is expected to possess non-linear encoding due to the differences
+ in tuning-curves of the individual neurons.
+ The output is then the filtered output of the spiking of these neurons,
+ summed with an uneven weighting to create a linear output [5].
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Transformation, the second definition, defines how populations communicate
+ with other populations.
+ If population A is communicating with population B, the transformation
+ matrix will begin with A’s decoding weights, end with B’s encoding weights,
+ and the middle will be defined by any linear transformation.
+ This linear transformation term allows the modeling of arbitrary mathematical
+ functions [5].
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Finally, dynamics is the term used to describe the recurrent connections
+ between populations.
+ These recurrent connections allow the populations to behave as state-variables
+ in a dynamic system [5].
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Nengo is the software platform through which we implement the NEF model
+ and simulate these large populations of neurons.
+ Nengo provides not only an interactive means for modeling these many population
+s of neurons, but it also provides a means for interfacing multiple functional
+ blocks.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Distributed Adaptive Control FIGURE T2 is a graphical representation of
+ the distributed adaptive control (DAC) model.
+ This model represents all layers of an adapative mammalian nervous system
+ and provides a systematic design methodology for creating and analyzing
+ neural-controlled robots with complex behaviors.
+ In previous studies, these robotic and mechatronic designs based upon DAC
+ have lent insight to the workings of actual biological systems and fine-tuning
+ of the DAC theory.
+ These insights arise as a consequence of creating systems within the tight
+ biological grounding of the DAC model.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+The DAC model consists of 4 levels with 3 columns each in a matrix.
+ The levels represent successively higher levels of cognition and learning.
+ The columns represent coupling from the bottom up and from the top down
+ within domains of sensing, state maintenance, and behavior.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+More specifically, the leftmost blue column, or exosensing column, represents
+ influence from the physical world including basic perception and perceptual
+ abstraction and episodic memory in one column.
+ The center green endosensing column represents internal states and motivational
+ states based upon needs, values and their effect on decisions and plans.
+ The final column red column is for action, action gating, and planning.
+ Of key importance to the model is that it is embodied in a system with
+ sensors and effectors that is interacting with a world.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Spanning these columns are four rows categorizing the blocks’ general functional
+ity within the entity and representing capabilities that build upon one
+ another.
+ The somatic layer deals with the self as a physical body and the sensations
+ it receives.
+ In the context of the robot, this layer is comprised of the various sensors
+ which are used by the robot to interact with the world around it.
+ The reactive layer controls the stereotypical behaviors or reflexes of
+ the animal/animat in response to species salient stimuli.
+ These specific behaviors have the property of being proportional to the
+ stimuli received from the somatic layer.
+ The adaptive layer is what allows a system to learn instead of being completely
+ reactive.
+ This Hebbian style learning is enabled through the storage of former outcomes
+ resulting from reactions to specific stimuli.
+ The contextual layer enables even more advanced forms of learning through
+ additional long-term memory units.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Layer based Implementation The layers of the DAC model were used to provide
+ the framework for the design of an autonomous foraging robot.
+ In this subsection, the implementation details will be explained in the
+ order that they were integrated into the system.
+ We use IQR and Nengo with Python to implement the model for the robot.
+ IQR was used for the Cerebellum and the Hippocampus models, and are long
+ term development projects [11].
+ The Reactive layer and the high level planning were implemented using Nengo
+ from NEF.
+ Different parts of the overall model were run on different PCs with different
+ operating systems and different software environments.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Allostatic Control: The allostatic controls represent the endosensing function
+ of the reactive layer within the DAC model and its influence on behavior.
+ It can be thought of as the organism's innate decision making system to
+ balance needs.
+ If hungry, eat.
+ If scared, run.
+ If both things occur, there must be some innate prioritization or some
+ higher level learned arbitration.
+ Otherwise, there can be response conflict that meets no needs.
+ This control attempts to achieve an internal allostatic equilibrium by
+ optimal balance of all needs and resources by way of reactive and stereotypical
+ behavior[8].
+ The job of these allostatic controls is to match the processes coupling
+ internal and external sensations of the robot which come from the various
+ sensors to the behavioral degrees of freedom available at the somatic level.
+ In our robot model these sensors include three proximity and touch sensors
+ mounted to the front of the tank robot as well as a DVS camera [13], compass,
+ and velocity inferred from information provided by the attached Pushbot.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+The allostatic controls are not meant to provide a binary value (ie: hungry/full
+, energetic/tired…), but instead are meant to provide an analog value which
+ varies according to the intensity of the perceived sensation.
+ A relatable example of this is how persons react to the tactile sensation
+ of heat.
+ If a person touches a car hood that has been sitting in the sun, they will
+ likely perceive some degree of heat intensity.
+ If the hood is not particularly hot, they may choose to continue touching
+ the hood (perhaps to open it and check an engine component).
+ Conversely, if the hood is hot enough to burn one’s hand, the person will
+ likely withdraw their hand to avoid damaging their skin.
+ These opposing reactions are examples of stereotypical behaviors.
+ However, if there is some sort of urgent need that motivated the original
+ action, then the degree of this tactile sensation will be utilized to determine
+ if it is worth incurring the burn damage or if a new plan is needed.
+ This planning is performed at a higher level within the DAC model, but
+ it could not be done without the analog value provided by the allostatic
+ controls.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Vision GOAL OF FEATURE EXTRACTION
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+AER DESCRIPTION
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Within this project, we are utilizing Address event Representation (AER)
+ with a eDVS [13] camera system.
+ AER is a way of representing neural spiking events and sending them over
+ a shared bus.
+ AER is also often referred to as being an event-based protocol.
+ AER conserves bus bandwidth by only transmitting a code when an event happens
+ rather than scanning out the whole state of system activity repeatedly
+ with, for example, a raster scan.
+ The code sent for an event is an address that represents where the event
+ originated from, eg, the address of a spiking neuron.
+ In the simplest implementations listeners on the same AER bus must look
+ for the addresses that are of significance to them (their receptive field).
+ Refinements of AER include adding time stamps, hierarchical event routing,
+ additions of parameters that describe the event in more detail, and inclusion
+ of geometry in the address code, e.g.
+ x,y location of the event source on a silicon retina, x,y,z,,t location
+ in a brain volume [14,15,16,17].
+ 
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Events are created asynchronously in the AER framework as individual neurons
+ decide to spike.
+ Thus, there is a variable demand for the AER bus that often results in
+ collisions.
+ These are handled by a) using a bus arbitration scheme that enforces single
+ file access to the bus, and b) using a bus that operates at high speeds
+ to accommodate many events in rapid succession, c) overlapped arbitration
+ and event transfer.
+ In this manner, events are transmitted with little timing jitter if the
+ bus bandwidth is sufficient.
+ In large networks of neurons care must be taken to ensure that proper axonal
+ delays are represented where STDP (spike time dependent plasticity) is
+ included [18], or where temporal dynamics are an issue as in polychronous
+ networks [19].
+ This may require event queing, analog delays, hierarchical routing, or
+ other methods [20,21].
+ AER systems are only beginning to test their limits of scalability to represent
+ traffic along billions of axons in systems with significant numbers of
+ highly interconnected neurons as researchers start to include STDP and
+ dynamics related time delays in their neuromorphic models.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+BRIEF SUMMARY OF [7]
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Adaptive:
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Planning:
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Goal:
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Results
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Discussion
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Temporary Figure Storage
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+[Place holder image until original added back in]
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Temp Fig 1: Shows a hardware-oriented view of our implementation, and our
+ integration schedule.
+ We have multiple computers each doing a different part of the DAC processing.
+ So not only is the model distributed, so also is the implementation for
+ practical reasons.
+ We are using 3D printed tank chassis driven by 4 motors with tank-like
+ tracks.
+ On this we have mounted 3 subsystems.
+ One is a motor driver board that accepts commands over a local link from
+ a legobot EV3 [25] that has been stripped down to the bare essentials ‘brick’
+ with CPU and communication.
+ The lego bot passes motor commands from remote sources to the motors and
+ gathers proximity sensor status to forward to the reactive layer.
+ The reactive layer is represented by another robot called the ‘pushbot’
+ developed for the Institute for Neuroinformatics, ETH by INIlabs or Zurich
+ [26].
+ So not only is the model distributed, so also is the implementation for
+ practical reasons.
+ We are using 3D printed tank chassis driven by 4 motors with tank-like
+ tracks.
+ On this we have mounted 3 subsystems.
+ This is a true 'Rube Goldberg' implementation because we had to improvise.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+One subsystem on the tank is a motor driver board that accepts commands
+ over a local USB link from a legobot EV3 [25] that has been stripped down
+ to the bare essentials ‘brick’ with A7 CPU and communication.
+ The legobot passes motor commands originating from a laptop simulating
+ the reactive layer and gathers proximity sensor status from the tank's
+ on-board module to forward to the reactive layer using UDP protocol over
+ wifi.
+ The reactive layer is supplied with compass, DVS video sensor information,
+ and battery voltage level from another tank-mounted robot called the ‘pushbot’
+ developed for the Institute for Neuroinformatics, ETH, and Univ.
+ Zurich by INIlabs[26 http://www.inilabs.com/company].
+ This also uses UDP over wifi.
+ These inputs are aggregated in the reactive layer which processes battery
+ voltage level as a measure of overall system readiness and health, reacts
+ to proximity issues, and looks for good and bad stimuli in the environment
+ indicated by flickering LEDs.
+ It reactively approaches and avoids these by sending motor commands to
+ the leobot to forward to the tank motor drivers.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+The proximity information, the pushbot motor control decisions, the video
+ feed, and the LED location information is also forwarded to the cerebellum
+ simulation running on another laptop while the compass heading and the
+ averaged pushbot motor drive is sent to a hippocampus simulation running
+ on a third laptop.
+ These too are wifi connections using UDP protocol.
+ The power level is also forwarded to another planning task that keeps track
+ of hippocampal output, power level, and goals in order to output a direction
+ command sent back to the reactive layer.
+ The cerebellum learns conditioned responses and sends to the reactive simulatio
+n motor commands to add onto those of the reactive layer.
+ The cerebellar commands result from anticipating actions to perform using
+ signs in the video feed (classical conditioning).
+ Meanwhile the hippocampus simulation is learning a grid/place map and informing
+ the planning module so that it can chose a direction.
+ The planner direction is added to the cerebellum output that is added to
+ the reactive output and sent to the motor command relay station in the
+ legobot.
+ So the motors are driven by a linear combination of input from reactive
+ (unconditioned), cerebellum (conditioned) and planner (cognitive).
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+Temp FIg 2: DAC diagram stolen from [1].
+ IT WOULD BE GOOD TO HAVE THE ORIGINAL FILE.
+ Alternatively, maybe we could make a simplified version that suits the
+ needs of this paper?
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+-General Neuromorphic Robotic Framework description -”One reason for the
+ lack of progress in understanding the interrelationship of behaviour and
+ perception is experimental intractability....
+ Our approach was to bypass the animal experimental difﬁculty by using a
+ mobile robot, for which it is possible to fully observe and quantify perception
+ and behaviour” [3]
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+-NEF -”The NEF provides principles to guide the construction of a neural
+ model that incorporates anatomical constraints, functional objectives,
+ and dynamical systems or control theory.
+ Constructing models from this starting point, rather than from single cell
+ electrophysiology and connectivity statistics alone, produces simulated
+ data that explains and predicts a wide variety of experimental results.”
+ [5] -Compare to data driven models and machine learning approaches -”...NEF-design
+ed models match physiological and psychological ﬁndings without being built
+ speciﬁcally into the design.
+ These results are a consequence of the need to satisfy functional objectives
+ within anatomical and neurobiological constraints.” [5] -NEF Connection
+ weight simplification -NEF allows modeling at the neural level or the cognitive
+ science level using methods ranging from leaky integrate and fire (LEF)
+ spiking neurons, to dynamical system models 
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+of how serial order is learned and executed in response to needs and environment
+al constraints.
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+-Nengo description -”Nengo is a software tool that can be used to build
+ and simulate large-scale models based on the NEF; currently, it is the
+ primary resource for both teaching how the NEF is used, and for doing research
+ that generates speciﬁc NEF models to explain experimental data.” [5] -”Nengo
+ is a graphical and scripting based software package for simulating large-scale
+ neural systems.” [2] -”Among other things, Nengo has been used to implement
+ motor control, visual attention, serial recall, action selection, working
+ memory, attractor networks, inductive reasoning, path integration, and
+ planning with problem solving” [2] -Nengo Object model [5] pic and descrip?
+ -Comparison to Brian and PyNN -Updates from version in [5]
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+-Paul Verschure’s DAC model -DAC overview pic and description[1] -”DAC is
+ unique in that it has been explored using robots and mechatronic systems
+ (including Ada) in a range of tasks, links between symbolic and sub/non-symboli
+c approaches, has been mapped to a number of key brain systems and given
+ rise to novel neurorehabilitation technologies.”[Emb web] -Opposing Models?
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+-Layer descriptions of DAC as they relate to our specific implementation
+ -Vision -Optical Flow, Pattern Rec -”DVS retina sensing specific shapes
+ and landmarks.
+ Sends out events to FPGA Vertex 6 where we implement convolutional network
+ with 9 filters.
+ processes events in parallel.
+ program 9 different kernels to detect different shapes.
+ For certain shapes we program different sizes and angles so that the convolutio
+nal network can detect in different angles.
+ -Scalable AER method using character recognition based on convolutional
+ type network presented in [[7] -AER convolution, convolutional network
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+-Allostatic Control -Targeted behaviors -”smooth and robust control of stereotyp
+ical behaviors”[1] -”one salient feature of these behaviors is that the
+ response intensity varies with the salience of the target stimulus”[1]
+ -Decision/Reward/Planning -”We found, using both simulated and real-world
+ robots, that performance in the static condition [no behavioral feedback]
+ was strongly reduced by comparison with the enabled condition… This result
+ confirms that behavioural feedback directly enhances performance.”[3] -”Thus,
+ we propose that the brain exploits behavioural feedback to constrain perceptual
+ learning and to stabilize acquired behavioural structures.”[3] -”We observed
+ a signiﬁcant and systematic difference in RT and neural response variability
+ that held over a wide range of trial history conditions.
+ These results suggested that, other than perceptual signals, neurons in
+ PMd are also inﬂuenced by an additional input related to the history of
+ the trial, i.e., memory.
+ To validate this hypothesis, we studied the response of a mean-ﬁeld approximati
+on of a spiking neural model (Wilson and Cowan, 1972) in a simulated countermand
+ing task.
+ We observed that an additional monitoring-related signal can directly account
+ for the observed changes in the neural response variability and the behavioural
+ performance.” [4] --Learning Models?
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+-Sensory/motor -Spatial Memory
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+-Goals/Internal States/ value and utility Takes the allostatic outputs and
+ weight it to determine a stable internal state which could include rturn/stay
+ home (caled home, low batt power, sense danger or explore (if search for
+ food, has adequate batt).
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+-Code snippets -Nengo block diagrams
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang british
+Results EMB 
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+-Output from nengo (shots of camera feed, thresholds being crossed etc.
+ -How can we quantify/benchmark behavioral traits? -Since we are integrating
+ piece by piece, it would really be cool to have results from each phase
+ of integration… That way we can show how useful all of these layers are.
+\end_layout
+
+\begin_layout Subsubsection
+
+\lang british
+Discussion EMB
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+-Technologies and studies already developed due to this line of research.
+ -Future direction (Spinnaker integration, SPAUN +DAC=SPARTA…) 
+\end_layout
+
+\begin_layout Subsection
+
+\lang british
+Speedy attack robot
+\end_layout
+
+\begin_layout Subsection
+
+\lang british
+Prototype reactive layer foraging for pushbot
+\end_layout
+
+\begin_layout Subsection
+
+\lang british
+Egomotion compensation using gyroscope
+\end_layout
+
+\begin_layout Subsection
+
+\lang british
+Android Devices and Neuromorphic Camera
+\end_layout
+
+\begin_layout Subsection
+
+\lang british
+Extensions 
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+stab at one or two of those and what to add to the paper 
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+- cerebellum model relatively str to add 
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+- prototype for doing SPA model running on the robot look for 
+\end_layout
+
+\begin_layout Standard
+
+\lang british
+comparisons between any robot competitions ?? what other things have been
+ done out there and how does our system compare 
+\end_layout
+
+\end_body
+\end_document
