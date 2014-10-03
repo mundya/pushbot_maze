@@ -20,8 +20,12 @@ if __name__ == '__main__':
     import connection
     bot = PushBot()
     bot.connect(connection.Serial('/dev/ttyUSB0', baud=4000000))
-    bot.laser(5)
+    #bot.connect(connection.Socket('10.162.177.135'))
+    bot.laser(150)
+    bot.track_frequencies(freqs=[50, 100, 150])
     bot.retina(True)
     bot.show_image()
+    bot.track_spike_rate(all=(0,0,128,128))
+    import time
     while True:
-        pass
+        time.sleep(1)

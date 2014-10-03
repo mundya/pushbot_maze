@@ -39,6 +39,8 @@ class RetinaBot(nstbot.NSTBot):
         pylab.ion()
         img = pylab.imshow(self.image, vmax=1, vmin=-1,
                                        interpolation='none', cmap='binary')
+        pylab.xlim(0, 127)
+        pylab.ylim(127, 0)
 
         regions = {}
         if self.count_spike_regions is not None:
@@ -51,27 +53,24 @@ class RetinaBot(nstbot.NSTBot):
                 pylab.gca().add_patch(rect)
                 regions[k] = rect
 
-        #if self.track_periods is not None:
-        #    colors = ([(0,0,1), (0,1,0), (1,0,0), (1,1,0), (1,0,1)] * 10)[:len(self.p_y)]
-        #    scatter = pylab.scatter(self.p_y, self.p_x, s=50, c=colors)
-        #else:
-        #    scatter = None
+        if self.track_periods is not None:
+            colors = ([(0,0,1), (0,1,0), (1,0,0), (1,1,0), (1,0,1)] * 10)[:len(self.p_y)]
+            scatter = pylab.scatter(self.p_x, self.p_y, s=50, c=colors)
+        else:
+            scatter = None
 
         while True:
-            #fig.clear()
-            #print self.track_periods
-            #pylab.plot(self.delta)
-            #pylab.hist(self.delta, 50, range=(0000, 15000))
             img.set_data(self.image)
 
             for k, rect in regions.items():
                 alpha = self.get_spike_rate(k) * 0.5
                 alpha = min(alpha, 0.5)
                 rect.set_alpha(0.05 + alpha)
-            #if scatter is not None:
-            #    scatter.set_offsets(np.array([self.p_y, self.p_x]).T)
-            #    c = [(r,g,b,min(self.track_certainty[i],1)) for i,(r,g,b) in enumerate(colors)]
-            #    scatter.set_color(c)
+            if scatter is not None:
+                scatter.set_offsets(np.array([self.p_x, self.p_y]).T)
+                c = [(r,g,b,min(self.track_certainty[i],1)) for i,(r,g,b) in enumerate(colors)]
+                scatter.set_color(c)
+
             if display_mode == 'quick':
                 # this is much faster, but doesn't work on all systems
                 fig.canvas.draw()
@@ -79,15 +78,16 @@ class RetinaBot(nstbot.NSTBot):
             else:
                 # this works on all systems, but is kinda slow
                 pylab.pause(0.001)
+
             self.image *= decay
 
 
     def sensor_loop(self):
         """Handle all data coming from the robot."""
         old_data = None
-        packet_size = self.retina_packet_size
         buffered_ascii = ''
         while True:
+            packet_size = self.retina_packet_size
             # grab the new data
             data = self.connection.receive()
 
@@ -136,7 +136,10 @@ class RetinaBot(nstbot.NSTBot):
                 self.process_ascii(cmd)
 
     def process_ascii(self, message):
-        print 'ascii', `message`
+        pass
+        #print 'ascii', `message`
+
+    last_timestamp = None
     def process_retina(self, data):
         packet_size = self.retina_packet_size
         y = data[::packet_size] & 0x7f    
@@ -186,6 +189,62 @@ class RetinaBot(nstbot.NSTBot):
                 dt = 1
             self.last_timestamp = t[-1]
 
+            index_on = (data[1::packet_size] & 0x80) > 0
+            #index_off = (data[1::packet_size] & 0x80) == 0
+
+            delta = np.where(index_on, t - self.last_on[x, y], 0)
+
+            self.last_on[x[index_on],
+                         y[index_on]] = t[index_on]
+            #self.last_off[x[index_off],
+            #              y[index_off]] = t[index_off]
+
+            tau = 0.05 * 1000000
+            decay = np.exp(-dt/tau)
+            self.track_certainty *= decay
+
+            for i, period in enumerate(self.track_periods):
+                eta = self.track_eta
+                t_exp = period * 2
+                sigma_t = self.track_sigma_t    # in microseconds
+                sigma_p = self.track_sigma_p    # in pixels
+                t_diff = delta.astype(np.float) - t_exp
+
+                w_t = np.exp(-(t_diff**2)/(2*sigma_t**2))
+                px = self.p_x[i]
+                py = self.p_y[i]
+
+                dist2 = (x - px)**2 + (y - py)**2
+                w_p = np.exp(-dist2/(2*sigma_p**2))
+
+                ww = w_t * w_p
+                c = sum(ww) * self.track_certainty_scale / dt
+
+                self.track_certainty[i] += (1-decay) * c
+
+                w = eta * ww
+                for j in np.where(w > 0.02)[0]:
+                        px += w[j] * (x[j] - px)
+                        py += w[j] * (y[j] - py)
+                self.p_x[i] = px
+                self.p_y[i] = py
+
+                '''
+                # faster, but less accurate method:
+                # update position estimate
+                try:
+                    r_x = np.average(x, weights=w_t*w_p)
+                    r_y = np.average(y, weights=w_t*w_p)
+                    self.p_x[i] = (1-eta)*self.p_x[i] + (eta)*r_x
+                    self.p_y[i] = (1-eta)*self.p_y[i] + (eta)*r_y
+                except ZeroDivisionError:
+                    # occurs in np.average if weights sum to zero
+                    pass
+                '''
+
+            #print self.p_x, self.p_y, self.track_certainty
+
+
     def track_spike_rate(self, **regions):
         self.count_spike_regions = regions
         self.count_regions = {}
@@ -201,7 +260,7 @@ class RetinaBot(nstbot.NSTBot):
     def track_frequencies(self, freqs, sigma_t=100, sigma_p=30, eta=0.3,
                                  certainty_scale=10000):
         freqs = np.array(freqs, dtype=float)
-        self.track_periods = 500000/freqs
+        track_periods = 500000/freqs
         self.track_certainty_scale = certainty_scale
 
         self.track_sigma_t = sigma_t
@@ -210,10 +269,11 @@ class RetinaBot(nstbot.NSTBot):
 
         self.last_on = np.zeros((128, 128), dtype=np.uint32)
         self.last_off = np.zeros((128, 128), dtype=np.uint32)
-        self.p_x = np.zeros_like(self.track_periods) + 64.0
-        self.p_y = np.zeros_like(self.track_periods) + 64.0
-        self.track_certainty = np.zeros_like(self.track_periods)
-        self.good_events = np.zeros_like(self.track_periods, dtype=int)
+        self.p_x = np.zeros_like(track_periods) + 64.0
+        self.p_y = np.zeros_like(track_periods) + 64.0
+        self.track_certainty = np.zeros_like(track_periods)
+        self.good_events = np.zeros_like(track_periods, dtype=int)
+        self.track_periods = track_periods
 
 
 
@@ -227,6 +287,8 @@ if __name__ == '__main__':
                          #all=(0,0,128,128), 
                          left=(0,0,64,128), 
                          right=(64,0,128,128))
+    bot.track_frequencies(freqs=[200, 300, 400])
+    import time
     while True:
-        pass
+        time.sleep(1)
 
