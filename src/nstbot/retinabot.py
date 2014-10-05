@@ -136,8 +136,7 @@ class RetinaBot(nstbot.NSTBot):
                 self.process_ascii(cmd)
 
     def process_ascii(self, message):
-        pass
-        #print 'ascii', `message`
+        print 'ascii', `message`
 
     last_timestamp = None
     def process_retina(self, data):
@@ -274,6 +273,10 @@ class RetinaBot(nstbot.NSTBot):
         self.track_certainty = np.zeros_like(track_periods)
         self.good_events = np.zeros_like(track_periods, dtype=int)
         self.track_periods = track_periods
+
+    def get_frequency_info(self, index):
+        return self.p_x[index], self.p_y[index], self.track_certainty[index]
+
 
 
 
