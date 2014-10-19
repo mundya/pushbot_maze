@@ -1,5 +1,13 @@
 import nengo
 import nengo.utils.functions
+import nengo.utils.connection
+import shelve
+import os
+import time
+
+record = False
+learn = True
+
 
 model = nengo.Network()
 with model:
@@ -49,9 +57,42 @@ with model:
     pAction = nengo.Probe(actions.output, synapse=0.03)
     pState = nengo.Probe(state, synapse=0.03)
 
+    if learn:
+        states = []
+        acts = []
+        for fn in os.listdir('.'):
+            if fn.startswith('choose '):
+                db = shelve.open(fn)
+                states.extend(db['state'])
+                acts.extend(db['action'])
+                db.close()
+        #acts = [list(aa) for aa in acts]
+        #states = [list(ss) for ss in states]
+        tf = nengo.utils.connection.target_function(
+                states, acts)
+        nengo.Connection(state, actions.input, function=tf['function'],
+                eval_points=tf['eval_points'])
+
+
+
 
 sim = nengo.Simulator(model)
-sim.run(5)
+if record:
+    sim.run(0.2)
+else:
+    sim.run(10)
+
+
+if record:
+    fn = 'choose ' + time.asctime()
+    fn = fn.replace(':', '-')
+    print fn
+    db = shelve.open(fn)
+    db['state'] = sim.data[pState]
+    db['action'] = sim.data[pAction]
+    db.close()
+
+
 
 import pylab
 pylab.subplot(2,1,1)
