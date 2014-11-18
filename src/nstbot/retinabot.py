@@ -46,8 +46,8 @@ class RetinaBot(nstbot.NSTBot):
         if self.count_spike_regions is not None:
             for k, v in self.count_spike_regions.items():
                 minx, miny, maxx, maxy = v
-                rect = pylab.Rectangle((minx - 0.5, miny - 0.5), 
-                                       maxx - minx, 
+                rect = pylab.Rectangle((minx - 0.5, miny - 0.5),
+                                       maxx - minx,
                                        maxy - miny,
                                        facecolor='yellow', alpha=0.2)
                 pylab.gca().add_patch(rect)
@@ -141,8 +141,8 @@ class RetinaBot(nstbot.NSTBot):
     last_timestamp = None
     def process_retina(self, data):
         packet_size = self.retina_packet_size
-        y = data[::packet_size] & 0x7f    
-        x = data[1::packet_size] & 0x7f  
+        y = data[::packet_size] & 0x7f
+        x = data[1::packet_size] & 0x7f
         if self.image is not None:
             value = np.where(data[1::packet_size]>=0x80, 1, -1)
             self.image[y, x] += value
@@ -275,7 +275,9 @@ class RetinaBot(nstbot.NSTBot):
         self.track_periods = track_periods
 
     def get_frequency_info(self, index):
-        return self.p_x[index], self.p_y[index], self.track_certainty[index]
+        x = self.p_x[index] / 64.0 - 1
+        y = - self.p_y[index] / 64.0 + 1
+        return x, y, self.track_certainty[index]
 
 
 
@@ -287,8 +289,8 @@ if __name__ == '__main__':
     bot.retina(True)
     bot.show_image()
     bot.track_spike_rate(
-                         #all=(0,0,128,128), 
-                         left=(0,0,64,128), 
+                         #all=(0,0,128,128),
+                         left=(0,0,64,128),
                          right=(64,0,128,128))
     bot.track_frequencies(freqs=[200, 300, 400])
     import time

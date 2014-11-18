@@ -69,6 +69,7 @@ class Plotter(object):
 if __name__ == '__main__':
     p = Plotter()
     p.load_data(filter='(left)|(right)')
+    #p.load_data(filter='learnL')
     p.compute('turn', lambda data: data['motor'][:,:,0] - data['motor'][:,:,1])
     p.compute('speed', lambda data: np.mean(data['motor'], axis=2))
 

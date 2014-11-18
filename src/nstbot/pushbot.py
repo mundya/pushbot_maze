@@ -6,7 +6,7 @@ class PushBot(retinabot.RetinaBot):
         self.laser(0)
         self.beep(0)
         self.motor(0, 0)
-        self.led(0)
+        #self.led(0)
         self.connection.send('!M+\n')
     def disconnect(self):
         self.laser(0)
@@ -46,6 +46,8 @@ class PushBot(retinabot.RetinaBot):
         else:
             cmd = '!PC=%d\n!PC0=%d\n!PC1=%d\n' % (int(1000000/freq),
                     int(500000/freq), int(500000/freq))
+        print 'led', cmd
+
         self.send('led', cmd, msg_period)
 
 
