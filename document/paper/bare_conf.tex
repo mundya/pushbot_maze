@@ -1,0 +1,616 @@
+
+%% bare_conf.tex
+%% V1.3
+%% 2007/01/11
+%% by Michael Shell
+%% See:
+%% http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.7 or later) with an IEEE conference paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/tex-archive/macros/latex/contrib/IEEEtran/
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%
+%% File list of work: IEEEtran.cls, IEEEtran_HOWTO.pdf, bare_adv.tex,
+%%                    bare_conf.tex, bare_jrnl.tex, bare_jrnl_compsoc.tex
+%%*************************************************************************
+
+% *** Authors should verify (and, if needed, correct) their LaTeX system  ***
+% *** with the testflow diagnostic prior to trusting their LaTeX platform ***
+% *** with production work. IEEE's font choices can trigger bugs that do  ***
+% *** not appear when using other class files.                            ***
+% The testflow support page is at:
+% http://www.michaelshell.org/tex/testflow/
+
+
+
+% Note that the a4paper option is mainly intended so that authors in
+% countries using A4 can easily print to A4 and see how their papers will
+% look in print - the typesetting of the document will not typically be
+% affected with changes in paper size (but the bottom and side margins will).
+% Use the testflow package mentioned above to verify correct handling of
+% both paper sizes by the user's LaTeX system.
+%
+% Also note that the "draftcls" or "draftclsnofoot", not "draft", option
+% should be used if it is desired that the figures are to be displayed in
+% draft mode.
+%
+\documentclass[conference]{IEEEtran}
+% Add the compsoc option for Computer Society conferences.
+%
+% If IEEEtran.cls has not been installed into the LaTeX system files,
+% manually specify the path to it like:
+% \documentclass[conference]{../sty/IEEEtran}
+
+% Some very useful LaTeX packages include:
+% (uncomment the ones you want to load)
+
+
+% *** MISC UTILITY PACKAGES ***
+%
+%\usepackage{ifpdf}
+% Heiko Oberdiek's ifpdf.sty is very useful if you need conditional
+% compilation based on whether the output is pdf or dvi.
+% usage:
+% \ifpdf
+%   % pdf code
+% \else
+%   % dvi code
+% \fi
+% The latest version of ifpdf.sty can be obtained from:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/oberdiek/
+% Also, note that IEEEtran.cls V1.7 and later provides a builtin
+% \ifCLASSINFOpdf conditional that works the same way.
+% When switching from latex to pdflatex and vice-versa, the compiler may
+% have to be run twice to clear warning/error messages.
+
+
+
+% *** CITATION PACKAGES ***
+%
+%\usepackage{cite}
+% cite.sty was written by Donald Arseneau
+% V1.6 and later of IEEEtran pre-defines the format of the cite.sty package
+% \cite{} output to follow that of IEEE. Loading the cite package will
+% result in citation numbers being automatically sorted and properly
+% "compressed/ranged". e.g., [1], [9], [2], [7], [5], [6] without using
+% cite.sty will become [1], [2], [5]--[7], [9] using cite.sty. cite.sty's
+% \cite will automatically add leading space, if needed. Use cite.sty's
+% noadjust option (cite.sty V3.8 and later) if you want to turn this off.
+% cite.sty is already installed on most LaTeX systems. Be sure and use
+% version 4.0 (2003-05-27) and later if using hyperref.sty. cite.sty does
+% not currently provide for hyperlinked citations.
+% The latest version can be obtained at:
+% http://www.ctan.org/tex-archive/macros/latex/contrib/cite/
+% The documentation is contained in the cite.sty file itself.
+
+
+
+% *** GRAPHICS RELATED PACKAGES ***
+%
+\ifCLASSINFOpdf
+  % \usepackage[pdftex]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../pdf/}{../jpeg/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\else
+  % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
+  % will default to the driver specified in the system graphics.cfg if no
+  % driver is specified.
+  % \usepackage[dvips]{graphicx}
+  % declare the path(s) where your graphic files are
+  % \graphicspath{{../eps/}}
+  % and their extensions so you won't have to specify these with
+  % every instance of \includegraphics
+  % \DeclareGraphicsExtensions{.eps}
+\fi
+% graphicx was written by David Carlisle and Sebastian Rahtz. It is
+% required if you want graphics, photos, etc. graphicx.sty is already
+% installed on most LaTeX systems. The latest version and documentation can
+% be obtained at: 
+% http://www.ctan.org/tex-archive/macros/latex/required/graphics/
+% Another good source of documentation is "Using Imported Graphics in
+% LaTeX2e" by Keith Reckdahl which can be found as epslatex.ps or
+% epslatex.pdf at: http://www.ctan.org/tex-archive/info/
+%
+% latex, and pdflatex in dvi mode, support graphics in encapsulated
+% postscript (.eps) format. pdflatex in pdf mode supports graphics
+% in .pdf, .jpeg, .png and .mps (metapost) formats. Users should ensure
+% that all non-photo figures use a vector format (.eps, .pdf, .mps) and
+% not a bitmapped formats (.jpeg, .png). IEEE frowns on bitmapped formats
+% which can result in "jaggedy"/blurry rendering of lines and letters as
+% well as large increases in file sizes.
+%
+% You can find documentation about the pdfTeX application at:
+% http://www.tug.org/applications/pdftex
+
+
+
+
+
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+% for inline code
+\usepackage{courier}
+% for block code 
+\usepackage{listings}
+\lstset{columns=fullflexible,
+        mathescape=true,
+        literate=
+               {=}{$\leftarrow{}$}{1}
+               {==}{$={}$}{1},
+        morekeywords={if,then,else,return,sqrt}
+        }
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Serendipitous Offline Learning in a Neuromorphic Robot}
+
+
+
+% for over three affiliations, or if they all won't fit within the width
+% of the page, use this alternative format:
+% 
+\author{\IEEEauthorblockN{Terrence C. Stewart\IEEEauthorrefmark{1},
+Andrew Mundy,\IEEEauthorrefmark{2},
+James Kirk\IEEEauthorrefmark{3}, 
+Ashley Kleinhans\IEEEauthorrefmark{3} and
+J{\"o}rg Conradt\IEEEauthorrefmark{4}}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
+Georgia Institute of Technology,
+Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
+Email: homer@thesimpsons.com}
+\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+Telephone: (800) 555--1212, Fax: (888) 555--1212}
+\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+
+
+% make the title area
+\maketitle
+
+
+\begin{abstract}
+%\boldmath
+We demonstrate a neuromorphic learning paradigm that is well-suited to embodied learning of complex sensorimotor mappings. A mobile robot is first controlled by a basic set of reflexive hand-designed behaviors. All sensor data is provided via a spike-based silicon retina camera (eDVS), and all control is implemented via spiking neurons simulated on neuromorphic hardware (SpiNNaker). Given this initial control system, the robot is capable of simple obstacle avoidance and random exploration. To train the robot to perform more complex tasks, we observe the robot and find instances where the robot accidentally performs the action we wish it to perform. Data recorded from the robot during these times is then used to update the neural control system, increasing the likelihood of the robot performing that task in the future, given a similar sensor state. We demonstrate this learning approach is sufficient for the robot to learn to turn left or right depending on novel sensory stimuli.
+
+\end{abstract}
+% IEEEtran.cls defaults to using nonbold math in the Abstract.
+% This preserves the distinction between vectors and scalars. However,
+% if the conference you are submitting to favors bold math in the abstract,
+% then you can use LaTeX's standard command \boldmath at the very start
+% of the abstract to achieve this. Many IEEE journals/conferences frown on
+% math in the abstract anyway.
+\medskip
+\noindent \textbf{Keywords.} adaptive systems, mobile robotics, neurocontrollers, neuromorphics, robot control
+
+
+\IEEEpeerreviewmaketitle
+
+
+\section{Introduction}
+
+ONGOING developments in neuromorphic hardware design mean that it is possible to simulate large numbers of neurons on a very small power budget. This makes neural control a promising direction for mobile robotics applications, hopefully leading to flexible control without significantly impacting battery life. The open question is how best to make use of neural networks for robotic control. Our research program examines one possible approach to this task which combines the SpiNNaker computing platform \cite{furber2007neural, furber2014spinnaker}, the Neural Engineering Framework method for constructing neural models \cite{eliasmith2004neural}, and a series of robots developed at the Technische Universit{\"a}t M{\"u}nchen. The goal is to explore the new types of control algorithms that are made possible by neuromorphic hardware. The particular algorithm of interest here is directly biologically inspired, as is the task to be performed. While living creatures are genetically endowed with low-level hard-wired reflexes, they are also capable of developing novel associations between stimuli and responses which are entirely context-dependent. In other words, they can learn through experience to perform certain actions at certain times, overriding and building upon these low-level reflexes. However, rather than allowing these associations to be learned entirely autonomously (as in approaches such as Distributed Adaptive Control \cite{verschure2012distributed}), our approach is to have the programmer shape the learning by identifying particular situations where there robot performed a desired action correctly. This guides the learning and provides explicit control over the eventual behaviour. 
+
+%\hfill mds
+ 
+\hfill \today
+
+\section{Infrastructure}
+
+\subsection{eDVS}
+The sensor system used here is the eDVS embedded dynamic vision sensor \cite{conradt2009embedded}. This is a silicon retina developed by iniLabs in collaboration with the Institute of Neuroinformatics at the University of Zurich and the ETH Zurich. This neuromorphic sensor is a 128 x 128 pixel camera, but instead of reporting frame-based data, it emits individual events whenever the relative brightness for any individual pixel increases or decreases by a certain amount. This provides high temporal resolution (~1us) and low latency (~15us), as well as a high dynamic range (120dB). The eDVS used here is an embedded version with an onboard microcontroller (NXP LPC4337), inertial measurement unit, multiple PWM control signals, and general-purpose I/O lines. The silicon retina is well-suited for integration with other neuromorphic hardware, since it produces output in the form of spikes, which is the natural communication framework for spike-based neural processors. Furthermore, certain image processing algorithms can be implemented efficiently. For example, previous work \cite{muller2011miniature} has implemented high-speed tracking of flashing LEDs, and we we use that algorithm here as sensory pre-processing.
+
+
+\subsection{PushBot}
+At the Technische Universit{\"a}t M{\"u}nchen, the Neuroscientific
+System Theory group has developed a sma ll tread-based robot built around the eDVS sensor, as shown in Figure 1. This provides two motors, a frequency-controllable laser pointer, two LEDs, and housing for power (4 AA batteries). They have also developed a WLAN module, enabling
+streaming of sensor data and motor command to and from the robot over standard WiFi.
+
+\subsection{SpiNNaker}
+
+The SpiNNaker multicore processor is developed by the University of Manchester and consists of 18 200MHz ARM968 cores on a single die \cite{furber2007neural, furber2014spinnaker}. The processors and inter-chip communication infrastructure is optimized for machine, which is a 48-chip SpiNNaker board with a total of 864 processors using under 40W of power. While this system can be programmed directly in C or using the standard neural modelling API PyNN, we made use of Nengo \cite{bekolay_nengo2014}, an open-source neural compiler, for which we have developed a custom backend for SpiNNaker. This allows neural models to be initially tested at small scales on a standard PC, and then recompile the models such that they
+run natively on SpiNNaker.
+
+
+\begin{figure}[!t]
+\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{The PushBot and the eDVS silicon retina.}
+\label{fig_sim}
+\end{figure}
+
+\subsection{Neural Engineering Framework}
+The reason we chose Nengo rather than a more standard neural network framework is that Nengo \cite{bekolay_nengo2014} directly instantiates the Neural Engineering Framework (NEF), a general-purpose neural compiler that allows the user to define a high-level algorithm which is then compiled down to a neural approximation of that algorithm \cite{eliasmith2004neural}. This approach is meant for constructing complex biologically realistic neural models that cover perception, cognition, and action, and it was recently used to build Spaun, the first large-scale (2.5 million neurons) functional brain model capable of performing multiple tasks  \cite{eliasmith_largescale_2012}. When developing neural models using the NEF, every group of neurons represents a vector. This vector is (normally) of much smaller dimensionality than the number of neurons in the group, so the neural firing forms a redundant code for that vector. Since each neuron in the group responds differently to the same input (neural heterogeneity), this redundant code can be thought of as a random projection from a low-dimensional space (the vector being represented) to a high-dimensional space (the neural activity). Connections between neural groups implement functions on those represented vectors. Importantly, due to the redundant code, these functions do not have to be linear functions; rather, any function can be specified. The Neural Engineering Framework treats this as a least-squares minimization problem and finds the linear synaptic connections between the individual neurons that will most closely approximate the desired nonlinear function. Furthermore (although it is not used here), the NEF also indicates how recurrent connections can be found that will approximate any desired differential equation. Of course,
+for both feed-forward and recurrent connections, the accuracy of the approximation will be dependent on the number of neurons and the function being approximated. As an example of use, consider a group of neurons storing the result of the flashing LED tracking algorithm that takes the output of the eDVS camera and determines the x,y location (if any) of a flashing light at a particular frequency. This output is a three-dimensional vector (x, y, c), where x and y are the pixel location of the flashing LED and c is a measure of certainty which should be 0 if no flashing at the desired frequency is found. In the NEF, we might use 100 neurons to form a distributed representation of these 3 values (more neurons would represent it more accurately). We can then define connections that compute functions of these values. For example, if we want a group
+of neurons \texttt{R} to store the distance from the center of the visual field to the LED, we could compute: 
+\begin{lstlisting}
+R = sqrt(led.x ** 2 + led.y ** 2 )
+\end{lstlisting}
+
+This would cause the NEF to find synaptic connection weights between the group of neurons representing the LED data and the group of neurons representing the radius, such that the neural group \texttt{R} would be driven to fire with whatever pattern represents the correct radius given the
+current activity of the LED population.
+
+\section{Method}
+\subsection{initial reflexive control}
+The first stage is to define a base set of simple behaviours for the robot, along with triggering conditions for these behaviours. These behaviours should be as simple as possible, since they must be hand-designed, but should also provide a fairly rich repertoire of resulting actions. These can be thought of as the basic, instinctive, genetically-endowed reflexes seen in living creatures. For example, the first reflexive behaviour is simply to go forward if there is nothing in front of the robot. To define this, we specify a function that uses the sensor data to compute the current strength S of this action (from 0 to 1). In this case, the visual position of the laser pointer dot can be used as a simple range detector; if it is lower than some threshold the robot is near a wall and should to go forward. If it is higher than that threshold, it is safe to go forward. 
+\begin{lstlisting}
+S[0] = if laser.y > -0.6 else 0
+\end{lstlisting}
+
+To complete this basic behaviour, we define the motor output M as a function of the strength S of the action. In this case, we want to drive both wheel motors forward when the action has a high strength, similar to an animal moving forward only when there is sufficient space in front of it.
+
+\begin{lstlisting}
+M = [1, 1] * S[0]
+\end{lstlisting}
+
+The next basic reflexive action is to back up when we are
+too close to an obstacle. This can be detected by the laser
+pointer position being too low. Indeed, if the laser pointer is
+so low that it is not visible, this action should also be
+triggered. This gives the following rule
+
+\begin{lstlisting}
+S[1] = 1 if laser.y < -0.8 or laser.c < 0 else 0
+M = [-1, -1] * S[1]
+\end{lstlisting}
+
+The final basic actions are to turn left or turn right when
+close to an obstacle. 
+
+\begin{lstlisting}
+S[2] ← 1 if laser.y < -0.8 else 0
+M ← [-1, 1] * S[2]
+
+S[3] ← 1 if laser.y < -0.8 else 0
+M ← [1, -1] * S[3]
+\end{lstlisting}
+
+These last two actions, of course, should not both be
+performed at the same time. To specify this, we can define
+functions that relate the strengths of different actions to
+each other.
+
+\begin{lstlisting}
+S[2] = -S[3]
+S[3] = -S[2]
+\end{lstlisting}
+
+This means that whenever S[2] is positive, it will drive
+S[3] towards 0, and S[3] will similarly drive S[2] towards 0.
+The result will be that only one of the two actions will occur
+at a time.
+Each of these basic actions can now be implemented
+using Nengo and the Neural Engineering Framework.
+Groups of neurons are defined to store the sensory state, the
+motor output, and the strengths of each action. The
+connections between the groups of neurons set to
+approximate each of the above functions. This results in the
+neural system shown in Figure \ref{React}.
+To understand the resulting basic behaviour, two important
+aspects of the Neural Engineering Framework must be
+considered. First, due to the neural representation scheme,
+when there are multiple inputs to a neural population, the
+value represented will be the sum of the input values. This
+means, for example, that the motor output will be the sum
+of all the connections from S[0], S[1], S[2], and S[3] to M.
+Second, the NEF approximations of the desired functions
+will be \textit{smooth}. That is, instead of implementing the exact
+functions specified above, the actual behaviour will be much
+
+\begin{figure}[!t]
+\label{React}
+\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Basic reactive control. Each box is implemented as a group of LIF neurons, where N indicates the number of neurons, whose tuning curves span the dimensionality D as indicated. Each solid arrow indicates an alltoall connection with connection weights computed as per the NEF to approximate the functions described above. Dotted arrows indicate inputs
+and outputs connecting the robot to the neuromorphic hardware.}
+\end{figure}
+
+\begin{figure}[!t]
+\label{NEF}
+\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Neural approximation with the NEF. When connections between neural groups are optimized to approximate a function, the result is a smooth version of that function. As the number of neurons is increased, this neural approximation will approach the ideal function.}
+\end{figure}
+
+more gradual. For example, the input function to the S[0]
+population is supposed to compute 1 if laser.y > -0.6
+else 0. The difference between this and the actual
+approximated function can be seen in Figure 3.
+The result is a small spiking neural network control
+system that performs very simple obstacle avoidance. Due
+to the smoothing inherent in the NEF neural approximation
+of the above functions, the robot gradually transitions
+between behaviors. It will slow when approaching a wall,
+and then turn in a random direction. This randomness will
+be due entirely to sensory noise, as there is no stochasticity
+in the neural model itself. Furthermore, once it has chosen
+a particular direction to turn (i.e. once either S[2] or S[3] has a high value), it will continue to turn in that direction
+until there is no longer an obstacle in front of it (rather than alternating back and forth between turning left and turning right).
+
+\begin{figure}[!t]
+\label{Tmaze}
+\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{The T-Maze environment. The robot starts at the bottom.}
+\end{figure}
+
+\subsection{Initial Behaviour}
+
+To examine the model's behaviour, we used a standard TMaze
+environment (Figure 4). When placed at the bottom
+of the T-maze, the robot navigates forward, avoids the
+walls, reaches the choice point, and turns left or right.
+Typical trajectories are shown in Figure 5, which indicates
+the motor outputs over time. Since the robot uses tank-style
+treads, the two motor output values are the left and right
+motor speeds, respectively. For clarity, here we plot the
+overall speed as the sum of M[left] and M[right], while
+the rotation rate is the difference between the two. Motor output values of typical individual runs are plotted along
+with an overall mean value (with 95\% bootstrap confidence
+interval). All values are Gaussian filtered with $\sigma=0.15s$ for visual clarity.
+
+\begin{figure}[!t]
+\label{Cnt}
+\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Behaviour of reactive control model over multiple runs. The speed (top graph) is high at the beginning, then slows as it turns either left or right (bottom graph). While on any individual run the robot tends to turn consistently either left or right, the overall average is zero turning (black
+area in bottom graph).}
+\end{figure}
+
+\subsection{Serendipitous Offline Learning}
+
+While the above approach is sufficient for implementing
+simple behaviours, it requires the developer to define explicit
+rules mapping sensory states to actions. In complex
+situations, it may not be feasible for action rules such as the
+ones defined above to be explicitly programmed. Instead,
+we can also define \textit{implicit} action rules. That is, we can use
+examples of the robot's own behaviour as the rules
+themselves.
+In particular, consider the simple case where we want the
+robot to turn left at the intersection, rather than randomly
+turning either left or right. If we record the sensory data
+and the strength of each action (S[0], S[1], etc.) while the
+robot is performing its basic initial behaviour, we can find
+particular instances where the robot happened to perform
+the desired action (turning left). We call these the\textit{positive examples}. In this case, we would consider the four
+individual runs shown in Figure 5 where the robot's rotation
+tended to remain positive, and ignore the five runs where it
+was negative.
+The data from these runs can be thought of as long
+sequences of state-action pairs, indicating what action to
+perform in what state. Given this, we can add new
+connections from sensors to the action strength populations.
+Instead of explicitly indicating what functions to
+approximate on these connections, we instead use the NEF
+to find the connection weights that produce outputs that
+most closely match the original behaviour.
+At first glance, it seems as if these new connections
+would just end up being exactly the same as the original
+reflexive control connections. However, the key difference
+here is that these new connections will also take into
+account \textit{other sensory states} that were not considered in the
+original hand-designed reflexive rules. In other words,
+these new connections will cause the robot to be more likely
+to perform the actions we desire whenever it is in a sensory
+state similar to those seen in the positive examples.
+Importantly, this will happen without any explicit indication
+of exactly what sensory states should trigger what actions.
+The result of this training is shown in Figure 6. Unlike
+Figure 5, this shows the robot consistently turning to the left
+about 2 seconds into the behaviour (the typical time at which
+the robot reaches the end of the corridor).
+
+\begin{figure}[!t]
+\label{Left}
+\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Behavior after learning to turn left. By adding connections
+optimized to approximate situations where the robot behaved appropriately,
+we implicitly program the robot to map its sensory states to its actions as
+desired.}
+\end{figure}
+
+\begin{figure}[!t]
+\label{Right}
+\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Behavior after learning to turn right if there is a mirror, and otherwise turn left. The robot successfully identifies the correct situation and turns appropriately. Robot speed is not shown, but is similar to that depicted at the top of Figure 6.}
+\end{figure}
+
+\subsection{Learning sensory conditions}
+
+The initial example of learning to turn left is not
+particularly complex. However, exactly the same method
+can be used for more complex cases. For example, we can
+place complex visual stimuli at the intersection and chose
+the positive examples as situations where the robot turned
+left for one stimulus or turned right for another stimulus.
+The particular stimulus we used was a mirror. Figure 7
+shows that the robot can successfully learn to turn right
+when it sees a mirror, but turn left when there is no mirror.
+
+\section{Discussion}
+The algorithm described in this paper is meant to be a
+general-purpose approach for making use of massively
+parallel low-power neuromorphic computing hardware on a
+mobile robot. We have shown that we can start be defining
+extremely simple reactive rules, using the Neural
+Engineering Framework to implement them on the
+neuromorphic hardware. However, these sorts of simple
+reactive rules could, of course, be implemented using more
+traditional computing hardware. The point of this paper is
+that we can automatically train a simple set of neural
+connections that interacts with these basic reactive systems
+to produce much more complex control.
+In the case of the system learning to change its behavior
+based on the presence of a mirror in front of it, the system
+was able to successfully map the complex sensory stimuli to
+a particular motor action. While we have not yet completed
+a full analysis of the learned behavior, it is strongly helped
+by the presence of the flashing LED on top of the robot,
+which would then be visible in the mirror. However, it is
+important to note that this sensory stimulus did not initially
+impact the robot's behavior in any way. It was only through
+the process of taking examples of desired behavior and
+building a new set of connections that approximate that
+behavior that this sensory stimuli came to trigger changes in
+movement.
+This means that the scope of possible sensorimotor
+mappings is limited only by the range of the sensory inputs
+and the size of the neural population representing the
+sensors. That is, if there are sufficiently many neurons
+representing the sensory space, then the Neural Engineering
+Framework guarantees that connection weights can be
+found that will approximate any function with any desired
+level of accuracy. However, for extremely complex
+functions, the number of neurons required may be
+astronomical. We thus need to perform further work to
+characterize a set of different useful functions to determine
+how many neurons are needed.
+It should be noted, however, that this method of using
+neural hardware does not run into the problems seen by
+traditional neural network learning rules, such as backpropagation
+of error. In particular, the only learning
+involves optimizing a single layer of connection weights.
+This task can be performed by any gradient-descent method,
+or by simple algebraic least-squares minimization. These
+are not subject to the problems of being stuck in local
+minima. This means that the same algorithm described here
+where there are only 500 neurons representing sensory state
+will scale up to situations where we use multiple SpiNNaker
+chips or even a full SpiNNaker board simulating
+approximately one million neurons. We will be
+characterizing these capabilities in future work.
+In previous work \cite{conradt2014trainable}, we have used a somewhat similar
+learning method. In that case, we did not have an initial
+reflexive control system, and we did not find particular
+examples of desired behavior. Instead, we put the robot
+temporarily under manual control, and used the behavior
+generated by the person performing the manual control to
+train the connections between sensory neurons and motor
+neurons. That work is more restrictive than the model
+presented here, since there is no initial scaffolding (the
+reflexive actions) for the learned actions to build upon.
+Furthermore, that method requires direct training examples,
+rather than an after-the-fact manual labeling of particular
+instances as desired behavior. Metaphorically speaking, the
+work presented here could be thought of as closer to
+reinforcement learning, while the previous work would be
+purely supervised learning. Of course, a hybrid approach
+could be pursued.
+Finally, it should be noted that in this work we are only
+training based on positive examples (i.e. situations where
+the robot behaved as desired). It may also be possible to
+supplement this work with explicit punishment for situations where the robot performs non-desired behaviour.
+However, exactly how to do this is not straightforward. In
+particular, rather than using the NEF to approximate
+whatever the robot had done during the positive example,
+we would need instead to modify the network to do
+anything except what it had done. This is not
+straightforward to express as a function. Interestingly, there
+is significant biological evidence that positive (reward) and
+negative (punishment) systems are separate in the brain.
+That is, they are not simple the opposite of each other –
+rather they are significantly different processes that interact.
+This interaction will also be explored in our future work,
+and the NEF has already been used to model fear
+conditioning \cite{kolbeck2013fear}, which would fit well with this model.
+
+
+
+% use section* for acknowledgement
+\section*{Acknowledgement}
+
+
+The authors would like to thank...
+
+
+
+
+
+% trigger a \newpage just before the given reference
+% number - used to balance the columns on the last page
+% adjust value as needed - may need to be readjusted if
+% the document is modified later
+%\IEEEtriggeratref{8}
+% The "triggered" command can be changed if desired:
+%\IEEEtriggercmd{\enlargethispage{-5in}}
+
+% references section
+
+% can use a bibliography generated by BibTeX as a .bbl file
+% BibTeX documentation can be easily obtained at:
+% http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/
+% The IEEEtran BibTeX style support page is at:
+% http://www.michaelshell.org/tex/ieeetran/bibtex/
+\bibliographystyle{IEEEtran}
+% argument is your BibTeX string definitions and bibliography database(s)
+\bibliography{refs}
+%
+% <OR> manually copy in the resultant .bbl file
+% set second argument of \begin to the number of references
+% (used to reserve space for the reference number labels box)
+
+
+
+
+
+% that's all folks
+\end{document}
+
+
