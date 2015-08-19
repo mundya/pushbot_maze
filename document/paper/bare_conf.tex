@@ -184,8 +184,7 @@
 % of the page, use this alternative format:
 % 
 \author{\IEEEauthorblockN{Terrence C. Stewart\IEEEauthorrefmark{1},
-Andrew Mundy,\IEEEauthorrefmark{2},
-James Kirk\IEEEauthorrefmark{3}, 
+Andrew Mundy\IEEEauthorrefmark{2},
 Ashley Kleinhans\IEEEauthorrefmark{3} and
 J{\"o}rg Conradt\IEEEauthorrefmark{4}}
 \IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
@@ -193,7 +192,7 @@ Georgia Institute of Technology,
 Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
 \IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
 Email: homer@thesimpsons.com}
-\IEEEauthorblockA{\IEEEauthorrefmark{3}Starfleet Academy, San Francisco, California 96678-2391\\
+\IEEEauthorblockA{\IEEEauthorrefmark{3}Council of Scientific and Industrial Research, Pretoria, South Africa, akleinhans@csir.co.za\\
 Telephone: (800) 555--1212, Fax: (888) 555--1212}
 \IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
 
@@ -204,7 +203,7 @@ Telephone: (800) 555--1212, Fax: (888) 555--1212}
 
 \begin{abstract}
 %\boldmath
-We demonstrate a neuromorphic learning paradigm that is well-suited to embodied learning of complex sensorimotor mappings. A mobile robot is first controlled by a basic set of reflexive hand-designed behaviors. All sensor data is provided via a spike-based silicon retina camera (eDVS), and all control is implemented via spiking neurons simulated on neuromorphic hardware (SpiNNaker). Given this initial control system, the robot is capable of simple obstacle avoidance and random exploration. To train the robot to perform more complex tasks, we observe the robot and find instances where the robot accidentally performs the action we wish it to perform. Data recorded from the robot during these times is then used to update the neural control system, increasing the likelihood of the robot performing that task in the future, given a similar sensor state. We demonstrate this learning approach is sufficient for the robot to learn to turn left or right depending on novel sensory stimuli.
+We demonstrate a neuromorphic learning paradigm that is well-suited to embodied learning of complex sensorimotor mappings. A mobile robot is first controlled by a basic set of reflexive hand-designed behaviours. All sensor data is provided via a spike-based silicon retina camera (eDVS), and all control is implemented via spiking neurons simulated on neuromorphic hardware (SpiNNaker). Given this initial control system, the robot is capable of simple obstacle avoidance and random exploration. To train the robot to perform more complex tasks, we observe the robot and find instances where the robot accidentally performs the action we wish it to perform. Data recorded from the robot during these times is then used to update the neural control system, increasing the likelihood of the robot performing that task in the future, given a similar sensor state. We demonstrate this learning approach is sufficient for the robot to learn to turn left or right depending on novel sensory stimuli.
 
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
@@ -222,13 +221,17 @@ We demonstrate a neuromorphic learning paradigm that is well-suited to embodied 
 
 \section{Introduction}
 
-ONGOING developments in neuromorphic hardware design mean that it is possible to simulate large numbers of neurons on a very small power budget. This makes neural control a promising direction for mobile robotics applications, hopefully leading to flexible control without significantly impacting battery life. The open question is how best to make use of neural networks for robotic control. Our research program examines one possible approach to this task which combines the SpiNNaker computing platform \cite{furber2007neural, furber2014spinnaker}, the Neural Engineering Framework method for constructing neural models \cite{eliasmith2004neural}, and a series of robots developed at the Technische Universit{\"a}t M{\"u}nchen. The goal is to explore the new types of control algorithms that are made possible by neuromorphic hardware. The particular algorithm of interest here is directly biologically inspired, as is the task to be performed. While living creatures are genetically endowed with low-level hard-wired reflexes, they are also capable of developing novel associations between stimuli and responses which are entirely context-dependent. In other words, they can learn through experience to perform certain actions at certain times, overriding and building upon these low-level reflexes. However, rather than allowing these associations to be learned entirely autonomously (as in approaches such as Distributed Adaptive Control \cite{verschure2012distributed}), our approach is to have the programmer shape the learning by identifying particular situations where the robot performed a desired action correctly. This guides the learning and provides explicit control over the eventual behaviour. 
+[TODO: represent related work and compare them with the proposed approach]
+
+ONGOING developments in neuromorphic hardware design mean that it is possible to simulate large numbers of neurons on a very small power budget. This makes neural control a promising direction for mobile robotics applications, hopefully leading to flexible control, without significantly impacting battery life. The open question is how best to make use of neural networks for robotic control. This is not a new area of research having first been presented by [TODO: x,y,z] as early as [TODO: years]. The main focus up till now has been mainly in the field of machine learning, however our study gravitates towards animal behaviour studies. We examine one possible approach to this task which combines the SpiNNaker computing platform \cite{furber2007neural, furber2014spinnaker}, the Neural Engineering Framework (NEF) method for constructing neural models \cite{eliasmith2004neural}, and a series of robots developed at the Technische Universit{\"a}t M{\"u}nchen. The goal is to explore the new types of control algorithms that are made possible by recent developments in neuromorphic hardware. The particular algorithm of interest here is directly biologically inspired, as is the task to be performed. While living creatures are genetically endowed with low-level hard-wired reflexes, they are also capable of developing novel associations between stimuli and responses which are entirely context-dependent. In other words, behaviour studies indicate that they can learn through experience to perform certain actions at certain times [TODO: insert reference], overriding and building upon these low-level reflexes. However, rather than allowing these associations to be learned entirely autonomously (as in approaches such as Distributed Adaptive Control \cite{verschure2012distributed}), our approach is to have the programmer shape the learning by identifying particular situations where the robot performed a desired action correctly, much like when an animal finds a food source and updates its situational awareness to return to that spot [TODO: ref]. This guides the learning and provides explicit control over the eventual behaviour. [TODO: this is where they get the idea that the system is pre-coded and not automatic - the reward signals need to be better outlined]
 
 %\hfill mds
  
 \hfill \today
 
 \section{Infrastructure}
+
+[TODO R3: "proposed approach is not well organised and written, therefore cannot see valuable novelty in manuscript." I think that if we update the into with comparisons and the rest of the TODO's from R2 this should be covered.]
 
 \subsection{eDVS}
 The sensor system used here is the eDVS embedded dynamic vision sensor \cite{conradt2009embedded}. This is a silicon retina developed by iniLabs in collaboration with the Institute of Neuroinformatics at the University of Zurich and the ETH Zurich. This neuromorphic sensor is a 128 x 128 pixel camera, but instead of reporting frame-based data, it emits individual events whenever the relative brightness for any individual pixel increases or decreases by a certain amount. This provides high temporal resolution (~1us) and low latency (~15us), as well as a high dynamic range (120dB). The eDVS used here is an embedded version with an onboard microcontroller (NXP LPC4337), inertial measurement unit, multiple PWM control signals, and general-purpose I/O lines. The silicon retina is well-suited for integration with other neuromorphic hardware, since it produces output in the form of spikes, which is the natural communication framework for spike-based neural processors. Furthermore, certain image processing algorithms can be implemented efficiently. For example, previous work \cite{muller2011miniature} has implemented high-speed tracking of flashing LEDs, and we use that algorithm here as sensory pre-processing.
@@ -260,23 +263,25 @@ The reason we chose Nengo rather than a more standard neural network framework i
 for both feed-forward and recurrent connections, the accuracy of the approximation will be dependent on the number of neurons and the function being approximated. As an example of use, consider a group of neurons storing the result of the flashing LED tracking algorithm that takes the output of the eDVS camera and determines the x,y location (if any) of a flashing light at a particular frequency. This output is a three-dimensional vector (x, y, c), where x and y are the pixel location of the flashing LED and c is a measure of certainty which should be 0 if no flashing at the desired frequency is found. In the NEF, we might use 100 neurons to form a distributed representation of these 3 values (more neurons would represent it more accurately). We can then define connections that compute functions of these values. For example, if we want a group
 of neurons \texttt{R} to store the distance from the center of the visual field to the LED, we could compute: 
 \begin{lstlisting}
-R = sqrt(led.x ** 2 + led.y ** 2 )
+	R = sqrt(led.x ** 2 + led.y ** 2 )
 \end{lstlisting}
 
 This would cause the NEF to find synaptic connection weights between the group of neurons representing the LED data and the group of neurons representing the radius, such that the neural group \texttt{R} would be driven to fire with whatever pattern represents the correct radius given the
 current activity of the LED population.
 
 \section{Method}
-\subsection{initial reflexive control}
+[TODO R2: provide more insight into methodology, to reflect scientific paper rather than technical report]
+
+\subsection{Initial Reflexive Control}
 The first stage is to define a base set of simple behaviours for the robot, along with triggering conditions for these behaviours. These behaviours should be as simple as possible, since they must be hand-designed, but should also provide a fairly rich repertoire of resulting actions. These can be thought of as the basic, instinctive, genetically-endowed reflexes seen in living creatures. For example, the first reflexive behaviour is simply to go forward if there is nothing in front of the robot. To define this, we specify a function that uses the sensor data to compute the current strength S of this action (from 0 to 1). In this case, the visual position of the laser pointer dot can be used as a simple range detector; if it is lower than some threshold the robot is near a wall and should not go forward. If it is higher than that threshold, it is safe to go forward. 
 \begin{lstlisting}
-S[0] = if laser.y > -0.6 else 0
+	S[0] = if laser.y > -0.6 else 0
 \end{lstlisting}
 
 To complete this basic behaviour, we define the motor output M as a function of the strength S of the action. In this case, we want to drive both wheel motors forward when the action has a high strength, similar to an animal moving forward only when there is sufficient space in front of it.
 
 \begin{lstlisting}
-M = [1, 1] * S[0]
+	M = [1, 1] * S[0]
 \end{lstlisting}
 
 The next basic reflexive action is to back up when we are
@@ -286,19 +291,19 @@ so low that it is not visible, this action should also be
 triggered. This gives the following rule
 
 \begin{lstlisting}
-S[1] = 1 if laser.y < -0.8 or laser.c < 0 else 0
-M = [-1, -1] * S[1]
+	S[1] = 1 if laser.y < -0.8 or laser.c < 0 else 0
+	M = [-1, -1] * S[1]
 \end{lstlisting}
 
 The final basic actions are to turn left or turn right when
 close to an obstacle. 
 
 \begin{lstlisting}
-S[2] ← 1 if laser.y < -0.8 else 0
-M ← [-1, 1] * S[2]
+	S[2] ← 1 if laser.y < -0.8 else 0
+	M ← [-1, 1] * S[2]
 
-S[3] ← 1 if laser.y < -0.8 else 0
-M ← [1, -1] * S[3]
+	S[3] ← 1 if laser.y < -0.8 else 0
+	M ← [1, -1] * S[3]
 \end{lstlisting}
 
 These last two actions, of course, should not both be
@@ -307,8 +312,8 @@ functions that relate the strengths of different actions to
 each other.
 
 \begin{lstlisting}
-S[2] = -S[3]
-S[3] = -S[2]
+	S[2] = -S[3]
+	S[3] = -S[2]
 \end{lstlisting}
 
 This means that whenever S[2] is positive, it will drive
@@ -331,30 +336,7 @@ means, for example, that the motor output will be the sum
 of all the connections from S[0], S[1], S[2], and S[3] to M.
 Second, the NEF approximations of the desired functions
 will be \textit{smooth}. That is, instead of implementing the exact
-functions specified above, the actual behaviour will be much
-
-\begin{figure}[!t]
-\label{React}
-\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-\caption{[TODO: Terry fig's 5,6 and 7 should all show 10 trials (ie same amount of trails] Basic reactive control. Each box is implemented as a group of leaky integrate and fire [TODO: explanation somewhere??] neurons, where N indicates the number of neurons, whose tuning curves span the dimensionality D as indicated. Each solid arrow indicates an alltoall connection with connection weights computed as per the NEF to approximate the functions described above. Dotted arrows indicate inputs
-and outputs connecting the robot to the neuromorphic hardware.}
-\end{figure}
-
-\begin{figure}[!t]
-\label{NEF}
-\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-\caption{Neural approximation with the NEF. When connections between neural groups are optimized to approximate a function, the result is a smooth version of that function. As the number of neurons is increased, this neural approximation will approach the ideal function.}
-\end{figure}
-
-more gradual. For example, the input function to the S[0]
+functions specified above, the actual behaviour will be much more gradual. For example, the input function to the S[0]
 population is supposed to compute 1 if laser.y > -0.6
 else 0. The difference between this and the actual
 approximated function can be seen in Figure 3.
@@ -362,21 +344,44 @@ The result is a small spiking neural network control
 system that performs very simple obstacle avoidance. Due
 to the smoothing inherent in the NEF neural approximation
 of the above functions, the robot gradually transitions
-between behaviors. It will slow when approaching a wall,
+between behaviours. It will slow when approaching a wall,
 and then turn in a random direction. This randomness will
 be due entirely to sensory noise, as there is no stochasticity
 in the neural model itself. Furthermore, once it has chosen
 a particular direction to turn (i.e. once either S[2] or S[3] has a high value), it will continue to turn in that direction
-until there is no longer an obstacle in front of it (rather than alternating back and forth between turning left and turning right).
+until there is no longer an obstacle in front of it (rather than alternating back and forth between turning left and turning right). [TODO R2: Make clear that human observation is not required, and relate to animal behaviour that, when first encountering a situation, makes "accidental" decisions, and then updates model of surroundings depending on outcome. Make clear that this means the system is learning, and the methodology is intrinsically automated - is there a way to describe this in math as suggested by reviewer 2?? ]
+
 
 \begin{figure}[!t]
-\label{Tmaze}
+\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{[TODO R1: Terry fig's 5,6 and 7 should all show 10 trials (ie same amount of trails] Basic reactive control. Each box is implemented as a group of leaky integrate and fire [TODO R1: explanation somewhere??] neurons, where N indicates the number of neurons, whose tuning curves span the dimensionality D as indicated. Each solid arrow indicates an alltoall connection with connection weights computed as per the NEF to approximate the functions described above. Dotted arrows indicate inputs
+and outputs connecting the robot to the neuromorphic hardware.}
+\label{React}
+\end{figure}
+
+\begin{figure}[!t]
+\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Neural approximation with the NEF. When connections between neural groups are optimized to approximate a function, the result is a smooth version of that function. As the number of neurons is increased, this neural approximation will approach the ideal function.}
+\label{NEF}
+\end{figure}
+
+
+\begin{figure}[!t]
 \centering
 %\includegraphics[width=2.5in]{myfigure}
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
 \caption{The T-Maze environment. The robot starts at the bottom.}
+\label{Tmaze}
 \end{figure}
 
 \subsection{Initial Behaviour}
@@ -394,16 +399,6 @@ the rotation rate is the difference between the two. Motor output values of typi
 with an overall mean value (with 95\% bootstrap confidence
 interval). All values are Gaussian filtered with $\sigma=0.15s$ for visual clarity.
 
-\begin{figure}[!t]
-\label{Cnt}
-\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-\caption{Behaviour of reactive control model over multiple runs. The speed (top graph) is high at the beginning, then slows as it turns either left or right (bottom graph). While on any individual run the robot tends to turn consistently either left or right, the overall average is zero turning (black
-area in bottom graph).}
-\end{figure}
 
 \subsection{Serendipitous Offline Learning}
 
@@ -421,7 +416,7 @@ turning either left or right. If we record the sensory data
 and the strength of each action (S[0], S[1], etc.) while the
 robot is performing its basic initial behaviour, we can find
 particular instances where the robot happened to perform
-the desired action (turning left). We call these the\textit{positive examples}. In this case, we would consider the four
+the desired action (turning left). We call these the \textit{positive examples}. In this case, we would consider the four
 individual runs shown in Figure 5 where the robot's rotation
 tended to remain positive, and ignore the five runs where it
 was negative.
@@ -444,35 +439,52 @@ to perform the actions we desire whenever it is in a sensory
 state similar to those seen in the positive examples.
 Importantly, this will happen without any explicit indication
 of exactly what sensory states should trigger what actions.
-The result of this training is shown in Figure 6. Unlike
-Figure 5, this shows the robot consistently turning to the left
+
+\section{Results}
+
+The result of this training is shown in Figure \ref{Left}. Unlike Figure \ref{Cnt}, this shows the robot consistently turning to the left
 about 2 seconds into the behaviour (the typical time at which
 the robot reaches the end of the corridor).
 
+[TODO R1: clean up this section and put all method related info in the method section]
+
+[TODO R1: Look at adding a little more info about the data already recorded, some metrics, like information available vs number of trials kind of thing. ]
+
 \begin{figure}[!t]
-\label{Left}
 \centering
 %\includegraphics[width=2.5in]{myfigure}
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
-\caption{Behavior after learning to turn left. By adding connections
+\caption{Behaviour of reactive control model over multiple runs. The speed (top graph) is high at the beginning, then slows as it turns either left or right (bottom graph). While on any individual run the robot tends to turn consistently either left or right, the overall average is zero turning (black
+area in bottom graph).}
+\label{Cnt}
+\end{figure}
+
+\begin{figure}[!t]
+\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Behaviour after learning to turn left. By adding connections
 optimized to approximate situations where the robot behaved appropriately,
 we implicitly program the robot to map its sensory states to its actions as
 desired.}
+\label{Left}
 \end{figure}
 
 \begin{figure}[!t]
-\label{Right}
 \centering
 %\includegraphics[width=2.5in]{myfigure}
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
-\caption{Behavior after learning to turn right if there is a mirror, and otherwise turn left. The robot successfully identifies the correct situation and turns appropriately. Robot speed is not shown, but is similar to that depicted at the top of Figure 6.}
+\caption{Behaviour after learning to turn right if there is a mirror, and otherwise turn left. The robot successfully identifies the correct situation and turns appropriately. Robot speed is not shown, but is similar to that depicted at the top of Figure 6.}
+\label{Right}
 \end{figure}
 
-\subsection{Learning sensory conditions}
+\subsection{Learning Sensory Conditions}
 
 The initial example of learning to turn left is not
 particularly complex. However, exactly the same method
@@ -497,18 +509,18 @@ traditional computing hardware. The point of this paper is
 that we can automatically train a simple set of neural
 connections that interacts with these basic reactive systems
 to produce much more complex control.
-In the case of the system learning to change its behavior
+In the case of the system learning to change its behaviour
 based on the presence of a mirror in front of it, the system
 was able to successfully map the complex sensory stimuli to
 a particular motor action. While we have not yet completed
-a full analysis of the learned behavior, it is strongly helped
+a full analysis of the learned behaviour, it is strongly helped
 by the presence of the flashing LED on top of the robot,
 which would then be visible in the mirror. However, it is
 important to note that this sensory stimulus did not initially
-impact the robot's behavior in any way. It was only through
-the process of taking examples of desired behavior and
+impact the robot's behaviour in any way. It was only through
+the process of taking examples of desired behaviour and
 building a new set of connections that approximate that
-behavior that this sensory stimuli came to trigger changes in
+behaviour that this sensory stimuli came to trigger changes in
 movement.
 This means that the scope of possible sensorimotor
 mappings is limited only by the range of the sensory inputs
@@ -539,7 +551,7 @@ characterizing these capabilities in future work.
 In previous work \cite{conradt2014trainable}, we have used a somewhat similar
 learning method. In that case, we did not have an initial
 reflexive control system, and we did not find particular
-examples of desired behavior. Instead, we put the robot
+examples of desired behaviour. Instead, we put the robot
 temporarily under manual control, and used the behavior
 generated by the person performing the manual control to
 train the connections between sensory neurons and motor
@@ -547,8 +559,8 @@ neurons. That work is more restrictive than the model
 presented here, since there is no initial scaffolding (the
 reflexive actions) for the learned actions to build upon.
 Furthermore, that method requires direct training examples,
-rather than an after-the-fact manual labeling of particular
-instances as desired behavior. Metaphorically speaking, the
+rather than an after-the-fact manual labelling of particular
+instances as desired behaviour. Metaphorically speaking, the
 work presented here could be thought of as closer to
 reinforcement learning, while the previous work would be
 purely supervised learning. Of course, a hybrid approach
@@ -576,12 +588,7 @@ conditioning \cite{kolbeck2013fear}, which would fit well with this model.
 % use section* for acknowledgement
 \section*{Acknowledgement}
 
-
 The authors would like to thank...
-
-
-
-
 
 % trigger a \newpage just before the given reference
 % number - used to balance the columns on the last page
@@ -592,25 +599,10 @@ The authors would like to thank...
 %\IEEEtriggercmd{\enlargethispage{-5in}}
 
 % references section
-
-% can use a bibliography generated by BibTeX as a .bbl file
-% BibTeX documentation can be easily obtained at:
-% http://www.ctan.org/tex-archive/biblio/bibtex/contrib/doc/
-% The IEEEtran BibTeX style support page is at:
-% http://www.michaelshell.org/tex/ieeetran/bibtex/
 \bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)
 \bibliography{refs}
-%
-% <OR> manually copy in the resultant .bbl file
-% set second argument of \begin to the number of references
-% (used to reserve space for the reference number labels box)
 
-
-
-
-
-% that's all folks
 \end{document}
 
 
