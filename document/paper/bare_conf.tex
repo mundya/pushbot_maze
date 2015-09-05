@@ -284,7 +284,7 @@ times, through experience, overriding and building upon these low-level
 reflexes \cite{kim2007encoding}. 
 
 However, for applied robotics applications, we do not want an approach where
-learning is entirely autonomous an undirected (as in, for example, the neural
+learning is entirely autonomous and undirected (as in, for example, the neural
 learning seen in Distributed Adaptive Control \cite{verschure2012distributed}). 
 Instead, our approach is to inform neural learning by providing explicit
 indications as to the instances where correct behaviour was achieved.  The 
@@ -298,17 +298,32 @@ guides the learning and provides explicit control over the eventual behaviour.
 [CHECK R3: "proposed approach is not well organised and written, therefore cannot see valuable novelty in manuscript."]
 
 \subsection{eDVS}
-The sensor system used here is the eDVS embedded dynamic vision sensor \cite{conradt2009embedded}.  A silicon retina developed by iniLabs in collaboration with the Institute of Neuroinformatics at the University of Zurich and the ETH Zurich. This neuromorphic sensor is a 128x128-pixel camera. Instead of reporting frame-based data, it emits individual events when the relative brightness for any individual pixel increases or decreases. The eDVS provides high temporal resolution (~1us), low latency (~15us) and high dynamic range (120dB). The eDVS used here is an embedded version with an onboard microcontroller (NXP LPC4337), inertial measurement unit, multiple PWM control signals, and general-purpose I/O lines. The silicon retina is well-suited for integration with other neuromorphic hardware since it produces output in the form of spikes, which is the natural communication framework for spike-based neural processors. Furthermore, certain image processing algorithms can be implemented efficiently. For example, previous work \cite{muller2011miniature} has implemented high-speed tracking of flashing LEDs, and we use that algorithm here as sensory pre-processing.
+The sensor system used here is the eDVS embedded dynamic vision 
+sensor \cite{conradt2009embedded}, a silicon retina developed by iniLabs in 
+collaboration with the Institute of Neuroinformatics at the University of 
+Zurich and the ETH Zurich. This neuromorphic sensor is a 128x128-pixel camera. 
+Instead of reporting frame-based data, it emits individual events when the 
+relative brightness for any individual pixel increases or decreases. The eDVS 
+provides high temporal resolution (~1us), low latency (~15us) and high dynamic 
+range (120dB). The eDVS used here is an embedded version with an onboard 
+microcontroller (NXP LPC4337), inertial measurement unit, multiple PWM control 
+signals, and general-purpose I/O lines. The silicon retina is well-suited for 
+integration with other neuromorphic hardware since it produces output in the 
+form of spikes, which is the natural communication framework for spike-based 
+neural processors. Furthermore, certain image processing algorithms can be 
+implemented efficiently. For example, previous work \cite{muller2011miniature} 
+has implemented high-speed tracking of flashing LEDs, and we use that algorithm 
+here as sensory pre-processing.
 
 
 \subsection{PushBot}
 At the Technische Universit{\"a}t M{\"u}nchen, the Neuroscientific
-System Theory group has developed a small tread-based robot built around the eDVS sensor, as shown in Figure 1. The robot provides two motors, a frequency-controllable laser pointer, two LEDs, and housing for power (4 AA batteries). The setup comes with a proprietary WLAN module, enabling streaming of sensor data and motor command to and from the robot over standard WiFi.
-
-\subsection{SpiNNaker}
-
-The SpiNNaker multicore processor is developed by the University of Manchester and consists of 18 200MHz ARM968 cores on a single die \cite{furber2007neural, furber2014spinnaker}. The processors and inter-chip communication infrastructure, optimized for the 48-chip SpiNNaker board with a total of 864 processors using under 40W of power. This system can be programmed directly in C or using the standard neural modeling API PyNN. We made use of Nengo \cite{bekolay_nengo2014}, an open-source neural compiler. A Nengo backend for SpiNNaker has been developed, which allows for testing of neural models on a standard PC, then recompiled such that they run natively on SpiNNaker.
-
+System Theory group has developed a small tread-based robot built around the 
+eDVS sensor, as shown in Figure 1. The robot provides two motors, a 
+frequency-controllable laser pointer, two LEDs, and housing for power 
+(4 AA batteries). The setup comes with a proprietary WLAN module, enabling 
+streaming of sensor data and motor command to and from the robot over 
+standard WiFi.
 
 \begin{figure}[!t]
 \centering
@@ -320,13 +335,81 @@ The SpiNNaker multicore processor is developed by the University of Manchester a
 \label{fig_sim}
 \end{figure}
 
-\subsection{NEF}
-The reason we chose Nengo rather than a more standard neural network framework is that Nengo \cite{bekolay_nengo2014} directly instantiates the Neural Engineering Framework (NEF). NEF is a general-purpose neural compiler that allows the user to define a high-level algorithm that is then compiled down to a neural approximation of that algorithm \cite{eliasmith2004neural}. This approach meant for constructing complex biologically realistic neural models. Demonstration of the use of Nengo for perception, cognition, and action encoding can be seen in Spaun, the first large-scale (2.5 million neurons) functional brain model capable of performing multiple tasks  \cite{eliasmith_largescale_2012}. When developing neural models using the NEF, every group of neurons represents a vector. This vector is (normally) of much smaller dimensionality than the number of neurons in the group, so the neural firing forms a redundant code for that vector. Each neuron in the group responds differently to the same input (neural heterogeneity). Therefore, the redundant code can be thought of as a random projection from a low-dimensional space (the vector being represented) to a high-dimensional space (the neural activity). Connections between neural groups implement functions on those represented vectors. Importantly, due to the redundant code, these functions do not have to be linear functions; rather, any function can be specified. The Neural Engineering Framework treats this as a least-squares minimization problem and finds the linear synaptic connections between the individual neurons that will most closely approximate the desired nonlinear function. Furthermore (not used here), the NEF also indicates how recurrent connections can be found that will approximate any desired differential equation.For both feed-forward and recurrent connections, the accuracy of the approximation will be dependent on the number of neurons and the function being approximated. As an example, consider a group of neurons store the resulting position of a flashing LED. A tracking algorithm takes the output of the eDVS camera and determines the x,y location (if any) of a flashing light at a particular frequency. The output is a three-dimensional vector (x, y, c). Where x and y are the pixel location of the flashing LED and c is a measure of certainty which should be 0 if no flashing at the desired frequency. In the NEF, we might use 100 neurons to form a distributed representation of these three values (more neurons would represent it more accurately). We can then define connections that compute functions of these values. For example, if we want a group of neurons \texttt{R} to store the distance from the center of the visual field to the LED, we could compute: 
+
+\subsection{SpiNNaker}
+
+The SpiNNaker multicore processor is developed by the University of Manchester 
+and consists of 18 200MHz ARM968 cores on a single die \cite{furber2007neural, furber2014spinnaker}. 
+The processors and inter-chip communication infrastructure are optimized for
+massively parallel operations, with a target of a one-million-core machine.  Its
+low power consumption means that a 48-chip SpiNNaker board with a total of 
+864 processors uses under 40W of power. This system can be programmed directly 
+in C or using the standard neural modeling API PyNN. However, for this work
+we made use of the Nengo open-source neural compiler \cite{bekolay_nengo2014} 
+(described below), and the custom Nengo backend that compiles high-level
+neural models into optimized SpiNNaker code \cite{mundy2015}.
+
+\subsection{Nengo and the Neural Engineering Framework}
+
+The reason we chose Nengo rather than a more standard neural network framework is that Nengo \cite{bekolay_nengo2014} directly instantiates the Neural Engineering Framework (NEF). 
+
+The Neural Engineering Framework (NEF) is a general-purpose neural compiler 
+that allows the user to define a high-level algorithm that is then compiled 
+down to a neural approximation of that algorithm \cite{eliasmith2004neural}. 
+This approach was originally meant for constructing complex biologically realistic neural 
+models. Demonstrationis of the use of Nengo for perception, cognition, and 
+action encoding can be seen in Spaun, the first large-scale 
+(2.5 million neuron) functional brain model capable of performing multiple 
+tasks  \cite{eliasmith_largescale_2012}. 
+
+When developing neural models using the NEF, every group of neurons is thought
+of as representing a vector.  That is, different patterns of activity within
+that group of neurons correspond to different vector values being represented.
+This vector is (normally) of much smaller dimensionality than the number of 
+neurons in the group, so the neural firing forms a redundant code for that 
+vector. Each neuron in the group responds differently to the same input, due
+to neural heterogeneity. Therefore, the redundant code can be thought of as a 
+random projection from a low-dimensional space (the vector being represented) 
+to a high-dimensional space (the neural activity). 
+
+Connections between neural 
+groups implement functions on those represented vectors. Importantly, due to 
+the redundant code, these functions do not have to be linear functions; 
+rather, any function can be specified, and the system will find the optimal
+connections between neurons to approximate that function. The Neural Engineering 
+Framework treats this as a least-squares minimization problem and finds the 
+feed-forward linear synaptic connection weights between the individual neurons that will 
+most closely approximate the desired nonlinear function. Furthermore, the NEF 
+also indicates how recurrent connections can be found that will approximate 
+any desired differential equation.  For both feed-forward and recurrent 
+connections, the accuracy of the approximation will be dependent on the 
+number of neurons and the function being approximated. 
+
+As an example, consider a group of neurons storing three values: the $x,y$ 
+position of an object and a certainty measure $c$ that the object is at that
+location.  (This example comes from the output of the tracking algorithm 
+for flashing LEDs \cite{muller2011miniature}).  In the NEF, we might use 100 
+neurons to form a distributed representation of these three values 
+(using more neurons would improve the accuracy of the representation).  Each
+neuron would be given a random combination of inputs from the three dimensions,
+resulting in a different pattern of firing for different vectors $(x,y,c)$.
+
+Given this activity, we can then define connections to other groups of neurons
+that compute functions of these values. For example, if we want a group of 
+neurons $R$ to store the distance from the center of the visual field to the 
+location of the LED, we could tell Nengo to optimize the connections so
+as to approximate: 
+ 
 \begin{lstlisting}
-	R = sqrt(led.x ** 2 + led.y ** 2 )
+    R = sqrt(led.x**2 + led.y**2)
 \end{lstlisting}
 
-This would cause the NEF to find synaptic connection weights between the group of neurons representing the LED data, and the group of neurons representing the radius $\ni$ the neural group \texttt{R} is driven to fire with whatever pattern represents the correct radius, given the current activity of the LED population. 
+This would find synaptic connection weights between the group of neurons 
+representing the LED data and the group of neurons representing the 
+radius $R$ such that $R$ is driven to fire with whatever pattern represents 
+the correct radius, given the current activity of the LED population. 
+
+All of the neural systems described below are defined in this manner.
 
 \section{Method}
 [TODO R2: provide more insight into methodology, to reflect scientific paper rather than technical report]
@@ -341,7 +424,7 @@ To complete this basic behavior, we define the motor output $M$ as a function of
 	M = [1, 1] * S[0]
 \end{lstlisting}
 The next basic reflexive action is to back up when we are too close to an obstacle. This can be detected by the laser pointer threshold being too low. [CHECK: this says that if the laser is not visible then turn - is this correct??] If the laser pointer is so low that it is not visible, this action should also be triggered. Giving the following rule:
-\begin{lstlisting}
+\begin{lstlistiYng}
 	S[1] = 1 if laser.y < -0.8 or laser.c < 0 else 0
 	M = [-1, -1] * S[1]
 \end{lstlisting}
