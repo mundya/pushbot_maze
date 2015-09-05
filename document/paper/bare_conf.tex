@@ -186,17 +186,16 @@
 % of the page, use this alternative format:
 % 
 \author{\IEEEauthorblockN{Terrence C. Stewart\IEEEauthorrefmark{1},
-Andrew Mundy\IEEEauthorrefmark{2},
-Ashley Kleinhans\IEEEauthorrefmark{3} and
+Ashley Kleinhans\IEEEauthorrefmark{2} and
+Andrew Mundy\IEEEauthorrefmark{3},
 J{\"o}rg Conradt\IEEEauthorrefmark{4}}
-\IEEEauthorblockA{\IEEEauthorrefmark{1}School of Electrical and Computer Engineering\\
-Georgia Institute of Technology,
-Atlanta, Georgia 30332--0250\\ Email: see http://www.michaelshell.org/contact.html}
-\IEEEauthorblockA{\IEEEauthorrefmark{2}Twentieth Century Fox, Springfield, USA\\
-Email: homer@thesimpsons.com}
-\IEEEauthorblockA{\IEEEauthorrefmark{3}Council of Scientific and Industrial Research, Pretoria, South Africa, akleinhans@csir.co.za\\
+\IEEEauthorblockA{\IEEEauthorrefmark{1}Centre for Theoretical Neuroscience, University of Waterloo,
+        Waterloo, ON, Canada\\ tcstewar@uwaterloo.ca}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Council of Scientific and Industrial Research, Pretoria, South Africa, akleinhans@csir.co.za\\
 Telephone: (800) 555--1212, Fax: (888) 555--1212}
-\IEEEauthorblockA{\IEEEauthorrefmark{4}Tyrell Inc., 123 Replicant Street, Los Angeles, California 90210--4321}}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}TODO: Address\\
+Email:}
+\IEEEauthorblockA{\IEEEauthorrefmark{4}TODO: Address\\Email:}}
 
 
 % make the title area
@@ -225,18 +224,73 @@ We demonstrate a neuromorphic learning paradigm that is well-suited to embodied 
 
 [CHECK: represent related work and compare them with the proposed approach]
 
-INTELLIGENT animal behaviour can be used for studies that mimic biological findings. The idea is to use recorded animalistic behaviour to guide robotic tools needed to facilitate understanding of real intelligence. By creating systems that emulate biological adaptivity, we can investigate the rational of intelligence in richer terms that what is provided by current machine learning methods \cite{mcfarland1993intelligent}. Animal behaviour can be observed, and in invasive electrophysiology studies recorded, providing two complimentary sets of data to support further study.  The open question is how best to make use of this data for robotic control. There are a few examples of neural networks being used for control \cite{janglova2005neural} in a robotic domain. Typically the hardware is standard, and the algorithms are machine-learning based. Over the last few years, a bridge has been forming between neuroscience and robotics \cite{webb2000does}. Ongoing developments in neuromorphic hardware design now provide the means to facilitate use of data provided by the neuroscience community. Practically speaking we can now use large numbers of neurones on a very small power budget making neural control a promising direction for mobile robot applications. Leading to flexible control, without significantly impacting battery life.  Our study looks to leverage neuromorphic hardware and published animal behaviour studies. We examine an approach to this task combining: the SpiNNaker computing platform \cite{furber2007neural, furber2014spinnaker}; the Neural Engineering Framework (NEF)  \cite{eliasmith2004neural} and a series of robots developed at the Technische Universit{\"a}t M{\"u}nchen. The neural model employed is that of the \textit{leaky integrate and fire} (LIF), where:
-The neural activity is given as:
-\begin{equation}
-\alpha_i = G(\alpha_i \textbf{e}_i \cdot \textbf{x} + \textit{b}_i )
-\end{equation}
-The LIF model as \cite{gerstner2002spiking} [CHECK: check notation and formula and reference please - is more explanation needed as per R1?]:
-\begin{equation}
-\alpha = \frac{1}{1-\exp^\frac{\tau_{ref}-\frac{1}{\mathit{Hz}}}{\tau_{rc}}}
-\end{equation}
-The goal of this work is to explore the usefulness of NEF using recet neuromorphic hardware, and platforms provided described in \ref{infrastructure}. The particular algorithm of interest here is directly biologically inspired, and supported with behaviour studies. While living creatures have genetic, low-level hard-wired reflexes, they are also capable of developing novel associations between stimuli and responses that are entirely context-dependent. Behaviour studies indicate that they can learn to perform certain actions at certain times, through experience, overriding and building upon these low-level reflexes \cite{kim2007encoding}. However, rather than allowing these associations to be learned entirely autonomously (as in approaches such as Distributed Adaptive Control \cite{verschure2012distributed}). Our approach is to inform learning by providing initial input that provides the robot with prior knowledge.  Used to identify desirable situations, much like when an animal finds a food source and updates its situational awareness to return to that location. [CHECK: I think this is counter intuitive. We say that it does not do it autonomously, but then refer to it like its reinforcement learning, which is more autonomous, we need a clearer difference here between DAC and our system, we need to outline the reward signals - and make it clear what is updating and how this is novel]. This guides the learning and provides explicit control over the eventual behaviour. 
+A long-standing dream for robotics is to provide the same sort of
+intelligent, adaptive, and flexible behavior that is seen in living
+biological systems.  Furthermore, by creating systems that emulate
+biological adaptivity, we can investidate intelligence in a very broad sense,
+including capabilities that are not yet seen in current machine learning
+methods \cite{mcfarland1993intelligent}.  However, it is still a very open
+question as to how best to make use of this biological inspiration to construct
+improved methods of robotic control.  There are few examples of neural networks 
+being used for control \cite{janglova2005neural} in a robotic domain. 
+Typically, the hardware used is standard general-purpose computing, and the 
+algorithms are machine-learning based. This means that, while they may take
+some high-level inspiration from biology, the algorithms themselves do not
+directly map to biological details.
 
-\hfill \today
+Over the last few years, a bridge has been forming between neuroscience and 
+robotics \cite{webb2000does}. Ongoing developments in neuromorphic hardware 
+design now provide novel computing resources that are more suitable to
+directly implementing the types of computations found in biological systems, 
+thus facilitating the use of observations and data provided by the 
+neuroscience community. Practically speaking, we can now implement large numbers of 
+neurons on a very small power budget, making neural control a promising 
+energy-efficient direction for mobile robot applications.  Ideally, this could
+lead to flexible adaptive control of systems while staying within a limited
+power budget.
+
+Our study looks to demonstrate such a flexible control system using 
+neuromorphic hardware and neural-based adaptive control. The approach 
+combines the SpiNNaker computing 
+platform \cite{furber2007neural, furber2014spinnaker}, the Neural Engineering 
+Framework (NEF)  \cite{eliasmith2004neural}, and a series of robots developed at 
+the Technische Universit{\"a}t M{\"u}nchen. 
+
+
+For energy efficient implementation given the hardware, the neurn model
+employed here is the standard \textit{leaky integrate and fire} (LIF) model, 
+where the weighted ($\omega$) sum of input current $I$ causes the voltage $V$ to build up until some
+threshold is reached, at which time the neuron emits a discrete spike:
+
+\begin{equation}
+    \tau_m {dV \over dt} = -V + \sum \omega I
+\end{equation}
+
+When this spike occurs, this causes post-synaptic current to flow into the 
+neurons it is connected to, with each connection having its own weight $\omega$
+and with the post-synaptic current $h(t)$ exponentially decaying over time:
+
+\begin{equation}
+    h(t) = e^{-t/\tau_s}
+\end{equation}
+
+The goal of this work is to explore algorithms that can be usefully implemented
+given hardware that efficiently implements neural networks of this form.  In
+particular, we note that living creatures have both genetic, low-level 
+hard-wired reflexes and they are also capable of developing novel associations 
+between stimuli and responses that are entirely context-dependent. Behavioural 
+studies indicate that they can learn to perform certain actions at certain 
+times, through experience, overriding and building upon these low-level 
+reflexes \cite{kim2007encoding}. 
+
+However, for applied robotics applications, we do not want an approach where
+learning is entirely autonomous an undirected (as in, for example, the neural
+learning seen in Distributed Adaptive Control \cite{verschure2012distributed}). 
+Instead, our approach is to inform neural learning by providing explicit
+indications as to the instances where correct behaviour was achieved.  The 
+approach described here is somewhat akin to reinforcement learning, but relies
+only on positive examples, and can be explicitly shaped as desired.  This 
+guides the learning and provides explicit control over the eventual behaviour. 
 
 \section{Infrastructure}
 \label{infrastructure}
