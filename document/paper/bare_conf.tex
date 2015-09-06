@@ -602,21 +602,21 @@ While the above approach is sufficient for implementing
 simple behaviors, it requires the developer to define explicit
 rules mapping sensory states to actions. In this section, we build upon these
 rules in a less explicit manner, allowing us to create more complex behavior
-without hand-coding the exact rules.  In complex situations, it may not be 
+without hard-coding any additional rules.  In complex situations, it may not be 
 feasible for action rules, such as the ones defined above, to be hard coded. Instead,
 we can also define \textit{implicit} action rules. The basic idea is to allow
 the robot to explore its environment, but whenever it happens to accidentally
 do whatever action we want it to do, we record the sensory and motor 
 values and \textit{use those values to define a new rule}.
 
-For example, consider the simple case where we want the robot to turn left at 
+For example, consider the simple case where we want the robot to always turn left at 
 the intersection, rather than randomly turning either left or right. Recording 
 the sensory data and the strength of each action $S$ while the robot is 
 performing its initial basic behavior, we find instances where the robot 
 performs the desired action (turning left). We call these the \textit{positive 
 examples}. In this case, we consider the four individual runs shown in Figure 
 5 where the robot's rotation tended to remain positive.  The data from runs
-where it turned left are removed.  The data from these positive examples can 
+where it turned right are removed.  The data from these positive examples can 
 be thought of as long sequences of state-action pairs, indicating what action 
 to perform in what state. Given this, we add new connections from sensors to 
 the action strength populations. Instead of explicitly indicating what functions 
@@ -665,7 +665,7 @@ two seconds into the task (the average time for the robot to reach the end of th
 
 The initial example of learning to turn left is not particularly complex. 
 However, we can use exactly the same process to produce more complex behavior.
-To demonstrate this, we now optionally place a \textit{mirror} at the intersection.
+To demonstrate this, we now sometimes place a \textit{mirror} at the intersection.
 Initially, the robot will ignore the mirror and just use its standard random
 reflexive navigation.  We now choose as our positive examples situations where
 the robot turned right when there was a mirror, and situations where it turned
