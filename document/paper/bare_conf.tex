@@ -412,23 +412,60 @@ the correct radius, given the current activity of the LED population.
 All of the neural systems described below are defined in this manner.
 
 \section{Method}
+
+The methodology used here is to start by building a neural system that
+implements a base set of automatic ``reflex-like'' behaviors for the robot.
+This is meant to correspond to the hardwired automatic responses found in
+living creatures.  In addition to this, we will then add a learned system
+where the robot must map its sensory state to the particular desired actions
+for this condition.  This corresponds to learned associative responses
+in animals.
+
 [TODO R2: provide more insight into methodology, to reflect scientific paper rather than technical report]
 
 \subsection{Initial Reflexive Control}
-The first stage of this study requires a definition of the base set of simple behaviors and their triggering conditions, for a small mobile robot. These behaviors should be as simple as possible, since they must be hand-designed, but should provide a fairly rich repertoire of resulting actions. These thought of as, the basic, instinctive reflexes seen in living creatures. For example, the first reflexive behavior is simply to go forward if there is no obstruction. To define this, we specify a function that uses sensor data to compute the current strength $S$ of an action (i.e. $0$ to $1$). In this case, the visual position of the laser pointer can be used as a simple range detector: if it is lower than some threshold, the robot is near a wall and should not go forward. If it is higher than that threshold, it is safe to go forward: 
+The first stage of this study requires a definition of the base set of simple 
+behaviors and their triggering conditions, for a small mobile robot. These 
+behaviors should be as simple as possible, since they must be hand-designed, 
+but should provide a fairly rich repertoire of resulting actions. These can be 
+thought of as, the basic, instinctive reflexes seen in living creatures. In
+general, the first step in using this methodology is to define a collection
+of these reflexes.
+
+The first reflexive behavior is simply to go forward if there is no 
+obstruction. To define this, we specify a function that uses sensor data to 
+compute the current strength $S$ of an action (i.e. $0$ to $1$). In this 
+case, the visual position of the dot caused by the laser pointer mounted on
+the robot can be used as a simple range 
+detector: if it is lower than some threshold, the robot is near a wall and 
+should not go forward. If it is higher than that threshold, it is safe to 
+go forward: 
+
 \begin{lstlisting}
 	S[0] = if laser.y > -0.6 else 0
 \end{lstlisting}
-To complete this basic behavior, we define the motor output $M$ as a function of $S$. In this case, we want to drive both wheel motors forward when the action has a high strength. Similar to an animal moving forward only when there is sufficient space in front of it.
+
+To complete this basic behavior, we define the motor output $M$ as a 
+function of $S$. In this case, we want to drive both wheel motors forward 
+when the action has a high strength.
+
 \begin{lstlisting}
 	M = [1, 1] * S[0]
 \end{lstlisting}
-The next basic reflexive action is to back up when we are too close to an obstacle. This can be detected by the laser pointer threshold being too low. [CHECK: this says that if the laser is not visible then turn - is this correct??] If the laser pointer is so low that it is not visible, this action should also be triggered. Giving the following rule:
+
+The next basic reflexive action is to back up when we are too close to an 
+obstacle. This is again detected by using the visual location of the dot
+shown by the laser pointer.  If this is very low in the visual field, or if
+it is not visible at all (i.e. the dot is below the field of view of the camera)
+then the robot should back up.  This gives the following rule:
+
 \begin{lstlistiYng}
 	S[1] = 1 if laser.y < -0.8 or laser.c < 0 else 0
 	M = [-1, -1] * S[1]
 \end{lstlisting}
+
 The final basic actions are: turn left or right when close to an obstacle. 
+
 \begin{lstlisting}
 	S[2] ← 1 if laser.y < -0.8 else 0
 	M ← [-1, 1] * S[2]
@@ -436,14 +473,68 @@ The final basic actions are: turn left or right when close to an obstacle.
 	S[3] ← 1 if laser.y < -0.8 else 0
 	M ← [1, -1] * S[3]
 \end{lstlisting}
-These last two actions should not both be performed at the same time. To specify this, we can define actions that relate the strengths of different actions to each other.
+
+However, these last two actions should not both be performed at the same time,
+since this would cause the robot to stay in place, rather than turning one
+direction or the other. To specify this, we can define connections that relate 
+the strengths of different actions to each other.
+
 \begin{lstlisting}
 	S[2] = -S[3]
 	S[3] = -S[2]
 \end{lstlisting}
-Meaning whenever $S[2]$ is positive, it will force $S[3]$ towards $0$, $S[3]$ similarly $S[2]$ towards $0$.
-The result will be that only one of the two actions will occur at a time. Each of these basic actions can now be implemented using Nengo and NEF. Ensembles of neurons are defined to store the sensory state, the motor output, and the strengths of each action. The connections between the groups of neurons set to approximate each of the above functions. Resulting in the neural system shown in Figure \ref{React}. To understand the resulting basic behavior, two important aspects of NEF must be considered. First, due to the neural representation scheme, when there are multiple inputs to a neural population, the value represented will be the sum of the input values. I.e. the motor output will be the sum of all the connections: $S[0]$, $S[1]$, $S[2]$, and $S[3]$ to $M$. Second, the NEF approximations of the desired functions will be \textit{smooth}. That is, instead of implementing the exact functions specified above, the actual behavior will be much more gradual. For example, the input function to the $S[0]$ population is supposed to compute $4$ if $laser.y > -0.6$ else $0$. The difference between this and the actual approximated function can be seen in Figure \ref{NEF}.
-The result is a small spiking neural network control system that performs very simple obstacle avoidance. Due to the smoothing, inherent in the NEF, neural approximation of the above functions, the robot gradually transitions between behaviors. It will slow when approaching a wall, then turn in a random direction. This randomness will be due entirely to sensory noise, as there is no stochasticity in the neural model itself. Once it has chosen a particular direction to turn, i.e. once either $S[2]$ or $S[3]$ has a high value. It will continue to turn in that direction until there is no longer an obstacle in front of it. Rather than alternating back and forth between turning left and turning right. All actions transpire without human interference, or hard coding. The only hardcoded input are the initial thresholds that provide information as to whether an action is, in fact, correct. These actions demonstrate obstacle avoidance, and simple decision making, in much the same way as animal behavior studies  \cite{kim2007encoding}. To reiterate, it's important to note that no human interaction happens post initiation. [CHECK R2: Make clear that human observation is not required, and relate to animal behavior that, when first encountering a situation, makes "accidental" decisions, and then updates model of surroundings depending on outcome.] [ TODO: Make clear that this means the system is learning, and the methodology is intrinsically automated - is there a way to describe this in math as suggested by reviewer 2?? ]
+
+This means that whenever $S[2]$ is positive, it will force $S[3]$ towards $0$, 
+and similarly $S[3]$ will drive $S[2]$ towards $0$.  This implements a classic
+neural competition, meaning that only one of the two actions will have a large
+value at a particular time.
+
+Now that these reflex actions have been defined in these simple terms, we use
+Nengo to build neural networks that approximate each of these rules.  Groups
+of neurons are defined to store the sensory state, the motor output, and the 
+strengths of each action. The connections between the groups of neurons are 
+set to approximate each of the above functions, resulting in the neural 
+system shown in Figure \ref{React}. 
+
+To understand the resulting basic reflexive behavior,
+two important aspects of NEF must be considered. First, due to the neural 
+representation scheme, when there are multiple inputs to a neural population, 
+the value represented will be the sum of the input values. In other words. the 
+motor output will be the sum of all the connections: $S[0]$, $S[1]$, $S[2]$, and $S[3]$ to $M$. 
+Second, the NEF approximations of the desired functions will be \textit{smooth}. 
+That is, instead of implementing the exact functions specified above, the 
+actual behavior will be much more gradual. For example, the input function to 
+the $S[0]$ population is supposed to compute $4$ if $laser.y > -0.6$ else $0$. 
+Instead of implementing this exact function, the neurons will instead implement
+a smoothed approximation of this step function, as shown in
+Figure \ref{NEF}.
+
+The result is a small spiking neural network control system that performs very 
+simple obstacle avoidance. Due to the smoothing inherent in the NEF neural 
+approximation of the above functions, the robot gradually transitions between 
+behaviors. This means that it will automatically slow when approaching a wall, 
+even though we have not explicitly built reflexes to do so.  
+
+When it reaches
+a wall, it will then turn in a random direction. This randomness will be due 
+entirely to sensory noise, as there is no stochasticity in the neural model 
+itself. Once it has chosen a particular direction to turn, i.e. once 
+either $S[2]$ or $S[3]$ has a high value, it will continue to turn in that 
+direction until there is no longer an obstacle in front of it. All actions 
+transpire without human interference. The only hardcoded input are the initial 
+thresholds that provide information as to whether an action is, in fact, 
+correct given the current sensory state. These actions demonstrate obstacle 
+avoidance, and simple decision making, in much the same way as animal behavior 
+studies  \cite{kim2007encoding}. 
+
+The core idea is that this set of behaviors is a bare minimum, sufficient to
+allow the robot to move throughout its environment without human intervention.
+As with animal behaviour, this allows the robot to have a basic set of automatic
+decision-making rules that apply in novel situations where there is not yet
+any learned response.  Using these reflexive rules, the robot makes ``accidental''
+decisions (turning left in some situations and turning right in others, for
+example), which we will then use to further train the robot's behavior, as
+discussed in the next section.
 
 
 \begin{figure}[!t]
@@ -452,7 +543,7 @@ The result is a small spiking neural network control system that performs very s
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
-\caption{[TODO R1: Terry fig's 5,6 and 7 should all show 10 trials (ie same amount of trails] Basic reactive control. Each box is implemented as a group of leaky integrate and fire [CHECK R1: explanation somewhere??] neurons, where N indicates the number of neurons, whose tuning curves span the dimensionality D as indicated. Each solid arrow indicates an alltoall connection with connection weights computed as per the NEF to approximate the functions described above. Dotted arrows indicate inputs
+\caption{[TODO R1: Terry fig's 5,6 and 7 should all show 10 trials (ie same amount of trails] Basic reactive control. Each box is implemented as a group of leaky integrate and fire neurons, where N indicates the number of neurons, whose tuning curves span the dimensionality D as indicated. Each solid arrow indicates an alltoall connection with connection weights computed as per the NEF to approximate the functions described above. Dotted arrows indicate inputs
 and outputs connecting the robot to the neuromorphic hardware.}
 \label{React}
 \end{figure}
@@ -490,7 +581,7 @@ and outputs connecting the robot to the neuromorphic hardware.}
 
 \subsection{Initial behavior}
 
-To examine the model's behavior, we used a standard TMaze
+To examine the model's behavior, we used a standard T-maze
 environment (Figure 4). When placed at the bottom
 of the T-maze, the robot navigates forward, avoids the
 walls, reaches the choice point, and turns left or right.
@@ -499,7 +590,8 @@ the motor outputs over time. Since the robot uses tank-style
 treads, the two motor output values are the left and right
 motor speeds, respectively. For clarity, here we plot the
 overall speed as the sum of M[left] and M[right], while
-the rotation rate is the difference between the two. Motor output values of typical individual runs are plotted along
+the rotation rate is the difference between the two. Motor output values of 
+typical individual runs are plotted along
 with an overall mean value (with 95\% bootstrap confidence
 interval). All values are Gaussian filtered with $\sigma=0.15s$ for visual clarity.
 
@@ -508,19 +600,45 @@ interval). All values are Gaussian filtered with $\sigma=0.15s$ for visual clari
 
 While the above approach is sufficient for implementing
 simple behaviors, it requires the developer to define explicit
-rules mapping sensory states to actions. In complex
-situations, it may not be feasible for action rules, such as the
-ones defined above, to be hard coded. Instead,
-we can also define \textit{implicit} action rules. That is, we can use
-examples of the robot's behavior as the rules
-themselves.
-In particular, consider the simple case where we want the robot to turn left at the intersection, rather than randomly turning either left or right. Recording the sensory data and the strength of each action (S[0], S[1], etc.), while the robot is performing its initial basic behavior, we find instances where the robot performs the desired action (turning left). We call these the \textit{positive examples}. In this case, we consider the four individual runs shown in Figure 5 where the robot's rotation tended to remain positive and ignore the five runs where it was negative. The data from these runs can be thought of as long sequences of state-action pairs, indicating what action to perform in what state. Given this, we would be able to add new connections from sensors to the action strength populations, suggested for further study. Instead of explicitly indicating what functions to approximate on these connections, we instead use the NEF to find the connection weights that produce outputs that most closely match the original behavior. At first glance, it seems as if these new connections would just end up being exactly the same as the original reflexive control connections. However, the key difference here is that these new connections will also take into account \textit{other sensory states}, not considered in the original hand-designed reflexive rules. In other words, these new connections will cause the robot to be more likely to perform the actions we desire whenever it is in a sensory state similar to those seen in the positive examples. Importantly, this will happen without any explicit indication of exactly what sensory states should trigger what actions.
+rules mapping sensory states to actions. In this section, we build upon these
+rules in a less explicit manner, allowing us to create more complex behavior
+without hand-coding the exact rules.  In complex situations, it may not be 
+feasible for action rules, such as the ones defined above, to be hard coded. Instead,
+we can also define \textit{implicit} action rules. The basic idea is to allow
+the robot to explore its environment, but whenever it happens to accidentally
+do whatever action we want it to do, we record the sensory and motor 
+values and \textit{use those values to define a new rule}.
+
+For example, consider the simple case where we want the robot to turn left at 
+the intersection, rather than randomly turning either left or right. Recording 
+the sensory data and the strength of each action $S$ while the robot is 
+performing its initial basic behavior, we find instances where the robot 
+performs the desired action (turning left). We call these the \textit{positive 
+examples}. In this case, we consider the four individual runs shown in Figure 
+5 where the robot's rotation tended to remain positive.  The data from runs
+where it turned left are removed.  The data from these positive examples can 
+be thought of as long sequences of state-action pairs, indicating what action 
+to perform in what state. Given this, we add new connections from sensors to 
+the action strength populations. Instead of explicitly indicating what functions 
+to approximate on these connections, we instead use the data gathered from
+the robot itself to be the target function that the neurons must approximate.
+
+At first glance, it seems as if these new connections would just end up being 
+exactly the same as the original reflexive control connections. However, the 
+key difference here is that these new connections will also take into 
+account \textit{other sensory states}, not considered in the original 
+hand-designed reflexive rules. In other words, these new connections will 
+cause the robot to be more likely to perform the actions we desire whenever it 
+is in a sensory state similar to those seen in the positive examples. 
+Importantly, this will happen without any explicit indication of exactly what 
+sensory states should trigger what actions.  This allows the system to
+discover more complex rules than could be reasonably manually hand-designed.
 
 \section{Results}
 
-The result of this training is shown in Figure \ref{Left}. Unlike Figure \ref{Cnt} this shows the robot consistently turning to the left about two seconds into the task (the average time for the robot to reach the end of the corridor).
-
-[TODO R1: Look at adding a little more info about the data already recorded, some metrics, like information available vs number of trials kind of thing. ]
+The result of this training is shown in Figure \ref{Left}. Unlike 
+Figure \ref{Cnt} this shows the robot consistently turning to the left about 
+two seconds into the task (the average time for the robot to reach the end of the corridor).
 
 \begin{figure}[!t]
 \centering
@@ -545,7 +663,19 @@ The result of this training is shown in Figure \ref{Left}. Unlike Figure \ref{Cn
 
 \subsection{Learning Sensory Conditions}
 
-The initial example of learning to turn left is not particularly complex. However, exactly the same method can be used for more complex cases. For example, we can place complex visual stimuli at the intersection, and chose the positive examples, i.e. situations where the robot turned left for one stimulus or right for another. The particular stimulus we used was the reflection of a mirror. Figure \ref{Right} shows that the robot can successfully learn to turn right when it sees a mirror, but turn left when there is no reflecting mirror. 
+The initial example of learning to turn left is not particularly complex. 
+However, we can use exactly the same process to produce more complex behavior.
+To demonstrate this, we now optionally place a \textit{mirror} at the intersection.
+Initially, the robot will ignore the mirror and just use its standard random
+reflexive navigation.  We now choose as our positive examples situations where
+the robot turned right when there was a mirror, and situations where it turned
+left when there was no mirror.
+
+Adding a learned connection that attempts to approximate those positive
+examples means that the neural connections now need to change their outputs
+depending on whether the mirror is present or not.  Figure \ref{Right} shows 
+that the robot can successfully learn to recognize and respond to mirrors,
+given only this simple learning rule on top of its basic reflexive rules.
 
 \section{Discussion}
 The algorithm described in this paper is meant to be a general-purpose approach, making use of massively parallel low-power neuromorphic computing hardware on a mobile robot. We have shown that we can start be defining extremely simple reactive rules, using NEF to implement them on the neuromorphic hardware. However, these sorts of simple reactive rules could, of course, be implemented using more traditional computing hardware. The point of this paper is to demonstrate automatic training of a simple set of neural connections that interacts with basic reactive systems to produce much more complex control.
