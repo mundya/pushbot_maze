@@ -494,7 +494,7 @@ Nengo to build neural networks that approximate each of these rules.  Groups
 of neurons are defined to store the sensory state, the motor output, and the 
 strengths of each action. The connections between the groups of neurons are 
 set to approximate each of the above functions, resulting in the neural 
-system shown in Figure \ref{React}. 
+system shown in \figurename~\ref{React}. 
 
 To understand the resulting basic reflexive behavior,
 two important aspects of NEF must be considered. First, due to the neural 
@@ -507,7 +507,7 @@ actual behavior will be much more gradual. For example, the input function to
 the $S[0]$ population is supposed to compute $4$ if $laser.y > -0.6$ else $0$. 
 Instead of implementing this exact function, the neurons will instead implement
 a smoothed approximation of this step function, as shown in
-Figure \ref{NEF}.
+\figurename~\ref{NEF}.
 
 The result is a small spiking neural network control system that performs very 
 simple obstacle avoidance. Due to the smoothing inherent in the NEF neural 
@@ -636,8 +636,8 @@ discover more complex rules than could be reasonably manually hand-designed.
 
 \section{Results}
 
-The result of this training is shown in Figure \ref{Left}. Unlike 
-Figure \ref{Cnt} this shows the robot consistently turning to the left about 
+The result of this training is shown in \figurename~\ref{Left}. Unlike 
+\figurename~\ref{Cnt} this shows the robot consistently turning to the left about 
 two seconds into the task (the average time for the robot to reach the end of the corridor).
 
 \begin{figure}[!t]
@@ -657,7 +657,7 @@ two seconds into the task (the average time for the robot to reach the end of th
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
-\caption{behavior after learning to turn right if there is a mirror, and otherwise turn left. The robot successfully identifies the correct situation and turns appropriately. Robot speed is not shown, but is similar to that depicted at the top of Figure \ref{Cnt}}
+\caption{behavior after learning to turn right if there is a mirror, and otherwise turn left. The robot successfully identifies the correct situation and turns appropriately. Robot speed is not shown, but is similar to that depicted at the top of \figurename~\ref{Cnt}}
 \label{Right}
 \end{figure}
 
@@ -673,7 +673,7 @@ left when there was no mirror.
 
 Adding a learned connection that attempts to approximate those positive
 examples means that the neural connections now need to change their outputs
-depending on whether the mirror is present or not.  Figure \ref{Right} shows 
+depending on whether the mirror is present or not.  \figurename~\ref{Right} shows 
 that the robot can successfully learn to recognize and respond to mirrors,
 given only this simple learning rule on top of its basic reflexive rules.
 
