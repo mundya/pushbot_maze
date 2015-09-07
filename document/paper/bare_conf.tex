@@ -685,13 +685,13 @@ behavior and building a new set of connections that approximate required
 behavior that triggered changes in movement.  This was done by building neural
 connections that replicate behaviour that the robot previously did accidentally.
 
-This means that the scope of possible sensorimotor mappings is limited only by the range of the sensory inputs and the size of the neural population 
-representing the sensors. If there are sufficiently many neurons representing 
-the sensory space, then NEF ensures that connection weights can be found 
-with a desired level of accuracy, if there is some function that could map
-the sensory state to the motor action. Should a function be more complex, or require greater levels of accuracy, more neurons are needed. Thus, further investigation is required to characterize a variety of different learned tasks with various
-sensor systems.  This would indicate what types of actions are feasible to
-learn in this manner.
+A vital topic of future work is to characterize the variety of different
+learned tasks that are amenable to this method.  In general, the NEF shows
+that the accuracy of the learned connections are dependent on the complexity
+of the function to be learned (in this case the mapping from sensor states to
+action choices) and the number of neurons.  As we explore different tasks,
+we will also need to explore different combinations of sensor systems and
+the pre-processing on this data.  
 
 This approach of using sensory experience to learn neural connections
 that attempt to cause the same actions to occur in response to similar
