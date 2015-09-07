@@ -186,8 +186,8 @@
 % of the page, use this alternative format:
 % 
 \author{\IEEEauthorblockN{Terrence C. Stewart\IEEEauthorrefmark{1},
-Ashley Kleinhans\IEEEauthorrefmark{2} and
-Andrew Mundy\IEEEauthorrefmark{3},
+Ashley Kleinhans\IEEEauthorrefmark{2},
+Andrew Mundy\IEEEauthorrefmark{3} and
 J{\"o}rg Conradt\IEEEauthorrefmark{4}}
 \IEEEauthorblockA{\IEEEauthorrefmark{1}Centre for Theoretical Neuroscience, University of Waterloo,
         Waterloo, ON, Canada\\ tcstewar@uwaterloo.ca}
@@ -319,11 +319,7 @@ here as sensory pre-processing.
 \subsection{PushBot}
 At the Technische Universit{\"a}t M{\"u}nchen, the Neuroscientific
 System Theory group has developed a small tread-based robot built around the 
-eDVS sensor, as shown in Figure 1. The robot provides two motors, a 
-frequency-controllable laser pointer, two LEDs, and housing for power 
-(4 AA batteries). The setup comes with a proprietary WLAN module, enabling 
-streaming of sensor data and motor command to and from the robot over 
-standard WiFi.
+eDVS sensor, as shown in \figurename~\ref{fig_sim}. The robot provides two motors, a frequency-controllable laser pointer, two LEDs, and housing for power (4 AA batteries). The setup comes with a proprietary WLAN module, enabling streaming of sensor data and motor command to and from the robot over standard WiFi.
 
 \begin{figure}[!t]
 \centering
@@ -459,7 +455,7 @@ shown by the laser pointer.  If this is very low in the visual field, or if
 it is not visible at all (i.e. the dot is below the field of view of the camera)
 then the robot should back up.  This gives the following rule:
 
-\begin{lstlistiYng}
+\begin{lstlisting}
 	S[1] = 1 if laser.y < -0.8 or laser.c < 0 else 0
 	M = [-1, -1] * S[1]
 \end{lstlisting}
@@ -582,25 +578,15 @@ and outputs connecting the robot to the neuromorphic hardware.}
 \subsection{Initial behavior}
 
 To examine the model's behavior, we used a standard T-maze
-environment (Figure 4). When placed at the bottom
+environment (\figurename~\ref{Tmaze}). When placed at the bottom
 of the T-maze, the robot navigates forward, avoids the
 walls, reaches the choice point, and turns left or right.
-Typical trajectories are shown in Figure 5, which indicates
-the motor outputs over time. Since the robot uses tank-style
-treads, the two motor output values are the left and right
-motor speeds, respectively. For clarity, here we plot the
-overall speed as the sum of M[left] and M[right], while
-the rotation rate is the difference between the two. Motor output values of 
-typical individual runs are plotted along
-with an overall mean value (with 95\% bootstrap confidence
-interval). All values are Gaussian filtered with $\sigma=0.15s$ for visual clarity.
+Typical trajectories are shown in \figurename~\ref{fig_sim}, which indicates the motor outputs over time. Since the robot uses tank-style treads, the two motor output values are the left and right motor speeds, respectively. For clarity, here we plot the overall speed as the sum of M[left] and M[right], while the rotation rate is the difference between the two. Motor output values of typical individual runs are plotted along with an overall mean value (with 95\% bootstrap confidence interval). All values are Gaussian filtered with $\sigma=0.15s$ for visual clarity.
 
 
 \subsection{Serendipitous Offline Learning}
 
-While the above approach is sufficient for implementing
-simple behaviors, it requires the developer to define explicit
-rules mapping sensory states to actions. In this section, we build upon these
+While the above approach is sufficient for implementing simple behaviors, it requires the developer to define explicit rules mapping sensory states to actions. In this section, we build upon these
 rules in a less explicit manner, allowing us to create more complex behavior
 without hard-coding any additional rules.  In complex situations, it may not be 
 feasible for action rules, such as the ones defined above, to be hard coded. Instead,
@@ -614,9 +600,7 @@ the intersection, rather than randomly turning either left or right. Recording
 the sensory data and the strength of each action $S$ while the robot is 
 performing its initial basic behavior, we find instances where the robot 
 performs the desired action (turning left). We call these the \textit{positive 
-examples}. In this case, we consider the four individual runs shown in Figure 
-5 where the robot's rotation tended to remain positive.  The data from runs
-where it turned right are removed.  The data from these positive examples can 
+examples}. In this case, we consider the four individual runs shown in \figurename~\ref{fig_sim} [TODO: check all figures are added and that they refer to the correct figures] where the robot's rotation tended to remain positive.  The data from runs where it turned right are removed.  The data from these positive examples can 
 be thought of as long sequences of state-action pairs, indicating what action 
 to perform in what state. Given this, we add new connections from sensors to 
 the action strength populations. Instead of explicitly indicating what functions 
@@ -628,8 +612,7 @@ exactly the same as the original reflexive control connections. However, the
 key difference here is that these new connections will also take into 
 account \textit{other sensory states}, not considered in the original 
 hand-designed reflexive rules. In other words, these new connections will 
-cause the robot to be more likely to perform the actions we desire whenever it 
-is in a sensory state similar to those seen in the positive examples. 
+cause the robot to be more likely to perform the actions we desire whenever it is in a sensory state similar to those seen in the positive examples. 
 Importantly, this will happen without any explicit indication of exactly what 
 sensory states should trigger what actions.  This allows the system to
 discover more complex rules than could be reasonably manually hand-designed.
@@ -678,15 +661,18 @@ that the robot can successfully learn to recognize and respond to mirrors,
 given only this simple learning rule on top of its basic reflexive rules.
 
 \section{Discussion}
-The algorithm described in this paper is meant to be a general-purpose approach, 
+The algorithm described in this paper is a general-purpose approach, 
 making use of massively parallel low-power neuromorphic computing hardware on 
-a mobile robot. We have shown that we can start by defining extremely simple 
+a mobile robot. We have shown that we can start by defining extremely simple
+
+[TODO: I'm not yet sold on the algorithm claim. I think for that to work the Method section needs to be much more explicit (even as a recap) as to what the algorithm is.
+- Create basic reflexive behaviours
+- Allow the robot to wander aimlessly for a while, simultaneously record input and output
+- Select "positive examples" of behaviour from the recorded data
+Use these examples to form functions which describe new, additional, behaviours]
+ 
 reactive rules, using Nengo and the NEF to implement them on neuromorphic 
-hardware. Certainly, these sorts of simple reactive rules could also be 
-implemented using more traditional computing hardware. However, the point of 
-this paper is to demonstrate automatic training of a simple set of neural 
-connections that interacts with basic reactive systems to produce much more 
-complex control.
+hardware. We present a method/algorithm whereby more complex behavioural rules for a robot could be constructed by forming functions to approximate the mappings between sensory stimuli and the activation of pre-existing reflexive behaviour. While we could have demonstrated this method on general-purpose computing hardware we instead used a massively-parallel, low-power neuromorphic platform.
 
 In the case of the system learning to change its behavior based on the 
 presence of a reflective mirror surface, the system was able to map the 
@@ -699,18 +685,15 @@ behavior and building a new set of connections that approximate required
 behavior that triggered changes in movement.  This was done by building neural
 connections that replicate behaviour that the robot previously did accidentally.
 
-This means that the scope of possible sensorimotor mappings is limited only by 
-the range of the sensory inputs and the size of the neural population 
+This means that the scope of possible sensorimotor mappings is limited only by the range of the sensory inputs and the size of the neural population 
 representing the sensors. If there are sufficiently many neurons representing 
-the sensory space, then NEF guarantees that connection weights can be found 
+the sensory space, then NEF ensures that connection weights can be found 
 with a desired level of accuracy, if there is some function that could map
-the sensory state to the motor action. However, for complex functions, 
-the number of neurons required may be excessive. Thus, further investigation 
-is required to characterize a variety of different learned tasks with various
+the sensory state to the motor action. Should a function be more complex, or require greater levels of accuracy, more neurons are needed. Thus, further investigation is required to characterize a variety of different learned tasks with various
 sensor systems.  This would indicate what types of actions are feasible to
 learn in this manner.
 
-This general approach of using sensory experience to learn neural connections
+This approach of using sensory experience to learn neural connections
 that attempt to cause the same actions to occur in response to similar
 sensory stimuli is novel, but we have performed previous work \cite{conradt2014trainable}
 with a somewhat similar learning method. In that case, we did not have an 
