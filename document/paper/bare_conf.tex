@@ -186,8 +186,8 @@
 % of the page, use this alternative format:
 % 
 \author{\IEEEauthorblockN{Terrence C. Stewart\IEEEauthorrefmark{1},
-Ashley Kleinhans\IEEEauthorrefmark{2} and
-Andrew Mundy\IEEEauthorrefmark{3},
+Ashley Kleinhans\IEEEauthorrefmark{2},
+Andrew Mundy\IEEEauthorrefmark{3} and
 J{\"o}rg Conradt\IEEEauthorrefmark{4}}
 \IEEEauthorblockA{\IEEEauthorrefmark{1}Centre for Theoretical Neuroscience, University of Waterloo,
         Waterloo, ON, Canada\\ tcstewar@uwaterloo.ca}
@@ -319,11 +319,7 @@ here as sensory pre-processing.
 \subsection{PushBot}
 At the Technische Universit{\"a}t M{\"u}nchen, the Neuroscientific
 System Theory group has developed a small tread-based robot built around the 
-eDVS sensor, as shown in Figure 1. The robot provides two motors, a 
-frequency-controllable laser pointer, two LEDs, and housing for power 
-(4 AA batteries). The setup comes with a proprietary WLAN module, enabling 
-streaming of sensor data and motor command to and from the robot over 
-standard WiFi.
+eDVS sensor, as shown in \figurename~\ref{fig_sim}. The robot provides two motors, a frequency-controllable laser pointer, two LEDs, and housing for power (4 AA batteries). The setup comes with a proprietary WLAN module, enabling streaming of sensor data and motor command to and from the robot over standard WiFi.
 
 \begin{figure}[!t]
 \centering
@@ -459,7 +455,7 @@ shown by the laser pointer.  If this is very low in the visual field, or if
 it is not visible at all (i.e. the dot is below the field of view of the camera)
 then the robot should back up.  This gives the following rule:
 
-\begin{lstlistiYng}
+\begin{lstlisting}
 	S[1] = 1 if laser.y < -0.8 or laser.c < 0 else 0
 	M = [-1, -1] * S[1]
 \end{lstlisting}
@@ -582,25 +578,15 @@ and outputs connecting the robot to the neuromorphic hardware.}
 \subsection{Initial behavior}
 
 To examine the model's behavior, we used a standard T-maze
-environment (Figure 4). When placed at the bottom
+environment (\figurename~\ref{Tmaze}). When placed at the bottom
 of the T-maze, the robot navigates forward, avoids the
 walls, reaches the choice point, and turns left or right.
-Typical trajectories are shown in Figure 5, which indicates
-the motor outputs over time. Since the robot uses tank-style
-treads, the two motor output values are the left and right
-motor speeds, respectively. For clarity, here we plot the
-overall speed as the sum of M[left] and M[right], while
-the rotation rate is the difference between the two. Motor output values of 
-typical individual runs are plotted along
-with an overall mean value (with 95\% bootstrap confidence
-interval). All values are Gaussian filtered with $\sigma=0.15s$ for visual clarity.
+Typical trajectories are shown in \figurename~\ref{fig_sim}, which indicates the motor outputs over time. Since the robot uses tank-style treads, the two motor output values are the left and right motor speeds, respectively. For clarity, here we plot the overall speed as the sum of M[left] and M[right], while the rotation rate is the difference between the two. Motor output values of typical individual runs are plotted along with an overall mean value (with 95\% bootstrap confidence interval). All values are Gaussian filtered with $\sigma=0.15s$ for visual clarity.
 
 
 \subsection{Serendipitous Offline Learning}
 
-While the above approach is sufficient for implementing
-simple behaviors, it requires the developer to define explicit
-rules mapping sensory states to actions. In this section, we build upon these
+While the above approach is sufficient for implementing simple behaviors, it requires the developer to define explicit rules mapping sensory states to actions. In this section, we build upon these
 rules in a less explicit manner, allowing us to create more complex behavior
 without hard-coding any additional rules.  In complex situations, it may not be 
 feasible for action rules, such as the ones defined above, to be hard coded. Instead,
@@ -614,9 +600,7 @@ the intersection, rather than randomly turning either left or right. Recording
 the sensory data and the strength of each action $S$ while the robot is 
 performing its initial basic behavior, we find instances where the robot 
 performs the desired action (turning left). We call these the \textit{positive 
-examples}. In this case, we consider the four individual runs shown in Figure 
-5 where the robot's rotation tended to remain positive.  The data from runs
-where it turned right are removed.  The data from these positive examples can 
+examples}. In this case, we consider the four individual runs shown in \figurename~\ref{fig_sim} [TODO: check all figures are added and that they refer to the correct figures] where the robot's rotation tended to remain positive.  The data from runs where it turned right are removed.  The data from these positive examples can 
 be thought of as long sequences of state-action pairs, indicating what action 
 to perform in what state. Given this, we add new connections from sensors to 
 the action strength populations. Instead of explicitly indicating what functions 
