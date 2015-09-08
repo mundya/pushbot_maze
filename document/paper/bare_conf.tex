@@ -117,12 +117,12 @@
 % *** GRAPHICS RELATED PACKAGES ***
 %
 \ifCLASSINFOpdf
-  % \usepackage[pdftex]{graphicx}
+   \usepackage[pdftex]{graphicx}
   % declare the path(s) where your graphic files are
-  % \graphicspath{{../pdf/}{../jpeg/}}
+   \graphicspath{{../figures/}}
   % and their extensions so you won't have to specify these with
   % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+   \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
 \else
   % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
   % will default to the driver specified in the system graphics.cfg if no
@@ -323,7 +323,7 @@ eDVS sensor, as shown in \figurename~\ref{fig_sim}. The robot provides two motor
 
 \begin{figure}[!t]
 \centering
-%\includegraphics[width=2.5in]{myfigure}
+\includegraphics[width=2.5in]{Pushbot1CroppedCropped.jpg}
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
@@ -499,7 +499,31 @@ the value represented will be the sum of the input values. In other words. the
 motor output will be the sum of all the connections: $S[0]$, $S[1]$, $S[2]$, and $S[3]$ to $M$. 
 Second, the NEF approximations of the desired functions will be \textit{smooth}. 
 That is, instead of implementing the exact functions specified above, the 
-actual behavior will be much more gradual. For example, the input function to 
+actual behavior will be much more gradual. 
+
+\begin{figure}[!t]
+\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{[TODO R1: Terry fig's 5,6 and 7 should all show 10 trials (ie same amount of trails] Basic reactive control. Each box is implemented as a group of leaky integrate and fire neurons, where N indicates the number of neurons, whose tuning curves span the dimensionality D as indicated. Each solid arrow indicates an alltoall connection with connection weights computed as per the NEF to approximate the functions described above. Dotted arrows indicate inputs
+and outputs connecting the robot to the neuromorphic hardware.}
+\label{Flow}
+\end{figure}
+
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{smoothing.png}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Neural approximation with the NEF. When connections between neural groups are optimized to approximate a function, the result is a smooth version of that function. As the number of neurons is increased, this neural approximation will approach the ideal function.}
+\label{NEF}
+\end{figure}
+
+For example, the input function to 
 the $S[0]$ population is supposed to compute $4$ if $laser.y > -0.6$ else $0$. 
 Instead of implementing this exact function, the neurons will instead implement
 a smoothed approximation of this step function, as shown in
@@ -511,8 +535,17 @@ approximation of the above functions, the robot gradually transitions between
 behaviors. This means that it will automatically slow when approaching a wall, 
 even though we have not explicitly built reflexes to do so.  
 
-When it reaches
-a wall, it will then turn in a random direction. This randomness will be due 
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{tmazeRev.pdf}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{The T-Maze environment. The robot starts at the bottom of the T shape.}
+\label{Tmaze}
+\end{figure}
+
+When it reaches a wall, it will then turn in a random direction. This randomness will be due 
 entirely to sensory noise, as there is no stochasticity in the neural model 
 itself. Once it has chosen a particular direction to turn, i.e. once 
 either $S[2]$ or $S[3]$ has a high value, it will continue to turn in that 
@@ -535,39 +568,17 @@ discussed in the next section.
 
 \begin{figure}[!t]
 \centering
-%\includegraphics[width=2.5in]{myfigure}
+\includegraphics[width=2.5in]{basic/basic.png}
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
-\caption{[TODO R1: Terry fig's 5,6 and 7 should all show 10 trials (ie same amount of trails] Basic reactive control. Each box is implemented as a group of leaky integrate and fire neurons, where N indicates the number of neurons, whose tuning curves span the dimensionality D as indicated. Each solid arrow indicates an alltoall connection with connection weights computed as per the NEF to approximate the functions described above. Dotted arrows indicate inputs
-and outputs connecting the robot to the neuromorphic hardware.}
+\caption{Behavior of reactive control model over multiple runs. The speed (top graph) is high at the beginning, then slows as it turns either left or right (bottom graph). While on any individual run the robot tends to turn consistently either left or right, the overall average is zero turning (black area in bottom graph).}
 \label{React}
 \end{figure}
 
 \begin{figure}[!t]
 \centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-\caption{Neural approximation with the NEF. When connections between neural groups are optimized to approximate a function, the result is a smooth version of that function. As the number of neurons is increased, this neural approximation will approach the ideal function.}
-\label{NEF}
-\end{figure}
-
-
-\begin{figure}[!t]
-\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-\caption{The T-Maze environment. The robot starts at the bottom.}
-\label{Tmaze}
-\end{figure}
-
-\begin{figure}[!t]
-\centering
-%\includegraphics[width=2.5in]{myfigure}
+\includegraphics[width=2.5in]{learn-left/learnleft.png}
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
@@ -581,7 +592,11 @@ To examine the model's behavior, we used a standard T-maze
 environment (\figurename~\ref{Tmaze}). When placed at the bottom
 of the T-maze, the robot navigates forward, avoids the
 walls, reaches the choice point, and turns left or right.
-Typical trajectories are shown in \figurename~\ref{fig_sim}, which indicates the motor outputs over time. Since the robot uses tank-style treads, the two motor output values are the left and right motor speeds, respectively. For clarity, here we plot the overall speed as the sum of M[left] and M[right], while the rotation rate is the difference between the two. Motor output values of typical individual runs are plotted along with an overall mean value (with 95\% bootstrap confidence interval). All values are Gaussian filtered with $\sigma=0.15s$ for visual clarity.
+Typical trajectories are shown in \figurename~\ref{fig_sim}, which indicates the motor outputs over time. Since the robot uses tank-style treads, the two motor output values are the left and right motor speeds, respectively. For clarity, here we plot the overall speed as the sum of M[left] and M[right], while the rotation rate is the difference between the two. 
+
+
+
+Motor output values of typical individual runs are plotted along with an overall mean value (with 95\% bootstrap confidence interval). All values are Gaussian filtered with $\sigma=0.15s$ for visual clarity.
 
 
 \subsection{Serendipitous Offline Learning}
@@ -620,27 +635,17 @@ discover more complex rules than could be reasonably manually hand-designed.
 \section{Results}
 
 The result of this training is shown in \figurename~\ref{Left}. Unlike 
-\figurename~\ref{Cnt} this shows the robot consistently turning to the left about 
+\figurename~\ref{React} this shows the robot consistently turning to the left about 
 two seconds into the task (the average time for the robot to reach the end of the corridor).
 
-\begin{figure}[!t]
-\centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-\caption{behavior of reactive control model over multiple runs. The speed (top graph) is high at the beginning, then slows as it turns either left or right (bottom graph). While on any individual run the robot tends to turn consistently either left or right, the overall average is zero turning (black area in bottom graph).}
-\label{Cnt}
-\end{figure}
-
 
 \begin{figure}[!t]
 \centering
-%\includegraphics[width=2.5in]{myfigure}
+\includegraphics[width=2.5in]{learn-mirror/learnmirror.png}
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
-\caption{behavior after learning to turn right if there is a mirror, and otherwise turn left. The robot successfully identifies the correct situation and turns appropriately. Robot speed is not shown, but is similar to that depicted at the top of \figurename~\ref{Cnt}}
+\caption{Behavior after learning to turn right if there is a mirror, and otherwise turn left. The robot successfully identifies the correct situation and turns appropriately. Robot speed is not shown, but is similar to that depicted at the top of \figurename~\ref{React}}
 \label{Right}
 \end{figure}
 
