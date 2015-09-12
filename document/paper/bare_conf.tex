@@ -201,7 +201,22 @@ J{\"o}rg Conradt\IEEEauthorrefmark{4}}
 
 \begin{abstract}
 %\boldmath
-We demonstrate a neuromorphic learning paradigm that is well-suited to embodied learning of complex sensorimotor mappings. A mobile robot is first controlled by a basic set of reflexive hand-designed behaviours. All sensor data is provided via a spike-based silicon retina camera (eDVS), and all control is implemented via spiking neurons simulated on neuromorphic hardware (SpiNNaker). Given this initial control system, the robot is capable of simple obstacle avoidance and random exploration. To train the robot to perform more complex tasks, we observe the robot and find instances where the robot accidentally performs the action we wish it to perform. Data recorded from the robot during these times is then used to update the neural control system, increasing the likelihood of the robot performing that task in the future, given a similar sensor state. We demonstrate this learning approach is sufficient for the robot to learn to turn left or right depending on novel sensory stimuli.
+We demonstrate a neuromorphic learning paradigm that is well-suited 
+to embodied learning of complex sensorimotor mappings. A mobile robot 
+is first controlled by a basic set of reflexive hand-designed behaviours. 
+All sensor data is provided via a spike-based silicon retina camera 
+(eDVS), and all control is implemented via spiking neurons simulated 
+on neuromorphic hardware (SpiNNaker). Given this initial control 
+system, the robot is capable of simple obstacle avoidance and random 
+exploration. To train the robot to perform more complex tasks, we 
+observe the robot and find instances where the robot accidentally 
+performs the action we wish it to perform. Data recorded from the 
+robot during these times is then used to update the neural control 
+system, increasing the likelihood of the robot performing that task 
+in the future, given a similar sensor state. As an example application
+of this general-purpose method of training, we demonstrate the
+robot learning to respond to novel sensory stimuli (a mirror) by turning
+right if it is present at an intersection, and otherwise turning left.
 
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
