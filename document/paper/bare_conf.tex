@@ -691,18 +691,30 @@ given only this simple learning rule on top of its basic reflexive rules.
 \end{figure}
 
 \section{Discussion}
-The algorithm described in this paper is a general-purpose approach, 
-making use of massively parallel low-power neuromorphic computing hardware on 
-a mobile robot. We have shown that we can start by defining extremely simple
+The algorithm described in this paper is a general-purpose approach to
+implementing mobile robot behaviours, 
+making use of massively parallel low-power neuromorphic computing hardware. 
+The basic algorithm is as follows:
 
-[TODO: I'm not yet sold on the algorithm claim. I think for that to work the Method section needs to be much more explicit (even as a recap) as to what the algorithm is.
-- Create basic reflexive behaviours
-- Allow the robot to wander aimlessly for a while, simultaneously record input and output
-- Select "positive examples" of behaviour from the recorded data
-Use these examples to form functions which describe new, additional, behaviours]
- 
-reactive rules, using Nengo and the NEF to implement them on neuromorphic 
-hardware. We present a method/algorithm whereby more complex behavioural rules for a robot could be constructed by forming functions to approximate the mappings between sensory stimuli and the activation of pre-existing reflexive behaviour. While we could have demonstrated this method on general-purpose computing hardware we instead used a massively-parallel, low-power neuromorphic platform.
+\begin{itemize}
+\item define a set of basic actions (e.g. driving forward, turning left)
+\item define functions for how strong each action should be done, given the
+current sensory state (e.g. drive forward if there is no obstacle ahead)
+\item generate a neural network that approximates these functions
+\item use the neural network to drive the robot and record the neural activity
+\item identify a set of positive examples where the robot has accidentally
+performed whatever other task is desired (e.g. turning towards a target object)
+\item retrain the neural connections between the sensory neurons and the
+action strengths so as to approximate the data gathered during the positive
+examples
+\end{itemize}
+
+Using this approach, we have shown that we can take a network that
+implements extremely simple manually specified reactive rules, and have
+it learn by example to perform more complex functions.  This method
+makes use of the power-efficiency of neuromorphic hardware, where large
+numbers of neurons and connections can be used to efficiently
+approximate complex functions.
 
 In the case of the system learning to change its behavior based on the 
 presence of a reflective mirror surface, the system was able to map the 
