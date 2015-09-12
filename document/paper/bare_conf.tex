@@ -347,29 +347,42 @@ neural models into optimized SpiNNaker code \cite{mundy2015}.
 
 \subsection{Nengo and the Neural Engineering Framework}
 
-The reason we chose Nengo rather than a more standard neural network framework is that Nengo \cite{bekolay_nengo2014} directly instantiates the Neural Engineering Framework (NEF). 
-
 The Neural Engineering Framework (NEF) is a general-purpose neural compiler 
 that allows the user to define a high-level algorithm that is then compiled 
 down to a neural approximation of that algorithm \cite{eliasmith2004neural}. 
 This approach was originally meant for constructing complex biologically realistic neural 
-models. Demonstrationis of the use of Nengo for perception, cognition, and 
+models. Demonstrations of the use of Nengo for perception, cognition, and 
 action encoding can be seen in Spaun, the first large-scale 
 (2.5 million neuron) functional brain model capable of performing multiple 
 tasks  \cite{eliasmith_largescale_2012}. 
 
-When developing neural models using the NEF, every group of neurons is thought
-of as representing a vector.  That is, different patterns of activity within
+The basic concept of modelling using the NEF is the same as most neural network
+approaches: groups of neurons form distributed representations of their input,
+and the weighted sum of the output from neurons is used to approximate
+complex functions.  For example, in \figurename~\ref{Flow}, the six square
+sensor boxes are the six values returned via the sensory preprocessing on the
+PushBot robot, indicating the position ($x, y$) and certainty ($c$) information 
+of two flashing lights (the laser pointer dot and the LED on the top of the
+robot).  This information is encoded into the sensory neurons using random
+connections; this ensures that there is a diverse and rich ``hidden layer''
+representation in the sensory neurons, allowing a wide range of output
+functions to be represented\footnote{It would, of course, be possible to use a
+learning rule such as backpropagation of error to optimize these weights,
+but we generally find this to be unnecessary}.
+
+This means that different patterns of activity within
 that group of neurons correspond to different vector values being represented.
 This vector is (normally) of much smaller dimensionality than the number of 
 neurons in the group, so the neural firing forms a redundant code for that 
 vector. Each neuron in the group responds differently to the same input, due
-to neural heterogeneity. Therefore, the redundant code can be thought of as a 
+to the random input connectivitty. Therefore, the redundant code can be thought of as a 
 random projection from a low-dimensional space (the vector being represented) 
 to a high-dimensional space (the neural activity). 
 
-Connections between neural 
-groups implement functions on those represented vectors. Importantly, due to 
+Connections out of a group of neurons implement functions on those represented 
+vectors. That is, given some arbitrary function of the input vector, we can
+find output connections from the neurons that will approximate that desired
+function.  Importantly, due to 
 the redundant code, these functions do not have to be linear functions; 
 rather, any function can be specified, and the system will find the optimal
 connections between neurons to approximate that function. The Neural Engineering 
@@ -393,7 +406,7 @@ resulting in a different pattern of firing for different vectors $(x,y,c)$.
 Given this activity, we can then define connections to other groups of neurons
 that compute functions of these values. For example, if we want a group of 
 neurons $R$ to store the distance from the center of the visual field to the 
-location of the LED, we could tell Nengo to optimize the connections so
+location of the LED, we could optimise the connections so
 as to approximate: 
  
 \begin{lstlisting}
@@ -405,7 +418,10 @@ representing the LED data and the group of neurons representing the
 radius $R$ such that $R$ is driven to fire with whatever pattern represents 
 the correct radius, given the current activity of the LED population. 
 
-All of the neural systems described below are defined in this manner.
+All of the neural systems described below are defined in this manner, using
+the software package Nengo \cite{bekolay_nengo2014} developed specifically
+for such neural network construction, along with its interface
+for efficiently simulating such networks on SpiNNaker \cite{mundy2015}.
 
 \section{Method}
 
@@ -438,7 +454,7 @@ should not go forward. If it is higher than that threshold, it is safe to
 go forward: 
 
 \begin{lstlisting}
-	S[0] = if laser.y > -0.6 else 0
+	S[0] = 1 if laser.y > -0.6 else 0
 \end{lstlisting}
 
 To complete this basic behavior, we define the motor output $M$ as a 
@@ -507,7 +523,7 @@ actual behavior will be much more gradual.
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
-\caption{[TODO R1: Terry fig's 5,6 and 7 should all show 10 trials (ie same amount of trails] Basic reactive control. Each box is implemented as a group of leaky integrate and fire neurons, where N indicates the number of neurons, whose tuning curves span the dimensionality D as indicated. Each solid arrow indicates an alltoall connection with connection weights computed as per the NEF to approximate the functions described above. Dotted arrows indicate inputs
+\caption{Basic reactive control. Each box is implemented as a group of leaky integrate and fire neurons, where N indicates the number of neurons, whose tuning curves span the dimensionality D as indicated. Each solid arrow indicates an alltoall connection with connection weights computed as per the NEF to approximate the functions described above. Dotted arrows indicate inputs
 and outputs connecting the robot to the neuromorphic hardware.}
 \label{Flow}
 \end{figure}
