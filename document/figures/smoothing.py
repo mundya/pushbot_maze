@@ -28,7 +28,7 @@ pylab.plot(stim, np.where(stim > -0.6, 1, 0), color='#888888', linewidth=2, labe
 
 pylab.plot(sim.data[p_stim][100:], sim.data[p_output][100:], color='k', label='neural')
 
-pylab.xlabel('laser.y')
+pylab.xlabel('$y_{LASER}$')
 pylab.ylabel('S[0]')
 
 pylab.legend(loc='best')

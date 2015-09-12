@@ -189,13 +189,10 @@
 Ashley Kleinhans\IEEEauthorrefmark{2},
 Andrew Mundy\IEEEauthorrefmark{3} and
 J{\"o}rg Conradt\IEEEauthorrefmark{4}}
-\IEEEauthorblockA{\IEEEauthorrefmark{1}Centre for Theoretical Neuroscience, University of Waterloo,
-        Waterloo, ON, Canada\\ tcstewar@uwaterloo.ca}
-\IEEEauthorblockA{\IEEEauthorrefmark{2}Council of Scientific and Industrial Research, Pretoria, South Africa, akleinhans@csir.co.za\\
-Telephone: (800) 555--1212, Fax: (888) 555--1212}
-\IEEEauthorblockA{\IEEEauthorrefmark{2}TODO: Address\\
-Email:}
-\IEEEauthorblockA{\IEEEauthorrefmark{4}TODO: Address\\Email:}}
+\IEEEauthorblockA{\IEEEauthorrefmark{1}Centre for Theoretical Neuroscience, University of Waterloo, Waterloo, ON, Canada\\tcstewar@uwaterloo.ca}
+\IEEEauthorblockA{\IEEEauthorrefmark{2}Council of Scientific and Industrial Research, Pretoria, South Africa\\akleinhans@csir.co.za}
+\IEEEauthorblockA{\IEEEauthorrefmark{3}TODO: Address\\Email}
+\IEEEauthorblockA{\IEEEauthorrefmark{4}TODO: Address\\Email}}
 
 
 % make the title area
@@ -304,7 +301,7 @@ collaboration with the Institute of Neuroinformatics at the University of
 Zurich and the ETH Zurich. This neuromorphic sensor is a 128x128-pixel camera. 
 Instead of reporting frame-based data, it emits individual events when the 
 relative brightness for any individual pixel increases or decreases. The eDVS 
-provides high temporal resolution (~1us), low latency (~15us) and high dynamic 
+provides high temporal resolution ($\sim$1us), low latency ($\sim$15us) and high dynamic 
 range (120dB). The eDVS used here is an embedded version with an onboard 
 microcontroller (NXP LPC4337), inertial measurement unit, multiple PWM control 
 signals, and general-purpose I/O lines. The silicon retina is well-suited for 
@@ -410,7 +407,7 @@ location of the LED, we could optimise the connections so
 as to approximate: 
  
 \begin{lstlisting}
-    R = sqrt(led.x**2 + led.y**2)
+    R = $\sqrt{x_{LED}^2 + y_{LED}^2}$
 \end{lstlisting}
 
 This would find synaptic connection weights between the group of neurons 
@@ -454,7 +451,7 @@ should not go forward. If it is higher than that threshold, it is safe to
 go forward: 
 
 \begin{lstlisting}
-	S[0] = 1 if laser.y > -0.6 else 0
+	S[0] = 1 if $y_{LASER} > -0.6$ else 0
 \end{lstlisting}
 
 To complete this basic behavior, we define the motor output $M$ as a 
@@ -462,7 +459,7 @@ function of $S$. In this case, we want to drive both wheel motors forward
 when the action has a high strength.
 
 \begin{lstlisting}
-	M = [1, 1] * S[0]
+	M = [1, 1] $\cdot$ S[0]
 \end{lstlisting}
 
 The next basic reflexive action is to back up when we are too close to an 
@@ -472,18 +469,18 @@ it is not visible at all (i.e. the dot is below the field of view of the camera)
 then the robot should back up.  This gives the following rule:
 
 \begin{lstlisting}
-	S[1] = 1 if laser.y < -0.8 or laser.c < 0 else 0
-	M = [-1, -1] * S[1]
+	S[1] = 1 if $y_{LASER} < -0.8$ or $c_{LASER} < 0$ else 0
+	M = [-1, -1] $\cdot$ S[1]
 \end{lstlisting}
 
 The final basic actions are: turn left or right when close to an obstacle. 
 
 \begin{lstlisting}
-	S[2] ← 1 if laser.y < -0.8 else 0
-	M ← [-1, 1] * S[2]
+	S[2] = 1 if $y_{LASER} < -0.8$ else 0
+	M = [-1, 1] $\cdot$ S[2]
 
-	S[3] ← 1 if laser.y < -0.8 else 0
-	M ← [1, -1] * S[3]
+	S[3] = 1 if $y_{LASER} < -0.8$ else 0
+	M = [1, -1] $\cdot$ S[3]
 \end{lstlisting}
 
 However, these last two actions should not both be performed at the same time,
@@ -506,7 +503,7 @@ Nengo to build neural networks that approximate each of these rules.  Groups
 of neurons are defined to store the sensory state, the motor output, and the 
 strengths of each action. The connections between the groups of neurons are 
 set to approximate each of the above functions, resulting in the neural 
-system shown in \figurename~\ref{React}. 
+system shown in \figurename~\ref{Flow}. 
 
 To understand the resulting basic reflexive behavior,
 two important aspects of NEF must be considered. First, due to the neural 
@@ -519,12 +516,14 @@ actual behavior will be much more gradual.
 
 \begin{figure}[!t]
 \centering
-%\includegraphics[width=2.5in]{myfigure}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-\caption{Basic reactive control. Each box is implemented as a group of leaky integrate and fire neurons, where N indicates the number of neurons, whose tuning curves span the dimensionality D as indicated. Each solid arrow indicates an alltoall connection with connection weights computed as per the NEF to approximate the functions described above. Dotted arrows indicate inputs
-and outputs connecting the robot to the neuromorphic hardware.}
+\includegraphics[width=3in]{network.png}
+\caption{A network implementing basic reactive control. Square boxes are the
+values being represented by the neurons (circles).  Random connectivity
+ensures the neurons form a distributed representation of the vector values
+that are their input.  The optimised output connections are solved for
+using least-squares minimization to approximate the functions listed in
+the text.  Learned connections are added afterwards, as discussed in 
+section \ref{learning}.}
 \label{Flow}
 \end{figure}
 
@@ -540,7 +539,7 @@ and outputs connecting the robot to the neuromorphic hardware.}
 \end{figure}
 
 For example, the input function to 
-the $S[0]$ population is supposed to compute $4$ if $laser.y > -0.6$ else $0$. 
+the $S[0]$ population is supposed to compute ``$1$ if $y_{LASER} > -0.6$ else $0$''. 
 Instead of implementing this exact function, the neurons will instead implement
 a smoothed approximation of this step function, as shown in
 \figurename~\ref{NEF}.
@@ -569,8 +568,8 @@ direction until there is no longer an obstacle in front of it. All actions
 transpire without human interference. The only hardcoded input are the initial 
 thresholds that provide information as to whether an action is, in fact, 
 correct given the current sensory state. These actions demonstrate obstacle 
-avoidance, and simple decision making, in much the same way as animal behavior 
-studies  \cite{kim2007encoding}. 
+avoidance and simple decision making, in much the same way as animal behavior 
+studies \cite{kim2007encoding}. 
 
 The core idea is that this set of behaviors is a bare minimum, sufficient to
 allow the robot to move throughout its environment without human intervention.
@@ -582,40 +581,36 @@ example), which we will then use to further train the robot's behavior, as
 discussed in the next section.
 
 
-\begin{figure}[!t]
-\centering
-\includegraphics[width=2.5in]{basic/basic.png}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-\caption{Behavior of reactive control model over multiple runs. The speed (top graph) is high at the beginning, then slows as it turns either left or right (bottom graph). While on any individual run the robot tends to turn consistently either left or right, the overall average is zero turning (black area in bottom graph).}
-\label{React}
-\end{figure}
-
-\begin{figure}[!t]
-\centering
-\includegraphics[width=2.5in]{learn-left/learnleft.png}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
-\caption{Behavior after learning to turn left. By adding connections optimized to approximate situations where the robot behaved appropriately, we implicitly program the robot to map its sensory states to its actions as desired.}
-\label{Left}
-\end{figure}
-
 \subsection{Initial behavior}
 
 To examine the model's behavior, we used a standard T-maze
 environment (\figurename~\ref{Tmaze}). When placed at the bottom
 of the T-maze, the robot navigates forward, avoids the
 walls, reaches the choice point, and turns left or right.
-Typical trajectories are shown in \figurename~\ref{fig_sim}, which indicates the motor outputs over time. Since the robot uses tank-style treads, the two motor output values are the left and right motor speeds, respectively. For clarity, here we plot the overall speed as the sum of M[left] and M[right], while the rotation rate is the difference between the two. 
+Typical trajectories are shown in \figurename~\ref{React}, which indicates
+the motor outputs over time. Since the robot uses tank-style treads, the 
+two motor output values are the left and right motor speeds, respectively. 
+For clarity, here we plot the overall speed as the sum of M[0] (left motor) 
+and M[1] (right motor), while the rotation rate is the difference between the two. 
+Motor output values of typical individual runs are plotted along with an overall 
+mean value (with 95\% bootstrap confidence interval). All values are Gaussian 
+filtered with $\sigma=0.15s$ for visual clarity.
+
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{basic/basic.png}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Behavior of reactive control model over multiple runs. The speed (top graph) is high at the beginning, then slows as it turns either left or right (bottom graph). While on any individual run the robot tends to turn consistently either left or right, the overall average is zero turning (black area in bottom graph; area is 95\% bootstrap confidence interval).}
+\label{React}
+\end{figure}
 
 
 
-Motor output values of typical individual runs are plotted along with an overall mean value (with 95\% bootstrap confidence interval). All values are Gaussian filtered with $\sigma=0.15s$ for visual clarity.
 
-
-\subsection{Serendipitous Offline Learning}
+\subsection{Serendipitous Offline Learning} \label{learning}
 
 While the above approach is sufficient for implementing simple behaviors, it requires the developer to define explicit rules mapping sensory states to actions. In this section, we build upon these
 rules in a less explicit manner, allowing us to create more complex behavior
@@ -631,7 +626,7 @@ the intersection, rather than randomly turning either left or right. Recording
 the sensory data and the strength of each action $S$ while the robot is 
 performing its initial basic behavior, we find instances where the robot 
 performs the desired action (turning left). We call these the \textit{positive 
-examples}. In this case, we consider the four individual runs shown in \figurename~\ref{fig_sim} [TODO: check all figures are added and that they refer to the correct figures] where the robot's rotation tended to remain positive.  The data from runs where it turned right are removed.  The data from these positive examples can 
+examples}. In this case, we consider the four individual runs shown in \figurename~\ref{React} where the robot's rotation tended to remain positive.  The data from runs where it turned right are removed.  The data from these positive examples can 
 be thought of as long sequences of state-action pairs, indicating what action 
 to perform in what state. Given this, we add new connections from sensors to 
 the action strength populations. Instead of explicitly indicating what functions 
@@ -654,15 +649,14 @@ The result of this training is shown in \figurename~\ref{Left}. Unlike
 \figurename~\ref{React} this shows the robot consistently turning to the left about 
 two seconds into the task (the average time for the robot to reach the end of the corridor).
 
-
 \begin{figure}[!t]
 \centering
-\includegraphics[width=2.5in]{learn-mirror/learnmirror.png}
+\includegraphics[width=2.5in]{learn-left/learnleft.png}
 % where an .eps filename suffix will be assumed under latex, 
 % and a .pdf suffix will be assumed for pdflatex; or what has been declared
 % via \DeclareGraphicsExtensions.
-\caption{Behavior after learning to turn right if there is a mirror, and otherwise turn left. The robot successfully identifies the correct situation and turns appropriately. Robot speed is not shown, but is similar to that depicted at the top of \figurename~\ref{React}}
-\label{Right}
+\caption{Behavior after learning to turn left. By adding connections optimized to approximate situations where the robot behaved appropriately, we implicitly program the robot to map its sensory states to its actions as desired.}
+\label{Left}
 \end{figure}
 
 \subsection{Learning Sensory Conditions}
@@ -680,6 +674,16 @@ examples means that the neural connections now need to change their outputs
 depending on whether the mirror is present or not.  \figurename~\ref{Right} shows 
 that the robot can successfully learn to recognize and respond to mirrors,
 given only this simple learning rule on top of its basic reflexive rules.
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=2.5in]{learn-mirror/learnmirror.png}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+\caption{Behavior after learning to turn right if there is a mirror, and otherwise turn left. The robot successfully identifies the correct situation and turns appropriately. Robot speed is not shown, but is similar to that depicted at the top of \figurename~\ref{React}}
+\label{Right}
+\end{figure}
 
 \section{Discussion}
 The algorithm described in this paper is a general-purpose approach, 
