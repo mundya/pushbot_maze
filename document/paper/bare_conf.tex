@@ -265,11 +265,19 @@ threshold is reached, at which time the neuron emits a discrete spike:
 
 When this spike occurs, this causes post-synaptic current to flow into the 
 neurons it is connected to, with each connection having its own weight $\omega$
-and with the post-synaptic current $h(t)$ exponentially decaying over time:
+and with the post-synaptic current $h(t)$ exponentially decaying over time, 
+as shown in \figurename~\ref{Neuron}:
 
 \begin{equation}
     h(t) = e^{-t/\tau_s}
 \end{equation}
+
+\begin{figure}[!t]
+\centering
+\includegraphics[width=3in]{neuron.png}
+\caption{Voltage $V$, spiking activity and output of a single LIF neuron, given a constant input $I$.}
+\label{Neuron}
+\end{figure}
 
 The goal of this work is to explore algorithms that can be usefully implemented
 given hardware that efficiently implements neural networks of this form.  In
@@ -600,9 +608,6 @@ filtered with $\sigma=0.15s$ for visual clarity.
 \begin{figure}[!t]
 \centering
 \includegraphics[width=2.5in]{basic/basic.png}
-% where an .eps filename suffix will be assumed under latex, 
-% and a .pdf suffix will be assumed for pdflatex; or what has been declared
-% via \DeclareGraphicsExtensions.
 \caption{Behavior of reactive control model over multiple runs. The speed (top graph) is high at the beginning, then slows as it turns either left or right (bottom graph). While on any individual run the robot tends to turn consistently either left or right, the overall average is zero turning (black area in bottom graph; area is 95\% bootstrap confidence interval).}
 \label{React}
 \end{figure}

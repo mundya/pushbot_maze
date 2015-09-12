@@ -1,0 +1,323 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.9.27)  12 SEP 2015 14:40
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**bare_conf.tex
+(./bare_conf.tex
+LaTeX2e <2011/06/27>
+Babel <3.9h> and hyphenation patterns for 2 languages loaded.
+(./IEEEtran.cls
+Document Class: IEEEtran 2007/03/05 V1.7a by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+\@IEEEtrantmpdimenA=\dimen102
+\@IEEEtrantmpdimenB=\dimen103
+\@IEEEtrantmpcountA=\count79
+\@IEEEtrantmpcountB=\count80
+\@IEEEtrantmptoksA=\toks14
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 366.
+
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+-- Using 8.5in x 11in (letter) paper.
+-- Using PDF output.
+\@IEEEnormalsizeunitybaselineskip=\dimen104
+-- This is a 10 point document.
+\CLASSINFOnormalsizebaselineskip=\dimen105
+\CLASSINFOnormalsizeunitybaselineskip=\dimen106
+\IEEEnormaljot=\dimen107
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <5> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <7> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <8> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <11> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <17> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <20> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 724.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <24> not available
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 724.
+\IEEEilabelindentA=\dimen108
+\IEEEilabelindentB=\dimen109
+\IEEEilabelindent=\dimen110
+\IEEEelabelindent=\dimen111
+\IEEEdlabelindent=\dimen112
+\IEEElabelindent=\dimen113
+\IEEEiednormlabelsep=\dimen114
+\IEEEiedmathlabelsep=\dimen115
+\IEEEiedtopsep=\skip41
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@IEEEsubequation=\count85
+\abovecaptionskip=\skip42
+\belowcaptionskip=\skip43
+\c@figure=\count86
+\c@table=\count87
+\@IEEEeqnnumcols=\count88
+\@IEEEeqncolcnt=\count89
+\@IEEEtmpitemindent=\dimen116
+\c@IEEEbiography=\count90
+\@IEEEtranrubishbin=\box26
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks15
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/etc/texmf/tex/latex/config/graphics.cfg
+File: graphics.cfg 2009/08/28 v1.8 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count91
+))
+\Gin@req@height=\dimen117
+\Gin@req@width=\dimen118
+)
+(/usr/share/texlive/texmf-dist/tex/latex/psnfss/courier.sty
+Package: courier 2005/04/12 PSNFSS-v9.2a (WaS) 
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count92
+\lst@gtempboxa=\box27
+\lst@token=\toks16
+\lst@length=\count93
+\lst@currlwidth=\dimen119
+\lst@column=\count94
+\lst@pos=\count95
+\lst@lostspace=\dimen120
+\lst@width=\dimen121
+\lst@newlines=\count96
+\lst@lineno=\count97
+\lst@maxwidth=\dimen122
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2013/08/26 1.5b (Carsten Heinz)
+\c@lstnumber=\count98
+\lst@skipnumbers=\count99
+\lst@framebox=\box28
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2013/08/26 1.5b listings configuration
+))
+Package: listings 2013/08/26 1.5b (Carsten Heinz)
+
+(./bare_conf.aux)
+\openout1 = `bare_conf.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 176.
+LaTeX Font Info:    ... okay on input line 176.
+ (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count100
+\scratchdimen=\dimen123
+\scratchbox=\box29
+\nofMPsegments=\count101
+\nofMParguments=\count102
+\everyMPshowfont=\toks17
+\MPscratchCnt=\count103
+\MPscratchDim=\dimen124
+\MPnumerator=\count104
+\makeMPintoPDFobject=\count105
+\everyMPtoPDFconversion=\toks18
+)
+\c@lstlisting=\count106
+LaTeX Font Info:    Calculating math sizes for size <11> on input line 199.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <11> on input line 199.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7.69997> on input line 199.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5.5> on input line 199.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 199.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 199.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 199.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 199.
+
+Underfull \hbox (badness 1454) in paragraph at lines 214--215
+\OT1/ptm/b/n/10 Keywords. \OT1/ptm/m/n/10 adap-tive sys-tems, mo-bile robotics,
+ neu-ro-con-
+ []
+
+<../figures/neuron.png, id=1, 433.62pt x 289.08pt>
+File: ../figures/neuron.png Graphic file (type png)
+ <use ../figures/neuron.png>
+Package pdftex.def Info: ../figures/neuron.png used on input line 277.
+(pdftex.def)             Requested size: 216.81pt x 144.53964pt.
+
+[1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
+<../figures/Pushbot1CroppedCropped.jpg, id=19, 232.61906pt x 240.14719pt>
+File: ../figures/Pushbot1CroppedCropped.jpg Graphic file (type jpg)
+
+<use ../figures/Pushbot1CroppedCropped.jpg>
+Package pdftex.def Info: ../figures/Pushbot1CroppedCropped.jpg used on input li
+ne 331.
+(pdftex.def)             Requested size: 180.67499pt x 186.5262pt.
+
+Underfull \hbox (badness 2495) in paragraph at lines 342--352
+\OT1/ptm/m/n/10 Uni-ver-sity of Manch-ester and con-sists of 18 200MHz
+ []
+
+[2 <../figures/neuron.png> <../figures/Pushbot1CroppedCropped.jpg>] [3]
+<../figures/network.png, id=29, 3255.16125pt x 2205.23875pt>
+File: ../figures/network.png Graphic file (type png)
+
+<use ../figures/network.png>
+Package pdftex.def Info: ../figures/network.png used on input line 527.
+(pdftex.def)             Requested size: 216.81pt x 146.87871pt.
+
+<../figures/smoothing.png, id=30, 433.62pt x 216.81pt>
+File: ../figures/smoothing.png Graphic file (type png)
+
+<use ../figures/smoothing.png>
+Package pdftex.def Info: ../figures/smoothing.png used on input line 541.
+(pdftex.def)             Requested size: 180.67499pt x 90.33838pt.
+
+<../figures/tmazeRev.pdf, id=31, 794.97pt x 534.99875pt>
+File: ../figures/tmazeRev.pdf Graphic file (type pdf)
+
+<use ../figures/tmazeRev.pdf>
+Package pdftex.def Info: ../figures/tmazeRev.pdf used on input line 563.
+(pdftex.def)             Requested size: 180.67499pt x 121.58586pt.
+ [4 <../figures/network.png> <../figures/smoothing.png> <../figures/tmazeRev.pd
+f>]
+<../figures/basic/basic.png, id=40, 433.62pt x 433.62pt>
+File: ../figures/basic/basic.png Graphic file (type png)
+
+<use ../figures/basic/basic.png>
+Package pdftex.def Info: ../figures/basic/basic.png used on input line 610.
+(pdftex.def)             Requested size: 180.67499pt x 180.67676pt.
+
+<../figures/learn-left/learnleft.png, id=41, 433.62pt x 433.62pt>
+File: ../figures/learn-left/learnleft.png Graphic file (type png)
+
+<use ../figures/learn-left/learnleft.png>
+Package pdftex.def Info: ../figures/learn-left/learnleft.png used on input line
+ 659.
+(pdftex.def)             Requested size: 180.67499pt x 180.67676pt.
+ [5 <../figures/basic/basic.png> <../figures/learn-left/learnleft.png>]
+<../figures/learn-mirror/learnmirror.png, id=47, 433.62pt x 433.62pt>
+File: ../figures/learn-mirror/learnmirror.png Graphic file (type png)
+
+<use ../figures/learn-mirror/learnmirror.png>
+Package pdftex.def Info: ../figures/learn-mirror/learnmirror.png used on input 
+line 685.
+(pdftex.def)             Requested size: 180.67499pt x 180.67676pt.
+Missing character: There is no â in font ptmr7t!
+Missing character: There is no € in font ptmr7t!
+Missing character: There is no “ in font ptmr7t!
+ (./bare_conf.bbl [6 <../figures/learn-mirror/learnmirror.png>]
+** WARNING: IEEEtran.bst: No hyphenation pattern has been
+** loaded for the language `eng'. Using the pattern for
+** the default language instead.
+** WARNING: IEEEtran.bst: No hyphenation pattern has been
+** loaded for the language `eng'. Using the pattern for
+** the default language instead.
+)
+
+** Conference Paper **
+Before submitting the final camera ready copy, remember to:
+
+ 1. Manually equalize the lengths of two columns on the last page
+ of your paper;
+
+ 2. Ensure that any PostScript and/or PDF output post-processing
+ uses only Type 1 fonts and that every step in the generation
+ process uses the appropriate paper size.
+
+[7
+
+] (./bare_conf.aux) ) 
+Here is how much of TeX's memory you used:
+ 3130 strings out of 495032
+ 47972 string characters out of 6181718
+ 111605 words of memory out of 5000000
+ 6333 multiletter control sequences out of 15000+600000
+ 41159 words of font info for 77 fonts, out of 8000000 for 9000
+ 17 hyphenation exceptions out of 8191
+ 32i,12n,32p,1009b,1372s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc
+}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></u
+sr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/urw/times/utmri8a.pfb>
+Output written on bare_conf.pdf (7 pages, 2753933 bytes).
+PDF statistics:
+ 101 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 41 words of extra memory for PDF output out of 10000 (max. 10000000)
+
