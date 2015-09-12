@@ -17,7 +17,9 @@ with model:
     p_output = nengo.Probe(ens, synapse=0.05)
 
 dt = 0.001
-sim = nengo.Simulator(model, dt=dt)
+import nengo_spinnaker
+
+sim = nengo_spinnaker.Simulator(model, dt=dt)
 sim.run(0.2)
 
 import pylab
