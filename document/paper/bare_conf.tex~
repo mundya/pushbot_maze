@@ -239,7 +239,7 @@ This approach was originally meant for constructing complex biologically realist
 models. Demonstrations of the use of Nengo for perception, cognition, and 
 action encoding can be seen in Spaun, the first large-scale 
 (2.5 million neuron) functional brain model capable of performing multiple 
-tasks  \citep{eliasmith_largescale_2012}. 
+tasks  \cite{eliasmith_largescale_2012}. 
 
 The basic concept of modelling using the NEF is the same as most neural network
 approaches: groups of neurons form distributed representations of their input,
@@ -282,7 +282,7 @@ number of neurons and the function being approximated.
 As an example, consider a group of neurons storing three values: the $x,y$ 
 position of an object and a certainty measure $c$ that the object is at that
 location.  (This example comes from the output of the tracking algorithm 
-for flashing LEDs \citep{muller2011miniature}).  In the NEF, we might use 100 
+for flashing LEDs \cite{muller2011miniature}).  In the NEF, we might use 100 
 neurons to form a distributed representation of these three values 
 (using more neurons would improve the accuracy of the representation).  Each
 neuron would be given a random combination of inputs from the three dimensions,
@@ -304,9 +304,9 @@ radius $R$ such that $R$ is driven to fire with whatever pattern represents
 the correct radius, given the current activity of the LED population. 
 
 All of the neural systems described below are defined in this manner, using
-the software package Nengo \citep{bekolay_nengo2014} developed specifically
+the software package Nengo \cite{bekolay_nengo2014} developed specifically
 for such neural network construction, along with its interface
-for efficiently simulating such networks on SpiNNaker \citep{mundy2015}.
+for efficiently simulating such networks on SpiNNaker \cite{mundy2015}.
 
 \section{Method}
 
@@ -441,7 +441,7 @@ transpire without human interference. The only hardcoded input are the initial
 thresholds that provide information as to whether an action is, in fact, 
 correct given the current sensory state. These actions demonstrate obstacle 
 avoidance and simple decision making, in much the same way as animal behavior 
-studies \citep{kim2007encoding}. 
+studies \cite{kim2007encoding}. 
 
 The core idea is that this set of behaviors is a bare minimum, sufficient to
 allow the robot to move throughout its environment without human intervention.
@@ -612,13 +612,13 @@ A vital topic of future work is to characterize the variety of different
 learned tasks that are amenable to this method.  In general, the NEF shows
 that the accuracy of the learned connections are dependent on the complexity
 of the function to be learned (in this case the mapping from sensor states to
-action choices) and the number of neurons \citep{eliasmith2004neural}.  As we explore different tasks,
+action choices) and the number of neurons \cite{eliasmith2004neural}.  As we explore different tasks,
 we will also need to explore different combinations of sensor systems and
 the pre-processing on this data.  
 
 This approach of using sensory experience to learn neural connections
 that attempt to cause the same actions to occur in response to similar
-sensory stimuli is novel, but we have performed previous work \citep{conradt2014trainable}
+sensory stimuli is novel, but we have performed previous work \cite{conradt2014trainable}
 with a somewhat similar learning method. In that case, we did not have an 
 initial reflexive control system, and we did not find particular examples of 
 desired behavior. Instead, we put the robot temporarily under manual control 
@@ -642,10 +642,10 @@ we plan to augment this approach with explicit punishment for situations where
 the robot performs a non-desired behavior. Interestingly, adding this capability
 is not straight-forward in this case.  Indeed, there is significant biological 
 evidence that positive (reward), and negative (punishment) systems are separate 
-in the brain \citep{boureau2010}. That is, they are not simply the opposite of 
+in the brain \cite{boureau2010}. That is, they are not simply the opposite of 
 each other --- rather they are significantly different processes that interact. 
 This interaction is still to be explored. One step towards this is a model
-of fear conditioning \citep{kolbeck2013fear}, which would fit well with this framework.
+of fear conditioning \cite{kolbeck2013fear}, which would fit well with this framework.
 
 
 % use section* for acknowledgement

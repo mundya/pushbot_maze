@@ -1,72 +1,95 @@
 \relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyperFirstAtBeginDocument{\AtBeginDocument}
+\HyperFirstAtBeginDocument{\ifx\hyper@anchor\@undefined
+\global\let\oldcontentsline\contentsline
+\gdef\contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global\let\oldnewlabel\newlabel
+\gdef\newlabel#1#2{\newlabelxx{#1}#2}
+\gdef\newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\ifx\hyper@anchor\@undefined
+\let\contentsline\oldcontentsline
+\let\newlabel\oldnewlabel
+\fi}
+\fi}
+\global\let\hyper@last\relax 
+\gdef\HyperFirstAtBeginDocument#1{#1}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
 \citation{mcfarland1993intelligent}
 \citation{janglova2005neural}
-\citation{webb2000does}
-\citation{furber2007neural}
-\citation{furber2014spinnaker}
+\newcplabel{^_1}{1}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{section.1}}
+\citation{krichmar2011}
+\citation{furber2007neural,furber2014spinnaker}
 \citation{eliasmith2004neural}
 \citation{kim2007encoding}
 \citation{verschure2012distributed}
-\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}}
 \citation{conradt2009embedded}
 \citation{muller2011miniature}
-\citation{furber2007neural}
-\citation{furber2014spinnaker}
+\citation{denk2013}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Voltage $V$, spiking activity and output of a single LIF neuron, given a constant input $I$. SpiNNaker uses a simulation time step of $dt=0.001$.}}{3}{figure.1}}
+\newlabel{Neuron}{{1}{3}{Voltage $V$, spiking activity and output of a single LIF neuron, given a constant input $I$. SpiNNaker uses a simulation time step of $dt=0.001$}{figure.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Infrastructure}{3}{section.2}}
+\newlabel{infrastructure}{{2}{3}{Infrastructure}{section.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {{2.1}}eDVS}{3}{subsection.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {{2.2}}PushBot}{3}{subsection.2.2}}
+\citation{furber2007neural,furber2014spinnaker}
 \citation{bekolay_nengo2014}
 \citation{mundy2015}
 \citation{eliasmith2004neural}
 \citation{eliasmith_largescale_2012}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Voltage $V$, spiking activity and output of a single LIF neuron, given a constant input $I$.}}{2}}
-\newlabel{Neuron}{{1}{2}}
-\@writefile{toc}{\contentsline {section}{\numberline {II}Infrastructure}{2}}
-\newlabel{infrastructure}{{II}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-A}}eDVS}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-B}}PushBot}{2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The PushBot and the eDVS silicon retina.}}{2}}
-\newlabel{fig_sim}{{2}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-C}}SpiNNaker}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {II-D}}Nengo and the Neural Engineering Framework}{2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces The PushBot robot with LEDs on the front and back (1), a control board (2) with an eDVS silicon retina (3) and NXP LPC4337 microcontroller (4), and a laser pointer (5). The robot communicates through a wireless module on the back (not visible). The top-left insert shows the laser pointer in red.}}{4}{figure.2}}
+\newlabel{fig_sim}{{2}{4}{The PushBot robot with LEDs on the front and back (1), a control board (2) with an eDVS silicon retina (3) and NXP LPC4337 microcontroller (4), and a laser pointer (5). The robot communicates through a wireless module on the back (not visible). The top-left insert shows the laser pointer in red}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {{2.3}}SpiNNaker}{4}{subsection.2.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {{2.4}}Nengo and the Neural Engineering Framework}{4}{subsection.2.4}}
 \citation{muller2011miniature}
 \citation{bekolay_nengo2014}
 \citation{mundy2015}
-\@writefile{toc}{\contentsline {section}{\numberline {III}Method}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}Initial Reflexive Control}{3}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Method}{5}{section.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {{3.1}}Initial Reflexive Control}{5}{subsection.3.1}}
 \citation{kim2007encoding}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A network implementing basic reactive control. Square boxes are the values being represented by the neurons (circles). Random connectivity ensures the neurons form a distributed representation of the vector values that are their input. The optimised output connections are solved for using least-squares minimization to approximate the functions listed in the text. Learned connections are added afterwards, as discussed in section \unhbox \voidb@x \hbox {III-C}\hbox {}.}}{4}}
-\newlabel{Flow}{{3}{4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Neural approximation with the NEF. When connections between neural groups are optimized to approximate a function, the result is a smooth version of that function. As the number of neurons is increased, this neural approximation will approach the ideal function.}}{4}}
-\newlabel{NEF}{{4}{4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The T-Maze environment. The robot starts at the bottom of the T shape.}}{4}}
-\newlabel{Tmaze}{{5}{4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Behavior of reactive control model over multiple runs. The speed (top graph) is high at the beginning, then slows as it turns either left or right (bottom graph). While on any individual run the robot tends to turn consistently either left or right, the overall average is zero turning (black area in bottom graph; area is 95\% bootstrap confidence interval).}}{5}}
-\newlabel{React}{{6}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}Initial behavior}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-C}}Serendipitous Offline Learning}{5}}
-\newlabel{learning}{{\unhbox \voidb@x \hbox {III-C}}{5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Behavior after learning to turn left. By adding connections optimized to approximate situations where the robot behaved appropriately, we implicitly program the robot to map its sensory states to its actions as desired.}}{5}}
-\newlabel{Left}{{7}{5}}
-\@writefile{toc}{\contentsline {section}{\numberline {IV}Results}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {IV-A}}Learning Sensory Conditions}{5}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces A network implementing basic reactive control. Square boxes are the values being represented by the neurons (circles). Random connectivity ensures the neurons form a distributed representation of the vector values that are their input. The optimised output connections are solved for using least-squares minimization to approximate the functions listed in the text. Learned connections are added afterwards, as discussed in section \ref  {learning}.}}{7}{figure.3}}
+\newlabel{Flow}{{3}{7}{A network implementing basic reactive control. Square boxes are the values being represented by the neurons (circles). Random connectivity ensures the neurons form a distributed representation of the vector values that are their input. The optimised output connections are solved for using least-squares minimization to approximate the functions listed in the text. Learned connections are added afterwards, as discussed in section \ref {learning}}{figure.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Neural approximation with the NEF. When connections between neural groups are optimized to approximate a function, the result is a smooth version of that function. As the number of neurons is increased, this neural approximation will approach the ideal function.}}{7}{figure.4}}
+\newlabel{NEF}{{4}{7}{Neural approximation with the NEF. When connections between neural groups are optimized to approximate a function, the result is a smooth version of that function. As the number of neurons is increased, this neural approximation will approach the ideal function}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {{3.2}}Serendipitous Offline Learning}{8}{subsection.3.2}}
+\newlabel{learning}{{{3.2}}{8}{Serendipitous Offline Learning}{subsection.3.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{8}{section.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {{4.1}}Initial behavior}{8}{subsection.4.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {{4.2}}Learning Example 1: Basic Responses}{8}{subsection.4.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces The T-Maze environment, top-down view. The robot starts at the bottom of the T shape. A mirror is sometimes placed at the intersection (see \ref  {learningConditions}).}}{9}{figure.5}}
+\newlabel{Tmaze}{{5}{9}{The T-Maze environment, top-down view. The robot starts at the bottom of the T shape. A mirror is sometimes placed at the intersection (see \ref {learningConditions})}{figure.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Behavior of reactive control model over multiple runs. The speed (top graph) is high at the beginning, then slows as it turns either left or right (bottom graph). While on any individual run the robot tends to turn consistently either left or right, the overall average is zero turning (black area in bottom graph; area is 95\% bootstrap confidence interval).}}{9}{figure.6}}
+\newlabel{React}{{6}{9}{Behavior of reactive control model over multiple runs. The speed (top graph) is high at the beginning, then slows as it turns either left or right (bottom graph). While on any individual run the robot tends to turn consistently either left or right, the overall average is zero turning (black area in bottom graph; area is 95\% bootstrap confidence interval)}{figure.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Behavior after learning to turn left. By adding connections optimized to approximate situations where the robot behaved appropriately, we implicitly program the robot to map its sensory states to its actions as desired.}}{9}{figure.7}}
+\newlabel{Left}{{7}{9}{Behavior after learning to turn left. By adding connections optimized to approximate situations where the robot behaved appropriately, we implicitly program the robot to map its sensory states to its actions as desired}{figure.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {{4.3}}Learning Example 2: Sensory Conditions}{9}{subsection.4.3}}
+\newlabel{learningConditions}{{{4.3}}{9}{Learning Example 2: Sensory Conditions}{subsection.4.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Behavior after learning to turn right if there is a mirror, and otherwise turn left. The robot successfully identifies the correct situation and turns appropriately. Robot speed is not shown, but is similar to that depicted at the top of Figure\nobreakspace  {}\ref  {React}}}{10}{figure.8}}
+\newlabel{Right}{{8}{10}{Behavior after learning to turn right if there is a mirror, and otherwise turn left. The robot successfully identifies the correct situation and turns appropriately. Robot speed is not shown, but is similar to that depicted at the top of \figurename ~\ref {React}}{figure.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{10}{section.5}}
+\citation{eliasmith2004neural}
 \citation{conradt2014trainable}
+\citation{boureau2010}
 \citation{kolbeck2013fear}
-\bibstyle{IEEEtran}
+\bibstyle{frontiersinSCNS_ENG_HUMS}
 \bibdata{refs}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Behavior after learning to turn right if there is a mirror, and otherwise turn left. The robot successfully identifies the correct situation and turns appropriately. Robot speed is not shown, but is similar to that depicted at the top of Fig.\nobreakspace  {}6\hbox {}}}{6}}
-\newlabel{Right}{{8}{6}}
-\@writefile{toc}{\contentsline {section}{\numberline {V}Discussion}{6}}
-\bibcite{mcfarland1993intelligent}{1}
-\bibcite{janglova2005neural}{2}
-\bibcite{webb2000does}{3}
-\bibcite{furber2007neural}{4}
-\bibcite{furber2014spinnaker}{5}
-\bibcite{eliasmith2004neural}{6}
-\bibcite{kim2007encoding}{7}
-\bibcite{verschure2012distributed}{8}
-\bibcite{conradt2009embedded}{9}
-\bibcite{muller2011miniature}{10}
-\bibcite{bekolay_nengo2014}{11}
-\bibcite{mundy2015}{12}
-\bibcite{eliasmith_largescale_2012}{13}
-\bibcite{conradt2014trainable}{14}
-\bibcite{kolbeck2013fear}{15}
-\@writefile{toc}{\contentsline {section}{References}{7}}
+\bibcite{bekolay_nengo2014}{{1}{2014}{{Bekolay et~al.}}{{Bekolay, Bergstra, Hunsberger, DeWolf, Stewart, Rasmussen et~al.}}}
+\bibcite{boureau2010}{{2}{2010}{{Boureau and Dayan}}{{}}}
+\bibcite{conradt2009embedded}{{3}{2009}{{Conradt et~al.}}{{Conradt, Berner, Cook, and Delbruck}}}
+\bibcite{conradt2014trainable}{{4}{2014}{{Conradt et~al.}}{{Conradt, Galluppi, and Stewart}}}
+\bibcite{denk2013}{{5}{2013}{{Denk et~al.}}{{Denk, Llobet-Blandino, Galluppi, Plana, Furber, and Conradt}}}
+\bibcite{eliasmith2004neural}{{6}{2004}{{Eliasmith and Anderson}}{{}}}
+\bibcite{eliasmith_largescale_2012}{{7}{2012}{{Eliasmith et~al.}}{{Eliasmith, Stewart, Choo, Bekolay, DeWolf, Tang et~al.}}}
+\bibcite{furber2007neural}{{8}{2007}{{Furber and Temple}}{{}}}
+\bibcite{furber2014spinnaker}{{9}{2014}{{Furber et~al.}}{{Furber, Galluppi, Temple, Plana et~al.}}}
+\bibcite{janglova2005neural}{{10}{2005}{{Janglov{\'a}}}{{}}}
+\bibcite{kim2007encoding}{{11}{2007}{{Kim et~al.}}{{Kim, Huh, Lee, Baeg, Lee, and Jung}}}
+\bibcite{kolbeck2013fear}{{12}{2013}{{Kolbeck et~al.}}{{Kolbeck, Bekolay, and Eliasmith}}}
+\bibcite{krichmar2011}{{13}{2011}{{Krichmar and Wagatsuma}}{{}}}
+\bibcite{mcfarland1993intelligent}{{14}{1993}{{McFarland and B{\"o}sser}}{{}}}
+\bibcite{muller2011miniature}{{15}{2011}{{M{\"u}ller and Conradt}}{{}}}
+\bibcite{mundy2015}{{16}{2015}{{Mundy et~al.}}{{Mundy, Knight, Stewart, and Furber}}}
+\bibcite{verschure2012distributed}{{17}{2012}{{Verschure}}{{}}}
+\global\@namedef{@lastpage@}{12}
