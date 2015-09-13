@@ -10,7 +10,8 @@ p.compute('turn', lambda data: data['motor'][:,:,1] - data['motor'][:,:,0])
 pylab.figure(figsize=(6,6))
 pylab.axes((0.2, 0.55, 0.75, 0.4))
 p.plot('turn')
-pylab.ylabel('without mirror\nrotation\nM[left] - M[right]')
+pylab.ylabel('rotation\nM[left] - M[right]', fontsize=14)
+pylab.text(0.5, 0.4, 'without mirror', fontsize=18)
 
 
 p = plotter.Plotter()
@@ -19,7 +20,8 @@ p.compute('turn', lambda data: data['motor'][:,:,1] - data['motor'][:,:,0])
 
 pylab.axes((0.2, 0.1, 0.75, 0.4))
 p.plot('turn')
-pylab.ylabel('with mirror\nrotation\nM[left] - M[right]')
+pylab.ylabel('rotation\nM[left] - M[right]', fontsize=14)
+pylab.text(0.5, 0.4, 'with mirror', fontsize=18)
 pylab.xlabel('time (s)')
 
 pylab.savefig('learnmirror.png', dpi=600)
