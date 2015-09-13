@@ -191,8 +191,8 @@ Andrew Mundy\IEEEauthorrefmark{3} and
 J{\"o}rg Conradt\IEEEauthorrefmark{4}}
 \IEEEauthorblockA{\IEEEauthorrefmark{1}Centre for Theoretical Neuroscience, University of Waterloo, Waterloo, ON, Canada\\tcstewar@uwaterloo.ca}
 \IEEEauthorblockA{\IEEEauthorrefmark{2}Council of Scientific and Industrial Research, Pretoria, South Africa\\akleinhans@csir.co.za}
-\IEEEauthorblockA{\IEEEauthorrefmark{3}TODO: Address\\Email}
-\IEEEauthorblockA{\IEEEauthorrefmark{4}TODO: Address\\Email}}
+\IEEEauthorblockA{\IEEEauthorrefmark{3}School of Computer Science, University of Manchester, Manchester, UK\\andrew.mundy@ieee.org}
+\IEEEauthorblockA{\IEEEauthorrefmark{4}Neuroscientific System Theory, Department of Electrical and Computer Engineering, Technische Universit{\"a}t M{\"u}nchen, Germany\\conradt@tum.de}}
 
 
 % make the title area
@@ -206,17 +206,19 @@ to embodied learning of complex sensorimotor mappings. A mobile robot
 is first controlled by a basic set of reflexive hand-designed behaviours. 
 All sensor data is provided via a spike-based silicon retina camera 
 (eDVS), and all control is implemented via spiking neurons simulated 
-on neuromorphic hardware (SpiNNaker). Given this initial control 
+on neuromorphic hardware (SpiNNaker). Given this control 
 system, the robot is capable of simple obstacle avoidance and random 
 exploration. To train the robot to perform more complex tasks, we 
 observe the robot and find instances where the robot accidentally 
-performs the action we wish it to perform. Data recorded from the 
+performs a desired action. Data recorded from the 
 robot during these times is then used to update the neural control 
 system, increasing the likelihood of the robot performing that task 
 in the future, given a similar sensor state. As an example application
 of this general-purpose method of training, we demonstrate the
 robot learning to respond to novel sensory stimuli (a mirror) by turning
 right if it is present at an intersection, and otherwise turning left.
+In general, this system can learn arbitrary relations between sensory
+input and motor behaviour.
 
 \end{abstract}
 % IEEEtran.cls defaults to using nonbold math in the Abstract.
@@ -251,7 +253,7 @@ some high-level inspiration from biology, the algorithms themselves do not
 directly map to biological details.
 
 Over the last few years, a bridge has been forming between neuroscience and 
-robotics \cite{webb2000does}. Ongoing developments in neuromorphic hardware 
+robotics \cite{krichmar2011}. Ongoing developments in neuromorphic hardware 
 design now provide novel computing resources that are more suitable to
 directly implementing the types of computations found in biological systems, 
 thus facilitating the use of observations and data provided by the 
@@ -340,7 +342,7 @@ here as sensory pre-processing.
 \subsection{PushBot}
 At the Technische Universit{\"a}t M{\"u}nchen, the Neuroscientific
 System Theory group has developed a small tread-based robot built around the 
-eDVS sensor, as shown in \figurename~\ref{fig_sim}. The robot provides two motors, a frequency-controllable laser pointer, two LEDs, and housing for power (4 AA batteries). The setup comes with a proprietary WLAN module, enabling streaming of sensor data and motor command to and from the robot over standard WiFi.
+eDVS sensor, as shown in \figurename~\ref{fig_sim}. The robot provides two motors, a frequency-controllable laser pointer, two LEDs, and housing for power (4 AA batteries). The setup comes with a proprietary WLAN module, enabling streaming of sensor data and motor command to and from the robot over standard WiFi to a SpiNNaker hardware interface board \cite{denk2013}.
 
 \begin{figure}[!t]
 \centering
