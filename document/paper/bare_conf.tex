@@ -3,6 +3,13 @@
 \usepackage{url,hyperref,lineno,microtype}
 \usepackage[onehalfspacing]{setspace}
 \usepackage{listings}
+\lstset{columns=fullflexible,
+        mathescape=true,
+        literate=
+               {=}{$\leftarrow{}$}{1}
+               {==}{$={}$}{1},
+        morekeywords={if,then,else,return,sqrt}
+        }
 \linenumbers
 
 \def\keyFont{\fontsize{8}{11}\helveticabold }
@@ -402,7 +409,7 @@ actual behavior will be much more gradual.
 
 \begin{figure}[!t]
 \centering
-\includegraphics[width=3in]{../figures/network.png}
+\includegraphics[width=4in]{../figures/network.png}
 \caption{A network implementing basic reactive control. Square boxes are the
 values being represented by the neurons (circles).  Random connectivity
 ensures the neurons form a distributed representation of the vector values
@@ -645,7 +652,7 @@ evidence that positive (reward), and negative (punishment) systems are separate
 in the brain \citep{boureau2010}. That is, they are not simply the opposite of 
 each other --- rather they are significantly different processes that interact. 
 This interaction is still to be explored. One step towards this is a model
-of fear conditioning \citep{kolbeck2013fear}, which would fit well with this framework.
+of fear conditioning \citep	{kolbeck2013fear}, which would fit well with this framework.
 
 
 % use section* for acknowledgement
