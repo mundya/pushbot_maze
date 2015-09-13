@@ -697,7 +697,7 @@ implementing mobile robot behaviours,
 making use of massively parallel low-power neuromorphic computing hardware. 
 The basic algorithm is as follows:
 
-\begin{enumerate}[label=\Alph*]
+\begin{enumerate}
 \item define a set of basic actions (e.g. driving forward, turning left)
 \item define functions for the strength of each action, given the
 current sensory state (e.g. drive forward if there is no obstacle ahead)
@@ -708,7 +708,7 @@ performed whatever other task is desired (e.g. turning towards a target object)
 \item retrain the neural connections between the sensory neurons and the
 action strengths so as to approximate the data gathered during the positive
 examples
-\end{itemize}
+\end{enumerate}
 
 Using this approach, we have shown that we can take a network that
 implements extremely simple manually specified reactive rules, and have
@@ -718,7 +718,7 @@ numbers of neurons and connections can be used to efficiently
 approximate complex functions.
 
 At first glance, it seems as if these new connections added during the
-training process (step F) would just end up being 
+training process (step 6) would just end up being 
 exactly the same as the original reflexive control connections. However, the 
 key difference here is that these new connections will also take into 
 account \textit{other sensory states}, not considered in the original 
