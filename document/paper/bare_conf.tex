@@ -201,8 +201,9 @@ J{\"o}rg Conradt\IEEEauthorrefmark{4}}
 
 \begin{abstract}
 %\boldmath
-We demonstrate a neuromorphic learning paradigm that is well-suited 
-to embodied learning of complex sensorimotor mappings. A mobile robot 
+We demonstrate a hybrid neuromorphic learning paradigm that
+learns complex sensorimotor mappings based on a small
+set of hard-coded reflex behaviours.  A mobile robot 
 is first controlled by a basic set of reflexive hand-designed behaviours. 
 All sensor data is provided via a spike-based silicon retina camera 
 (eDVS), and all control is implemented via spiking neurons simulated 
@@ -261,7 +262,25 @@ energy-efficient direction for mobile robot applications.  Ideally, this could
 lead to flexible adaptive control of systems while staying within a limited
 power budget.
 
-Our study looks to demonstrate such a flexible control system using 
+To exploit this hardware, we propose a hybrid method combining a small set of
+simple explicit programmed behaviours with a training phase for shaping robot
+behaviour as desired.  That is, we start with low-level hand-designed reflexive
+actions, such as backing up when a collision sensor is triggered.  While these can be defined using
+any standard robot control methodology, here we implement these simple rule-based
+behaviours using neuromorphic hardware.  Of course, these basic behaviours
+are extremely limited, and it is difficult to hand-design more complex actions,
+especially if those actions depend on complex environment-dependent stimuli.
+In the final example demonstrated in this paper, we want the robot to turn
+left or right depending on whether or not it is currently facing a mirror.
+Rather than attempting to hand-design a complex reasoning algorithm about detecting
+mirrors, we instead only hand-design the simple reflexive behaviour of collision
+avoidance.  The goal of this research is to then use a separate training phase
+where the robot can learn this more complex task.  Rather than programming this
+task, the idea is to simply manually identify situations where the robot
+does what we wanted it to do \textit{by accident}, and use those situations as
+the basis for training.
+
+Our study looks to demonstrate this flexible control system using 
 neuromorphic hardware and neural-based adaptive control. The approach 
 combines the SpiNNaker computing 
 platform \cite{furber2007neural, furber2014spinnaker}, the Neural Engineering 
