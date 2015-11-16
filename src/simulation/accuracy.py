@@ -84,9 +84,15 @@ class AccuracySim(ctn_benchmark.Benchmark):
             plt.plot(sim.trange(), sim.data[self.probe_ideal], lw=2, label='ideal')
             plt.legend(loc='best')
 
-        rmse = sim.data[self.conn].solver_info['rmses']
+        rmse_train = sim.data[self.conn].solver_info['rmses']
+        diff = sim.data[self.probe_result] - sim.data[self.probe_ideal]
+        rmse_test = np.sqrt(np.mean(diff**2))
 
-        return dict(rmse=np.mean(rmse))
+        dp = np.dot(sim.data[self.probe_result][:,0], sim.data[self.probe_ideal][:,0])
+        dp = dp / np.linalg.norm(sim.data[self.probe_result])
+        dp = dp / np.linalg.norm(sim.data[self.probe_ideal])
+
+        return dict(rmse_train=rmse_train[0], rmse_test=rmse_test, dp_norm=dp)
 
 
 if __name__ == '__main__':
