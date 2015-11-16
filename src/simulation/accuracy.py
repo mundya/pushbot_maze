@@ -32,7 +32,9 @@ class AccuracySim(ctn_benchmark.Benchmark):
             train_stims = []
             train_res = []
             train_fg = np.zeros((N, p.D))
-            signal_fg = np.random.normal(size=p.D) * p.strength
+            signal_fg = np.random.normal(size=p.D)
+            signal_fg = signal_fg / np.linalg.norm(signal_fg)
+            signal_fg *= p.strength
             for i in range(p.n_training + 1):
                 train_stim = np.zeros((N, p.D))
                 signal_bg = nengo.processes.WhiteSignal(p.T, high=2.0, rms=0.5)
