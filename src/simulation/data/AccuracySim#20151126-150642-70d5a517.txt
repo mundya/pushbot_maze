@@ -1,0 +1,17 @@
+_D = 1
+_T = 6.0
+_n_neurons = 1000
+_synapse = 0.01
+_stim = 'ramp'
+_n_training = 1
+_n_bumps = 2
+_strength = 1.5
+_backend = 'nengo'
+_dt = 0.001
+_seed = 4
+_hide_overlay = True
+_gui = False
+dp_norm = 0.99706720284526507
+rmse_test = 0.026632782824081911
+rmse_train = 0.013354841075758518
+sim_speed = 4.330438553321242
