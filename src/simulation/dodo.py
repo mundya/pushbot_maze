@@ -80,8 +80,7 @@ def task_plot_grid():
         pylab.axhline(0.3437, ls='dashed', lw=1, c='k')
 
         pylab.tight_layout()
-
-
+        pylab.savefig('plot_grid.png', dpi=300)
 
         pylab.show()
     return dict(actions=[plot])
