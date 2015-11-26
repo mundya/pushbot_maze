@@ -442,11 +442,52 @@ the robot itself to be the target function that the neurons must approximate.
 This adjusts the neural control system, biasing the robot to performing
 similar actions in similar sensory states.
 
+In order for this to work, there must be some underlying signal in the
+sensory data that indicates whether or not the action is appropriate.  The
+goal of this learning system is to identify and make use of that signal without
+requiring explicit programming.  To understand what sort of signals this
+learning mechanism is capable of uncovering, we can evaluate it in an
+idealized scenario.
+
+For example, in \figurename~\Ref{SimBasic} we consider sensory data that is
+a ramp from -1 to 1 over time, and a desired action that peaks at a particular
+point on that ramp.  When trained from this one positive example, the model
+is able to successfully trigger that output given the sensory data.  We measure
+the accuracy of this output by computing the similarity between
+the positive example that it was trained on and the actual neural output,
+using the normalized dot product.  For this simple situation, the model gives
+a similarity of 0.99.  However, the real test is how well such a system will
+generalize to new conditions, and where there is a more complex relationship
+between the sensor data and the conditions where the action should be triggered.
+
+For a more complex situation (but still simpler than the actual robot case),
+consider a scenario where the input stimulus reflects many different things
+going on in the environment, but only one of those things is of importance
+when deciding to perform a particular action.  If all of these aspects of
+the environment add together to create the sensory simulus, we can model all 
+of the other stimuli to be ignored as a randomly varying signal, plus an
+additive term that occurs when the action should be performed.  That is, the
+sensory stimulus is $r(t) + \alpha s(t)$, where $r(t)$ is a random N-dimensional
+band-limited gaussian white noise, $\alpha$ is the randomly chosen N-dimensional
+sensory signal that indicates the situation where the action should be performed,
+and $s(t)$ is a scalar that changes over time, adjusting how strong the
+indication is for this action at different points in time.  This situation 
+is shown in \figurename~\Ref{SimAdvanced}, and it is clear the the learning model
+performs worse in this condition than in the simpler condition given in 
+\figurename~\Ref{SimBasic}.  In order to understand how our learning
+model may perform on the physical robot, we can first analyze its behaviour 
+in this complex, but abstract scenario.
+
 \section{Results}
+
+\subsection{Simulated scenario}
+
+
+
 
 \subsection{Initial behavior}
 
-To examine the model's behavior, we used a standard T-maze
+To examine the model's behavior when run in a physical robot, we used a standard T-maze
 environment (\figurename~\ref{Tmaze}). When placed at the bottom
 of the T-maze, the robot navigates forward, avoids the
 walls, reaches the choice point, and turns left or right.
