@@ -482,7 +482,50 @@ in this complex, but abstract scenario.
 
 \subsection{Simulated scenario}
 
+Two major parameters which affect the performance of this serendipitous learning
+algorithm are the strength of the underlying signal and the number of positive
+examples.  The strength of the signal influences how reliable the sensor
+data is.  For a strong signal, the sensor data is a good predictor of whether
+or not performing the action is the correct thing to do, whereas with a weak
+signal it is less clear whether the action is correct.  As discussed above,
+we simulate this by generating an artificial sensory stimulus as $r(t) + \alpha s(t)$,
+where $|\alpha|$ is the signal strength.  The larger $|\alpha|$ is, the easier it
+is to predict $s(t)$ given the sensory stimulus.  However, to do this prediction,
+the learning system also needs to learn to separate $\alpha$ from the background
+$r(t)$ sensory data that it should ignore.  This capability should improve
+with more positive examples.
 
+These parameters are investigated in \figurename~\Ref{SimData}.  In each
+case, $r(t)$ and $\alpha$ are randomly chosen, and $s(t)$ is fixed at the
+pattern shown in \figurename~\Ref{SimBasic} and \Ref{SimAdvanced}.  To be
+consistent with the robot examples below, all values are 6-dimensional.  The
+training examples had randomly generated $r(t)$, but with the same $\alpha$.
+
+Performance was evaluated by computing the similarity between the output result
+of the neural network with the ideal output $s(t)$.  For this, we used the
+normalized dot product.  The result shows that, for cases where there is a
+clear relationship between sensor data and the action (i.e. for strong signals),
+this learning system quickly learns to perform the task well, given very few examples
+(and having more positive examples provides diminishing returns).
+
+The performance given a weak signal is somewhat counter-intuitive.  Importantly,
+note that the system improves its performance with more examples \emph{even
+if $|\alpha|$ is zero!}  That is, even when the sensory stimulus contains
+no information at all as to whether the action is appropriate, having more
+examples still improves the model's performance.  This is because, the learning
+system will attempt to predict $s(t)$ given the sensor data, which in this case
+is just the randomly chosen $r(t)$.  Given just a few examples, the learning
+system will make its decision based on spurious correlations between $r(t)$
+and $s(t)$.  In a sense, the model will be \emph{superstitious}.  With more
+examples, this reliance on spurious correlation will be reduced.  In the case
+where $\alpha$ is zero, the optimal result is to just output a fixed constant
+value for $s(t)$, which can be thought of as the ``chance'' level performance,
+indicated with a dashed line in \figurename~\Ref{SimData}.
+
+While this result shows that this learning system should be capable of
+learning given only a few examples, it also shows that its performance is
+very dependent on the quality of the sensory data.  Determining how this
+will work in practice requires the use of a physical robot.
 
 
 \subsection{Initial behavior}
@@ -675,6 +718,26 @@ A mirror is sometimes placed at the intersection (see \ref{learningConditions}).
 \label{Tmaze}
 \end{figure}
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=2.5in]{../figures/sim_basic.png}
+\caption{}
+\label{SimBasic}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=2.5in]{../figures/sim_advanced.png}
+\caption{}
+\label{SimAdvanced}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=2.5in]{../figures/plot_grid.png}
+\caption{}
+\label{SimData}
+\end{figure}
 
 \begin{figure}[h!]
 \centering
