@@ -509,14 +509,14 @@ this learning system quickly learns to perform the task well, given very few exa
 (and having more positive examples provides diminishing returns).
 
 The performance given a weak signal is somewhat counter-intuitive.  Importantly,
-note that the system improves its performance with more examples \emph{even
+note that the system improves its performance with more examples \textit{even
 if $|\alpha|$ is zero!}  That is, even when the sensory stimulus contains
 no information at all as to whether the action is appropriate, having more
 examples still improves the model's performance.  This is because, the learning
 system will attempt to predict $s(t)$ given the sensor data, which in this case
 is just the randomly chosen $r(t)$.  Given just a few examples, the learning
 system will make its decision based on spurious correlations between $r(t)$
-and $s(t)$.  In a sense, the model will be \emph{superstitious}.  With more
+and $s(t)$.  In a sense, the model will be \textit{superstitious}.  With more
 examples, this reliance on spurious correlation will be reduced.  In the case
 where $\alpha$ is zero, the optimal result is to just output a fixed constant
 value for $s(t)$, which can be thought of as the ``chance'' level performance,
@@ -721,21 +721,34 @@ A mirror is sometimes placed at the intersection (see \ref{learningConditions}).
 \begin{figure}[h!]
 \centering
 \includegraphics[width=2.5in]{../figures/sim_basic.png}
-\caption{}
+\caption{The learning algorithm applied to a simple synthetic data set.  Sensor
+data is a ramp (top), and a single positive example is given where the
+action is performed in the middle of the ramp (bottom ``ideal'' line).  Resulting
+performance after one training example is 0.997, measured as the normalized
+dot product between the ideal and the trained result.}
 \label{SimBasic}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=2.5in]{../figures/sim_advanced.png}
-\caption{}
+\caption{The learning algorithm applied to a more complex data set.  Sensor
+    data (top) is six-dimensional random gaussian white noise with an added random
+signal when the action should be performed (see text for details).  After 
+a single training example, the result is somewhat correct, but it also performs
+the action many times when it should not (middle).  After 50 training examples,
+the network is more reliable at performing the action only when it should.}
 \label{SimAdvanced}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=2.5in]{../figures/plot_grid.png}
-\caption{}
+\caption{Model performance as the signal strength $|\alpha|$ and the number
+of positive training examples is varied.  The synthetic data set used here is
+the same as in \figurename~\Ref{SimAdvanced}.  Performance is the similarity
+between the network's output and the desired ideal output, as measured with
+the normalized dot product.}
 \label{SimData}
 \end{figure}
 
