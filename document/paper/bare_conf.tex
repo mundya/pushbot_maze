@@ -449,7 +449,7 @@ requiring explicit programming.  To understand what sort of signals this
 learning mechanism is capable of uncovering, we can evaluate it in an
 idealized scenario.
 
-For example, in \figurename~\Ref{SimBasic} we consider sensory data that is
+For example, in \figurename~\ref{SimBasic} we consider sensory data that is
 a ramp from -1 to 1 over time, and a desired action that peaks at a particular
 point on that ramp.  When trained from this one positive example, the model
 is able to successfully trigger that output given the sensory data.  We measure
@@ -472,9 +472,9 @@ band-limited gaussian white noise, $\alpha$ is the randomly chosen N-dimensional
 sensory signal that indicates the situation where the action should be performed,
 and $s(t)$ is a scalar that changes over time, adjusting how strong the
 indication is for this action at different points in time.  This situation 
-is shown in \figurename~\Ref{SimAdvanced}, and it is clear the the learning model
+is shown in \figurename~\ref{SimAdvanced}, and it is clear the the learning model
 performs worse in this condition than in the simpler condition given in 
-\figurename~\Ref{SimBasic}.  In order to understand how our learning
+\figurename~\ref{SimBasic}.  In order to understand how our learning
 model may perform on the physical robot, we can first analyze its behaviour 
 in this complex, but abstract scenario.
 
@@ -495,9 +495,9 @@ the learning system also needs to learn to separate $\alpha$ from the background
 $r(t)$ sensory data that it should ignore.  This capability should improve
 with more positive examples.
 
-These parameters are investigated in \figurename~\Ref{SimData}.  In each
+These parameters are investigated in \figurename~\ref{SimData}.  In each
 case, $r(t)$ and $\alpha$ are randomly chosen, and $s(t)$ is fixed at the
-pattern shown in \figurename~\Ref{SimBasic} and \Ref{SimAdvanced}.  To be
+pattern shown in \figurename~\ref{SimBasic} and \ref{SimAdvanced}.  To be
 consistent with the robot examples below, all values are 6-dimensional.  The
 training examples had randomly generated $r(t)$, but with the same $\alpha$.
 
@@ -520,7 +520,7 @@ and $s(t)$.  In a sense, the model will be \textit{superstitious}.  With more
 examples, this reliance on spurious correlation will be reduced.  In the case
 where $\alpha$ is zero, the optimal result is to just output a fixed constant
 value for $s(t)$, which can be thought of as the ``chance'' level performance,
-indicated with a dashed line in \figurename~\Ref{SimData}.
+indicated with a dashed line in \figurename~\ref{SimData}.
 
 While this result shows that this learning system should be capable of
 learning given only a few examples, it also shows that its performance is
@@ -746,7 +746,7 @@ the network is more reliable at performing the action only when it should.}
 \includegraphics[width=2.5in]{../figures/plot_grid.png}
 \caption{Model performance as the signal strength $|\alpha|$ and the number
 of positive training examples is varied.  The synthetic data set used here is
-the same as in \figurename~\Ref{SimAdvanced}.  Performance is the similarity
+the same as in \figurename~\ref{SimAdvanced}.  Performance is the similarity
 between the network's output and the desired ideal output, as measured with
 the normalized dot product.}
 \label{SimData}
