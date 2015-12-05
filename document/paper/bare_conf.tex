@@ -105,8 +105,11 @@ directly implementing the types of computations found in biological systems,
 thus facilitating the use of observations and data provided by the 
 neuroscience community. Practically speaking, we can now implement large numbers of 
 neurons on a very small power budget, making neural control a promising 
-energy-efficient direction for mobile robot applications.  Ideally, this could
-lead to flexible adaptive control of systems while staying within a limited
+energy-efficient direction for mobile robot applications.  For example,
+IBM's TrueNorth chip implements neural network algorithms at one ten-thousandth
+of the energy cost of traditional computers \citep{truenorth2014}.  Ideally, this 
+sort of hardware could be used to provide
+flexible adaptive control of systems while staying within a limited
 power budget.
 
 To exploit this hardware, we propose a hybrid method combining a small set of
@@ -132,26 +135,11 @@ neuromorphic hardware and neural-based adaptive control. The approach
 combines the SpiNNaker computing 
 platform \citep{furber2007neural, furber2014spinnaker}, the Neural Engineering 
 Framework (NEF)  \citep{eliasmith2004neural}, and a series of robots developed at 
-the Technische Universit{\"a}t M{\"u}nchen. 
-
-
-For energy efficient implementation given the hardware, the neuron model
-employed here is the standard \textit{leaky integrate and fire} (LIF) model, 
-where the weighted ($\omega$) sum of input current $I$ causes the voltage $V$ to build up until some
-threshold is reached, at which time the neuron emits a discrete spike:
-
-\begin{equation}
-    \tau_m {dV \over dt} = -V + \sum \omega I
-\end{equation}
-
-When this spike occurs, this causes post-synaptic current to flow into the 
-neurons it is connected to, with each connection having its own weight $\omega$
-and with the post-synaptic current $h(t)$ exponentially decaying over time, 
-as shown in \figurename~\ref{Neuron}:
-
-\begin{equation}
-    h(t) = e^{-t/\tau_s}
-\end{equation}
+the Technische Universit{\"a}t M{\"u}nchen.  We have previously compared
+SpiNNaker's performance when implementing the class of neural networks used by
+the NEF, showing that it is capable of implementing them ten to twenty times more efficiently
+than modern CPUs and GPUs \citep{closedloop2015}, even though it was manufactured
+with what is now a rather old process (130nm as compared to modern 22nm or smaller).
 
 The goal of this work is to explore algorithms that can be usefully implemented
 given hardware that efficiently implements neural networks of this form.  In
@@ -170,6 +158,12 @@ indications as to the instances where correct behaviour was achieved.  The
 approach described here is somewhat akin to reinforcement learning, but relies
 only on positive examples, and can be explicitly shaped as desired.  This 
 guides the learning and provides explicit control over the eventual behaviour. 
+
+Our main contribution here is a novel method of configuring
+neural-network-based hardware to perform tasks.  This method is a hybrid 
+between explicit programming and autonomous learning, allowing for reliable
+behaviour without the difficulties involved in developing explicit control
+programs.
 
 \section{Infrastructure}
 \label{infrastructure}
@@ -211,6 +205,26 @@ in C or using the standard neural modeling API PyNN. However, for this work
 we made use of the Nengo open-source neural compiler \citep{bekolay_nengo2014} 
 (described below), and the custom Nengo backend that compiles high-level
 neural models into optimized SpiNNaker code \citep{mundy2015}.
+
+For energy efficient implementation given the hardware, the neuron model
+employed here is the standard \textit{leaky integrate and fire} (LIF) model, 
+where the weighted ($\omega$) sum of input current $I$ causes the voltage $V$ to build up until some
+threshold is reached, at which time the neuron emits a discrete spike:
+
+\begin{equation}
+    \tau_m {dV \over dt} = -V + \sum \omega I
+\end{equation}
+
+The neural membrane time constant (controlling how quickly current leaks
+out of the neuron) $\tau_m$ was fixed at 20ms.  When a spike occurs, this causes 
+post-synaptic current to flow into the 
+neurons to which it is connected, with each connection having its own weight $\omega$
+and with the post-synaptic current $h(t)$ exponentially decaying over time with
+a time constant $\tau_s$ (fixed at 30ms), as shown in \figurename~\ref{Neuron}:
+
+\begin{equation}
+    h(t) = e^{-t/\tau_s}
+\end{equation}
 
 \subsection{Nengo and the Neural Engineering Framework}
 
@@ -594,9 +608,15 @@ implements extremely simple manually specified reactive rules, and have
 it learn by example to perform more complex functions.  This method
 makes use of the power-efficiency of neuromorphic hardware, where large
 numbers of neurons and connections can be used to efficiently
-approximate complex functions.
+approximate complex functions.  Importantly, the functions that the neurons
+are learning to approximate do not have to be explicity defined.  Instead,
+we only explicitly define the initial functions for the basic actions.  The
+functions for the more complex actions are implicitly defined \textit{by example}.
+This means that rather than trying to develop an explicit set of rules the
+robot should follow, we can instead simply give the robot examples of its own desired
+behaviour.  This gives a novel, alternate method for developing robot control.
 
-At first glance, it seems as if these new connections added during the
+At first glance, it seems as if the new connections added during the
 training process (step 6) would just end up being 
 exactly the same as the original reflexive control connections. However, the 
 key difference here is that these new connections will also take into 
