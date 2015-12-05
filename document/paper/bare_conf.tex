@@ -10,6 +10,7 @@
                {==}{$={}$}{1},
         morekeywords={if,then,else,return,sqrt}
         }
+\usepackage{amsmath}
 \linenumbers
 
 \def\keyFont{\fontsize{8}{11}\helveticabold }
@@ -300,9 +301,9 @@ neurons $R$ to store the distance from the center of the visual field to the
 location of the LED, we could optimise the connections so
 as to approximate: 
  
-\begin{lstlisting}
-    R = $\sqrt{x_{LED}^2 + y_{LED}^2}$
-\end{lstlisting}
+\begin{equation}
+    R \leftarrow \sqrt{x_{LED}^2 + y_{LED}^2}
+\end{equation}
 
 This would find synaptic connection weights between the group of neurons 
 representing the LED data and the group of neurons representing the 
@@ -342,9 +343,12 @@ detector: if it is lower than some threshold, the robot is near a wall and
 should not go forward. If it is higher than that threshold, it is safe to 
 go forward: 
 
-\begin{lstlisting}
-	S[0] = 1 if $y_{LASER} > -0.6$ else 0
-\end{lstlisting}
+\begin{equation}
+    S[0] \leftarrow \left \{ \begin{array}{ll}
+            1 & \text{if}~y_{LASER} > -0.6 \\
+               0 & \text{otherwise}
+    \end{array} \right.
+\end{equation}
 
 Importantly, the precise threshold of -0.6 is not vital for this model.  If the
 value is slightly higher, then the robot will stop moving forward slightly
@@ -354,9 +358,9 @@ To complete this basic behavior, we define the motor output $M$ as a
 function of $S$. In this case, we want to drive both wheel motors forward 
 when the action has a high strength.
 
-\begin{lstlisting}
-	M = [1, 1] $\cdot$ S[0]
-\end{lstlisting}
+\begin{equation}
+    M \leftarrow [1, 1] \cdot S[0]
+\end{equation}
 
 The next basic reflexive action is to back up when we are too close to an 
 obstacle. This is again detected by using the visual location of the dot
@@ -364,30 +368,45 @@ shown by the laser pointer.  If this is very low in the visual field, or if
 it is not visible at all (i.e. the dot is below the field of view of the camera)
 then the robot should back up.  This gives the following rule:
 
-\begin{lstlisting}
-	S[1] = 1 if $y_{LASER} < -0.8$ or $c_{LASER} < 0$ else 0
-	M = [-1, -1] $\cdot$ S[1]
-\end{lstlisting}
+\begin{equation}
+    \begin{split}
+    S[1] \leftarrow \left \{ \begin{array}{ll}
+            1 & \text{if}~y_{LASER} < -0.8 ~\text{or}~ c_{LASER}<0 \\
+               0 & \text{otherwise}
+    \end{array} \right. \\
+       M & \leftarrow [-1, -1] \cdot S[1]
+    \end{split}
+\end{equation}
 
 The final basic actions are: turn left or right when close to an obstacle. 
 
-\begin{lstlisting}
-	S[2] = 1 if $y_{LASER} < -0.8$ else 0
-	M = [-1, 1] $\cdot$ S[2]
-
-	S[3] = 1 if $y_{LASER} < -0.8$ else 0
-	M = [1, -1] $\cdot$ S[3]
-\end{lstlisting}
+\begin{equation}
+    \begin{split}
+    S[2] \leftarrow \left \{ \begin{array}{ll}
+            1 & \text{if}~y_{LASER} < -0.8 \\
+               0 & \text{otherwise}
+    \end{array} \right. \\
+       M & \leftarrow [-1, 1] \cdot S[2] \\ 
+       \\
+    S[3] \leftarrow \left \{ \begin{array}{ll}
+            1 & \text{if}~y_{LASER} < -0.8 \\
+               0 & \text{otherwise}
+    \end{array} \right. \\
+       M & \leftarrow [1, -1] \cdot S[3] \\
+    \end{split}
+\end{equation}
 
 However, these last two actions should not both be performed at the same time,
 since this would cause the robot to stay in place, rather than turning one
 direction or the other. To specify this, we can define connections that relate 
 the strengths of different actions to each other.
 
-\begin{lstlisting}
-	S[2] = -S[3]
-	S[3] = -S[2]
-\end{lstlisting}
+\begin{equation}
+    \begin{split}
+       S[2] \leftarrow -S[3] \\
+       S[3] \leftarrow -S[2]
+    \end{split}
+\end{equation}
 
 This means that whenever $S[2]$ is positive, it will force $S[3]$ towards $0$, 
 and similarly $S[3]$ will drive $S[2]$ towards $0$.  This implements a classic
@@ -411,7 +430,8 @@ That is, instead of implementing the exact functions specified above, the
 actual behavior will be much more gradual. 
 
 For example, the input function to 
-the $S[0]$ population is supposed to compute ``$1$ if $y_{LASER} > -0.6$ else $0$''. 
+the $S[0]$ population is supposed to be 1 if $y_{LASER}$ is greater than -0.6,
+and otherwise it should be 0. 
 Instead of implementing this exact function, the neurons will instead implement
 a smoothed approximation of this step function, as shown in
 \figurename~\ref{NEF}.
@@ -713,20 +733,20 @@ Technische Universit{\"a}t M{\"u}nchen within the funding programme Open Access 
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=3in]{../figures/neuron.png}
-\caption{Voltage $V$, spiking activity and output of a single LIF neuron, given a constant input $I$.
-SpiNNaker uses a simulation time step of $dt=0.001$.}
-\label{Neuron}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
 \includegraphics[width=2.5in]{../figures/Pushbot.png}
 \caption{The PushBot robot with LEDs on the front and back (1), a control
 board (2) with an eDVS silicon retina (3) and NXP LPC4337 microcontroller (4),
 and a laser pointer (5).  The robot communicates through a wireless module on
 the back (not visible).  The top-left insert shows the laser pointer in red.}
 \label{fig_sim}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=3in]{../figures/neuron.png}
+\caption{Voltage $V$, spiking activity and output of a single LIF neuron, given a constant input $I$.
+SpiNNaker uses a simulation time step of $dt=0.001$.}
+\label{Neuron}
 \end{figure}
 
 \begin{figure}[h!]
