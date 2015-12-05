@@ -526,7 +526,7 @@ For a more complex situation (but still simpler than the actual robot case),
 consider a scenario where the input stimulus reflects many different things
 going on in the environment, but only one of those things is of importance
 when deciding to perform a particular action.  If all of these aspects of
-the environment add together to create the sensory simulus, we can model all 
+the environment add together to create the sensory stimulus, we can model all 
 of the other stimuli to be ignored as a randomly varying signal, plus an
 additive term that occurs when the action should be performed.  That is, the
 sensory stimulus is $r(t) + \alpha s(t)$, where $r(t)$ is a random N-dimensional
@@ -534,7 +534,7 @@ band-limited gaussian white noise, $\alpha$ is the randomly chosen N-dimensional
 sensory signal that indicates the situation where the action should be performed,
 and $s(t)$ is a scalar that changes over time, adjusting how strong the
 indication is for this action at different points in time.  This situation 
-is shown in \figurename~\ref{SimAdvanced}, and it is clear the the learning model
+is shown in \figurename~\ref{SimAdvanced}, and it is clear the learning model
 performs worse in this condition than in the simpler condition given in 
 \figurename~\ref{SimBasic}.  In order to understand how our learning
 model may perform on the physical robot, we can first analyze its behaviour 
@@ -659,17 +659,41 @@ it learn by example to perform more complex functions.  This method
 makes use of the power-efficiency of neuromorphic hardware, where large
 numbers of neurons and connections can be used to efficiently
 approximate complex functions.  Importantly, the functions that the neurons
-are learning to approximate do not have to be explicity defined.  Instead,
+are learning to approximate do not have to be explicitly defined.  Instead,
 we only explicitly define the initial functions for the basic actions.  The
 functions for the more complex actions are implicitly defined \textit{by example}.
 This means that rather than trying to develop an explicit set of rules the
 robot should follow, we can instead simply give the robot examples of its own desired
 behaviour.  This gives a novel, alternate method for developing robot control.
 
-TODO: talk about overfitting (happens with few examples and weak signal)
-TODO: use sim result to suggest when need better sensor data
+With any learning method, there is the important question of how well it
+generalizes and avoids the problem of overfitting.  While the fact that the
+model does perform correctly (\figurename~\ref{Left} and \figurename~\ref{Right})
+indicates that it has successfully generalized in this case, the simulation
+results in \figurename~\ref{SimData} provide a clearer picture of its
+performance.  In particular, if there is a clear indication in the sensor
+data as to when the task should be performed (i.e. if the sensor data is
+unambiguous), then correct generalization performance can be achieved after just a few
+positive examples.  However, if the sensor data is less clear, the learning
+system will have difficulties.  That is, if multiple different conditions in
+the environment can trigger similar sensory states, the model will have difficulty
+picking out a sensory pattern that reliably indicates the action should be
+performed.  If this occurs when there are only a few positive examples, then
+the network will be prone to responding to the \textit{wrong} features of
+the environment.  This can be thought of as the model overfitting to those
+few positive examples.  Fortunately, by increasing the number of positive
+examples, this overfitting problem is reduced.
 
-At first glance, it seems as if the new connections added during the
+While the simulation results indicate good performance for strong signals,
+it is not yet clear what sorts of tasks provide strong signals.  This is
+a function of the particular sensory data available to the robot, the
+body morphology, the dynamics of movement, and what the user decides is a
+positive example.  This is a large task space to explore, and this is
+only a first step.  Now that we have demonstrated that this approach is at
+least possible, we need to rigorously explore these options.
+
+Considering the neural implementation of this algorithm, at first glance it 
+seems as if the new connections added during the
 training process (step 6) would just end up being 
 exactly the same as the original reflexive control connections. However, the 
 key difference here is that these new connections will also take into 
