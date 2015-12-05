@@ -336,6 +336,10 @@ go forward:
 	S[0] = 1 if $y_{LASER} > -0.6$ else 0
 \end{lstlisting}
 
+Importantly, the precise threshold of -0.6 is not vital for this model.  If the
+value is slightly higher, then the robot will stop moving forward slightly
+earlier, but it will still perform qualitatively the same action.  
+
 To complete this basic behavior, we define the motor output $M$ as a 
 function of $S$. In this case, we want to drive both wheel motors forward 
 when the action has a high strength.
@@ -520,7 +524,8 @@ of the neural network with the ideal output $s(t)$.  For this, we used the
 normalized dot product.  The result shows that, for cases where there is a
 clear relationship between sensor data and the action (i.e. for strong signals),
 this learning system quickly learns to perform the task well, given very few examples
-(and having more positive examples provides diminishing returns).
+(and having more positive examples provides diminishing returns).  Error bars
+are the 95\% bootstrap confidence intervals after 150 trials.
 
 The performance given a weak signal is somewhat counter-intuitive.  Importantly,
 note that the system improves its performance with more examples \textit{even
@@ -562,7 +567,7 @@ filtered with $\sigma=0.15s$ for visual clarity.
 
 For the first and simplest learning task, we chose positive examples
 where the robot turned left at the intersection.
-The result of this training is shown in \figurename~\ref{Left}. Unlike 
+The result of this training after ten positive examples is shown in \figurename~\ref{Left}. Unlike 
 \figurename~\ref{React}, this shows the robot consistently turning to the left about 
 two seconds into the task (the average time for the robot to reach the end of the corridor).
 This indicates we can take a robot with one underlying reflexive control scheme
@@ -582,7 +587,8 @@ Adding a learned connection that attempts to approximate those positive
 examples means that the neural connections now need to change their outputs
 depending on whether the mirror is present or not.  \figurename~\ref{Right} shows 
 that the robot can successfully learn to recognize and respond to mirrors,
-given only this simple learning rule on top of its basic reflexive rules.
+given only this simple learning rule on top of its basic reflexive rules and
+ten positive examples.
 
 \section{Discussion}
 The algorithm described in this paper is a general-purpose approach to
