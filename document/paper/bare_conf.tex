@@ -159,7 +159,17 @@ approach described here is somewhat akin to reinforcement learning, but relies
 only on positive examples, and can be explicitly shaped as desired.  This 
 guides the learning and provides explicit control over the eventual behaviour. 
 
-Our main contribution here is a novel method of configuring
+While the learning system presented here is
+related to reinforcement learning \citep{suttonbarto1998}, there are important differences.  First,
+the system only requires positive reinforcement (rather than both positive
+and negative).  This both simplifies the model and is reflective of the
+fact that positive and negative reinforcement are generally considered
+to be separate systems in living creatures \citep{boureau2010}.  Second, all training is done offline (rather than gradual learning while the robot behaviour occurs).  Third, the neural connection weights are found by
+optimization, rather than through a gradient descent learning algorithm.
+This reduces the catastrophic forgetting problem commonly seen in online
+learning algorithms.
+
+Our main contribution is a novel method of configuring
 neural-network-based hardware to perform tasks.  This method is a hybrid 
 between explicit programming and autonomous learning, allowing for reliable
 behaviour without the difficulties involved in developing explicit control
@@ -621,6 +631,9 @@ functions for the more complex actions are implicitly defined \textit{by example
 This means that rather than trying to develop an explicit set of rules the
 robot should follow, we can instead simply give the robot examples of its own desired
 behaviour.  This gives a novel, alternate method for developing robot control.
+
+TODO: talk about overfitting (happens with few examples and weak signal)
+TODO: use sim result to suggest when need better sensor data
 
 At first glance, it seems as if the new connections added during the
 training process (step 6) would just end up being 
