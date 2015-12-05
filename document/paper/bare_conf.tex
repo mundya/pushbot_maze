@@ -310,6 +310,8 @@ representing the LED data and the group of neurons representing the
 radius $R$ such that $R$ is driven to fire with whatever pattern represents 
 the correct radius, given the current activity of the LED population. 
 
+
+
 All of the neural systems described below are defined in this manner, using
 the software package Nengo \citep{bekolay_nengo2014} developed specifically
 for such neural network construction, along with its interface
@@ -361,6 +363,18 @@ when the action has a high strength.
 \begin{equation}
     M \leftarrow [1, 1] \cdot S[0]
 \end{equation}
+
+This first reflexive action is depicted in \figurename~\ref{Flow} as the left-most
+square ($S[0]$), and the connections into and out of that square.  This action
+strength will be a scalar value.  The connections
+into that square are optimized using the NEF to best approximate Equation 4,
+given the neural representation of the sensory neurons.  To connect this result
+to the motors ($M[0]$ and $M[1]$), it would be possible to directly connect
+$S[0]$ to $M[0]$ and $M[1]$ with a connection strength of 1.  However, this
+would limit us to only being able to perform \textit{linear} functions.  In
+general, we may want some more complex function to perform the effect of an
+action, so we perform another random mapping to the action neurons and do
+another NEF optimization to produce the connections to the motors. 
 
 The next basic reflexive action is to back up when we are too close to an 
 obstacle. This is again detected by using the visual location of the dot
