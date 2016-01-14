@@ -1,14 +1,15 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Infrastructure}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{eDVS}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{PushBot}{section.2}% 4
-\BOOKMARK [2][-]{subsection.2.3}{SpiNNaker}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.1}{Embedded Dynamic Vision Sensor: eDVS}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Small Mobile Robot: PushBot}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{Neuromorphic Computing System: SpiNNaker}{section.2}% 5
 \BOOKMARK [2][-]{subsection.2.4}{Nengo and the Neural Engineering Framework}{section.2}% 6
 \BOOKMARK [1][-]{section.3}{Method}{}% 7
 \BOOKMARK [2][-]{subsection.3.1}{Initial Reflexive Control}{section.3}% 8
 \BOOKMARK [2][-]{subsection.3.2}{Serendipitous Offline Learning}{section.3}% 9
 \BOOKMARK [1][-]{section.4}{Results}{}% 10
-\BOOKMARK [2][-]{subsection.4.1}{Initial behavior}{section.4}% 11
-\BOOKMARK [2][-]{subsection.4.2}{Learning Example 1: Basic Responses}{section.4}% 12
-\BOOKMARK [2][-]{subsection.4.3}{Learning Example 2: Sensory Conditions}{section.4}% 13
-\BOOKMARK [1][-]{section.5}{Discussion}{}% 14
+\BOOKMARK [2][-]{subsection.4.1}{Simulated scenario}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.2}{Initial behavior}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.3}{Learning Example 1: Basic Responses}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.4}{Learning Example 2: Sensory Conditions}{section.4}% 14
+\BOOKMARK [1][-]{section.5}{Discussion}{}% 15

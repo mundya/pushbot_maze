@@ -1,4 +1,4 @@
-\begin{thebibliography}{17}
+\begin{thebibliography}{21}
 \providecommand{\natexlab}[1]{#1}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
@@ -14,8 +14,8 @@
 
 \bibitem[{Bekolay et~al.(2014)Bekolay, Bergstra, Hunsberger, DeWolf, Stewart,
   Rasmussen et~al.}]{bekolay_nengo2014}
-Bekolay, T., Bergstra, J., Hunsberger, E., DeWolf, T., Stewart, T.~C.,
-  Rasmussen, D., et~al. (2014).
+Bekolay, T., Bergstra, J., Hunsberger, E., DeWolf, T., Stewart, T., Rasmussen,
+  D., et~al. (2014).
 \newblock Nengo: a {Python} tool for building large-scale functional brain
   models.
 \newblock \emph{Frontiers in Neuroinformatics} 7.
@@ -23,7 +23,7 @@ Bekolay, T., Bergstra, J., Hunsberger, E., DeWolf, T., Stewart, T.~C.,
 \bibAnnoteFile{bekolay_nengo2014}
 
 \bibitem[{Boureau and Dayan(2010)}]{boureau2010}
-Boureau, Y.-L. and Dayan, P. (2010).
+Boureau, Y. and Dayan, P. (2010).
 \newblock Opponency revisited: competition and cooperation between dopamine and
   serotonin.
 \newblock \emph{Neuropsychopharmacology} 36, 74--97
@@ -40,10 +40,18 @@ Conradt, J., Berner, R., Cook, M., and Delbruck, T. (2009).
 
 \bibitem[{Conradt et~al.(2014)Conradt, Galluppi, and
   Stewart}]{conradt2014trainable}
-Conradt, J., Galluppi, F., and Stewart, T.~C. (2014).
+Conradt, J., Galluppi, F., and Stewart, T. (2014).
 \newblock Trainable sensorimotor mapping in a neuromorphic robot.
 \newblock \emph{Robotics and Autonomous Systems} 71, 60--68
 \bibAnnoteFile{conradt2014trainable}
+
+\bibitem[{Conradt et~al.(2000)Conradt, Tevatia, Vijayakumar, and
+  Schaal}]{conradt2000}
+Conradt, J., Tevatia, G., Vijayakumar, S., and Schaal, S. (2000).
+\newblock On-line learning for humanoid robot systems.
+\newblock In \emph{International Conference on Machine Learning (ICML2000)}
+  (Stanford, USA), 191--198
+\bibAnnoteFile{conradt2000}
 
 \bibitem[{Denk et~al.(2013)Denk, Llobet-Blandino, Galluppi, Plana, Furber, and
   Conradt}]{denk2013}
@@ -58,32 +66,32 @@ Denk, C., Llobet-Blandino, F., Galluppi, F., Plana, L.~A., Furber, S., and
 \bibAnnoteFile{denk2013}
 
 \bibitem[{Eliasmith and Anderson(2004)}]{eliasmith2004neural}
-Eliasmith, C. and Anderson, C.~H. (2004).
+Eliasmith, C. and Anderson, C. (2004).
 \newblock \emph{Neural engineering: {Computation}, representation, and dynamics
   in neurobiological systems} (MIT press)
 \bibAnnoteFile{eliasmith2004neural}
 
 \bibitem[{Eliasmith et~al.(2012)Eliasmith, Stewart, Choo, Bekolay, DeWolf, Tang
   et~al.}]{eliasmith_largescale_2012}
-Eliasmith, C., Stewart, T.~C., Choo, X., Bekolay, T., DeWolf, T., Tang, Y.,
-  et~al. (2012).
+Eliasmith, C., Stewart, T., Choo, X., Bekolay, T., DeWolf, T., Tang, Y., et~al.
+  (2012).
 \newblock A large-scale model of the functioning brain.
 \newblock \emph{Science (New York, N.Y.)} 338, 1202--1205.
 \newblock \doi{10.1126/science.1225266}
 \bibAnnoteFile{eliasmith_largescale_2012}
+
+\bibitem[{Furber et~al.(2014)Furber, Galluppi, Temple, Plana
+  et~al.}]{furber2014spinnaker}
+Furber, S., Galluppi, F., Temple, S., Plana, L., et~al. (2014).
+\newblock The {SpiNNaker} project.
+\newblock \emph{Proceedings of the IEEE} 102, 652--665
+\bibAnnoteFile{furber2014spinnaker}
 
 \bibitem[{Furber and Temple(2007)}]{furber2007neural}
 Furber, S. and Temple, S. (2007).
 \newblock Neural systems engineering.
 \newblock \emph{Journal of the Royal Society interface} 4, 193--206
 \bibAnnoteFile{furber2007neural}
-
-\bibitem[{Furber et~al.(2014)Furber, Galluppi, Temple, Plana
-  et~al.}]{furber2014spinnaker}
-Furber, S.~B., Galluppi, F., Temple, S., Plana, L., et~al. (2014).
-\newblock The {SpiNNaker} project.
-\newblock \emph{Proceedings of the IEEE} 102, 652--665
-\bibAnnoteFile{furber2014spinnaker}
 
 \bibitem[{Janglov{\'a}(2005)}]{janglova2005neural}
 Janglov{\'a}, D. (2005).
@@ -92,7 +100,7 @@ Janglov{\'a}, D. (2005).
 \bibAnnoteFile{janglova2005neural}
 
 \bibitem[{Kim et~al.(2007)Kim, Huh, Lee, Baeg, Lee, and Jung}]{kim2007encoding}
-Kim, Y.~B., Huh, N., Lee, H., Baeg, E.~H., Lee, D., and Jung, M.~W. (2007).
+Kim, Y., Huh, N., Lee, H., Baeg, E., Lee, D., and Jung, M. (2007).
 \newblock Encoding of action history in the rat ventral striatum.
 \newblock \emph{Journal of neurophysiology} 98, 3548--3556
 \bibAnnoteFile{kim2007encoding}
@@ -112,11 +120,21 @@ Krichmar, J. and Wagatsuma, H. (2011).
 
 \bibitem[{McFarland and B{\"o}sser(1993)}]{mcfarland1993intelligent}
 McFarland, D. and B{\"o}sser, T. (1993).
-\newblock \emph{Intelligent behavior in animals and robots} (Mit Press)
+\newblock \emph{Intelligent behavior in animals and robots} (MIT Press)
 \bibAnnoteFile{mcfarland1993intelligent}
 
+\bibitem[{Merolla et~al.(2014)Merolla, Arthur, Alvarez-Icaza, Cassidy, Sawada,
+  Akopyan et~al.}]{truenorth2014}
+Merolla, P., Arthur, J., Alvarez-Icaza, R., Cassidy, A., Sawada, J., Akopyan,
+  F., et~al. (2014).
+\newblock A million spiking-neuron integrated circuit with a scalable
+  communication network and interface.
+\newblock \emph{Science} 345, 668--673.
+\newblock \doi{10.1126/science.1254642}
+\bibAnnoteFile{truenorth2014}
+
 \bibitem[{M{\"u}ller and Conradt(2011)}]{muller2011miniature}
-M{\"u}ller, G.~R. and Conradt, J. (2011).
+M{\"u}ller, G. and Conradt, J. (2011).
 \newblock A miniature low-power sensor system for real time {2D} visual
   tracking of {LED} markers.
 \newblock In \emph{Robotics and Biomimetics (ROBIO), 2011 IEEE International
@@ -124,14 +142,28 @@ M{\"u}ller, G.~R. and Conradt, J. (2011).
 \bibAnnoteFile{muller2011miniature}
 
 \bibitem[{Mundy et~al.(2015)Mundy, Knight, Stewart, and Furber}]{mundy2015}
-Mundy, A., Knight, J., Stewart, T.~C., and Furber, S. (2015).
+Mundy, A., Knight, J., Stewart, T., and Furber, S. (2015).
 \newblock An efficient {SpiNNaker} implementation of the {Neural Engineering
   Framework}.
 \newblock In \emph{International Joint Conference on Neural Networks}
 \bibAnnoteFile{mundy2015}
 
+\bibitem[{Stewart et~al.(2015)Stewart, DeWolf, Kleinhans, and
+  Eliasmith}]{closedloop2015}
+Stewart, T., DeWolf, T., Kleinhans, A., and Eliasmith, C. (2015).
+\newblock Closed-loop neuromorphic benchmarks.
+\newblock \emph{Frontiers in Neuroscience} 9.
+\newblock \doi{10.3389/fnins.2015.00464}
+\bibAnnoteFile{closedloop2015}
+
+\bibitem[{Sutton and Barto(1998)}]{suttonbarto1998}
+Sutton, R. and Barto, A. (1998).
+\newblock \emph{Introduction to reinforcement learning} (Cambridge, MA, USA:
+  MIT Press), 1st edn.
+\bibAnnoteFile{suttonbarto1998}
+
 \bibitem[{Verschure(2012)}]{verschure2012distributed}
-Verschure, P.~F. (2012).
+Verschure, P. (2012).
 \newblock Distributed adaptive control: a theory of the mind, brain, body
   nexus.
 \newblock \emph{Biologically Inspired Cognitive Architectures} 1, 55--72

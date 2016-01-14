@@ -5,45 +5,45 @@ The style file: frontiersinSCNS_ENG_HUMS.bst
 Database file #1: refs.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Warning--empty pages in mundy2015
-You've used 17 entries,
+You've used 21 entries,
             3027 wiz_defined-function locations,
-            722 strings with 8336 characters,
-and the built_in function-call counts, 12356 in all, are:
-= -- 1016
-> -- 679
-< -- 9
-+ -- 338
-- -- 184
-* -- 900
-:= -- 1783
-add.period$ -- 34
-call.type$ -- 17
-change.case$ -- 149
-chr.to.int$ -- 18
-cite$ -- 35
-duplicate$ -- 805
-empty$ -- 851
-format.name$ -- 243
-if$ -- 2522
+            750 strings with 9028 characters,
+and the built_in function-call counts, 15431 in all, are:
+= -- 1269
+> -- 869
+< -- 10
++ -- 434
+- -- 235
+* -- 1126
+:= -- 2226
+add.period$ -- 43
+call.type$ -- 21
+change.case$ -- 188
+chr.to.int$ -- 22
+cite$ -- 43
+duplicate$ -- 999
+empty$ -- 1049
+format.name$ -- 308
+if$ -- 3160
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 186
-newline$ -- 115
-num.names$ -- 70
-pop$ -- 418
+missing$ -- 232
+newline$ -- 140
+num.names$ -- 86
+pop$ -- 520
 preamble$ -- 1
-purify$ -- 127
+purify$ -- 160
 quote$ -- 0
-skip$ -- 471
+skip$ -- 603
 stack$ -- 0
-substring$ -- 496
-swap$ -- 413
+substring$ -- 591
+swap$ -- 512
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 144
+type$ -- 177
 warning$ -- 1
-while$ -- 77
+while$ -- 92
 width$ -- 0
-write$ -- 251
+write$ -- 311
 (There was 1 warning)
